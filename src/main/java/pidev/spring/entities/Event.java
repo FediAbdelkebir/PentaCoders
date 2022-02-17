@@ -23,25 +23,20 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class User implements Serializable{
+public class Event implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column
-	private String firstname;
+	private String title;
 	@Column
-	private String lastname;
-	@Column
-	private String emailAddress;
-	@Column
-	private String password;
-	@Column
-	private Date birthDate;
-	@Column
-	private float salary;
-	@Column
-	private String address;
-	@Column
-	private int PhoneNumber;
-	
+	private String description;
+	@Column 
+	private Date dateStart;
+	@Column 
+	private Date dateEnd;
+	@Column 
+	private int place;
+	@Column 
+	private boolean competition;
 }

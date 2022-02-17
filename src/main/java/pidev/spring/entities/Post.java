@@ -23,25 +23,16 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class User implements Serializable{
+public class Post implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column
-	private String firstname;
+	private String description;
 	@Column
-	private String lastname;
+	private Date date;
 	@Column
-	private String emailAddress;
+	private String tags;
 	@Column
-	private String password;
-	@Column
-	private Date birthDate;
-	@Column
-	private float salary;
-	@Column
-	private String address;
-	@Column
-	private int PhoneNumber;
-	
+	private int likes;
 }
