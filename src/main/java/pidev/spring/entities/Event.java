@@ -1,5 +1,4 @@
 package pidev.spring.entities;
-
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -28,15 +27,17 @@ public class Event implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column
-	private String title;
+	private String Title;
 	@Column
-	private String description;
+	private String Description;
 	@Column 
-	private Date dateStart;
+	private Date DateStart;
 	@Column 
-	private Date dateEnd;
+	private Date DateEnd;
 	@Column 
-	private int place;
+	private int Nbrplace;
 	@Column 
-	private boolean competition;
+	private String Type;
+	@Column 
+	private boolean Trouphy;
 }
