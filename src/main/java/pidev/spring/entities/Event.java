@@ -1,12 +1,14 @@
 package pidev.spring.entities;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -33,11 +35,12 @@ public class Event implements Serializable{
 	@Column 
 	private Date DateStart;
 	@Column 
+	@Temporal(TemporalType.DATE)
 	private Date DateEnd;
 	@Column 
 	private int Nbrplace;
 	@Column 
-	private String Type;
+	private EventType Type;
 	@Column 
 	private boolean Trouphy;
 }

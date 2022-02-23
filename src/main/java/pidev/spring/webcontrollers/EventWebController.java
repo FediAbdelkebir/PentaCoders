@@ -21,7 +21,7 @@ public class EventWebController {
 	@Autowired
 	EventServices ES;
 	//Add
-	@PostMapping("/addEvent")
+	@PostMapping("/AddEvent")
 	@ResponseBody //trajaa retour
 void AddEvent(@RequestBody Event event) {
 		try {

@@ -27,7 +27,13 @@ public class EventServices {
 	//Update
 	public Event updateEvent(Event c) {
 		Event event = EventRepository.findById((int) c.getId()).orElse(null);
-		
+		event.setDateEnd(c.getDateEnd());
+		event.setDateStart(c.getDateStart());
+		event.setDescription(c.getDescription());
+		event.setNbrplace(c.getNbrplace());
+		event.setTitle(c.getTitle());
+		event.setTrouphy(c.isTrouphy());
+		event.setType(c.getType());
 		return EventRepository.save(event);
 	}
 	//FindAll
