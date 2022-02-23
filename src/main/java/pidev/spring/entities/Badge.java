@@ -1,6 +1,6 @@
 package pidev.spring.entities;
+
 import java.io.Serializable;
-import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +22,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class Event implements Serializable{
+public class Badge implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -30,14 +30,4 @@ public class Event implements Serializable{
 	private String Title;
 	@Column
 	private String Description;
-	@Column 
-	private Date DateStart;
-	@Column 
-	private Date DateEnd;
-	@Column 
-	private int Nbrplace;
-	@Column 
-	private String Type;
-	@Column 
-	private boolean Trouphy;
 }
