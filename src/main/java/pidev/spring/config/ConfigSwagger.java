@@ -25,7 +25,7 @@ public class ConfigSwagger {
 	
 	private ApiInfo apiInfo () {
 		return new ApiInfoBuilder()
-		.title("Swagger Configuration for tpStockProject")
+		.title("Swagger Configuration for WorkMood")
 		.description("\"Spring Boot Swagger configuration\"")
 		.version("1.1.0").build();
 		}
