@@ -26,7 +26,8 @@ public class BadgeServices {
 	//Update
 	public Badge updateBadge(Badge c) {
 		Badge badge = BadgeRepository.findById((int) c.getId()).orElse(null);
-		
+		badge.setTitle(c.getTitle());
+		badge.setDescription(c.getDescription());
 		return BadgeRepository.save(badge);
 	}
 	//FindAll

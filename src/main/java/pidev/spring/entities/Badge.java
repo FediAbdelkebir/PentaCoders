@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -23,6 +24,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 public class Badge implements Serializable{
+	@ApiModelProperty(hidden = true)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
