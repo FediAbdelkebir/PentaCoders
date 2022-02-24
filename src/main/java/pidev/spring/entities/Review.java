@@ -1,17 +1,16 @@
 package pidev.spring.entities;
-import java.io.Serializable;
-import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
+import java.io.Serializable;
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,27 +28,29 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class Event implements Serializable{
+public class Review implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column
-	private String Title;
+	private String SocieteName;
 	@Column
-	private String Description;
-	@Column 
-	private Date DateStart;
-	@Column 
-	@Temporal(TemporalType.DATE)
-	private Date DateEnd;
-	@Column 
-	private int Nbrplace;
-	@Column 
-	private EventType Type;
-	@Column 
-	private boolean Trouphy;
+	private String EmployeeName;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@Column
+	private String ContentReview;
+	
+	//Ennum categorie fiha Employee W Societee
+	//Ennumm message fiha Normal or Annonyme
+	
+	@Enumerated(EnumType.STRING)
+	@Column
+	private CategoryReview category;
+	@Enumerated(EnumType.STRING)
+	@Column
+	private TypeReview review;
+	
+	@ManyToOne
 	@JsonIgnore
-	private Set<User> users;
+	private User user;
 }

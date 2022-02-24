@@ -1,15 +1,13 @@
 package pidev.spring.entities;
-import java.io.Serializable;
+
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -29,27 +27,21 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class Event implements Serializable{
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@Column
-	private String Title;
-	@Column
-	private String Description;
-	@Column 
-	private Date DateStart;
-	@Column 
-	@Temporal(TemporalType.DATE)
-	private Date DateEnd;
-	@Column 
-	private int Nbrplace;
-	@Column 
-	private EventType Type;
-	@Column 
-	private boolean Trouphy;
+public class Comments {
+	@Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String description ;
+    private String likes ;
+    @Temporal(TemporalType.DATE)
+    private Date DateComment ;
+
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JsonIgnore
+    private Article article; 
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JsonIgnore
+    private Post post;
+
 	
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JsonIgnore
-	private Set<User> users;
 }

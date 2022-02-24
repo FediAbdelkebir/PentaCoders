@@ -1,0 +1,64 @@
+package pidev.spring.webcontrollers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import pidev.spring.entities.SurveyQuestion;
+import pidev.spring.services.ISurveyServices;
+
+
+
+@RestController
+@RequestMapping("/survey")
+public class SurveyController {
+	
+	@Autowired
+	ISurveyServices SurveyServ;
+	
+	//Afficher survey
+	
+	@GetMapping("/retrieve-all-survey")
+	@ResponseBody
+	public List<SurveyQuestion> getSurvey() {
+	List<SurveyQuestion> listSurvey = SurveyServ.retrieveAllSurvey();
+	return listSurvey;
+	}
+	
+			//update survey
+			@PutMapping("/modify-survey/{idUser}")
+			@ResponseBody
+			public SurveyQuestion modifyCentreC(@RequestBody SurveyQuestion survey, @PathVariable Long idUser) {
+			return SurveyServ.updateSurvey(survey,idUser);
+			}
+			
+		//Ajouter survey
+			
+			@PostMapping("/add-survey/{idUser}")
+			@ResponseBody
+			public SurveyQuestion addsurvey(@RequestBody SurveyQuestion s, @PathVariable Long idUser)
+			{
+				SurveyQuestion survey = SurveyServ.addSurvey(s,idUser);
+			return survey;
+			}
+		
+		//Supprimer survey
+			
+			@DeleteMapping("/remove-survey/{survey-id}")
+			@ResponseBody
+			public void RemoveSurvey(@PathVariable("survey-id") Integer id) {
+				SurveyServ.deleteSurvey(id);
+			}
+			
+	
+	
+}

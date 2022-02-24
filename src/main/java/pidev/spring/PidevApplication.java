@@ -11,9 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PidevApplication {
 
 	public static void main(String[] args) {
-		String url = "jdbc:mysql://udugso46lqiotqrx:HBN5SyT3RpkT8bfgCuqd@bmjq0fwqtaqyt7smb7k7-mysql.services.clever-cloud.com:3306/bmjq0fwqtaqyt7smb7k7";
-		String username = "udugso46lqiotqrx";
-		String password = "HBN5SyT3RpkT8bfgCuqd";
+		String url = "jdbc:mysql://localhost:3306/Woorkmood?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+				String username = "root";
+		String password = "";
 
 		System.out.println("Connecting database...");
 
