@@ -5,9 +5,12 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -23,10 +26,28 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class Message implements Serializable{
+public class Review implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column
-	private String mesage;
+	private String SocieteName;
+	@Column
+	private String EmployeeName;
+	
+	@Column
+	private String ContentReview;
+	
+	//Ennum categorie fiha Employee W Societee
+	//Ennumm message fiha Normal or Annonyme
+	
+	@Enumerated(EnumType.STRING)
+	@Column
+	private CategoryReview category;
+	@Enumerated(EnumType.STRING)
+	@Column
+	private TypeReview review;
+	
+	@ManyToOne
+	private User user;
 }

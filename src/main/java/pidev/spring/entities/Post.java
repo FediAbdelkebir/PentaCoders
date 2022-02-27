@@ -1,13 +1,20 @@
 package pidev.spring.entities;
 
-import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
+import java.util.Set;
+import javax.persistence.CascadeType;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -16,23 +23,30 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@EqualsAndHashCode
-public class Post implements Serializable{
+@Entity 
+@Getter 
+@Setter 
+@AllArgsConstructor 
+@NoArgsConstructor 
+@ToString 
+@EqualsAndHashCode 
+public class Post  { 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@Column
-	private String description;
-	@Column
-	private Date date;
-	@Column
-	private String tags;
-	@Column
-	private int likes;
+	private int id;      
+	private String contenu; 
+	@Temporal(TemporalType.DATE)
+	private Date creation_time; 
+	private String Images; 
+	private int Likes; 
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="post")  
+	@JsonIgnore
+    private Set<Comment> Comments; 
+	
+	@ManyToOne(cascade = CascadeType.ALL)  
+	@JsonIgnore
+     User user;
+	
 }
