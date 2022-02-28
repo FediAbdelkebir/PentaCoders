@@ -38,6 +38,7 @@ public class User implements Serializable {
 	private Date subDate;
 	private String passwd;
 	private String confirmPasswd;
+	private boolean enabled;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JsonIgnore

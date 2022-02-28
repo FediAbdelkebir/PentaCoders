@@ -2,6 +2,7 @@ package tn.esprit.workmood.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,13 +28,18 @@ public class UserController {
 
         if (bindingResult.hasErrors()) {
         	
-            return "registration failed";
+            return "registration failed  :     "+bindingResult.getAllErrors();
         }
         us.save(user);
 		return "registred";
         
 	}
-        
+	@DeleteMapping("/remove-user/{user-id}")
+	@ResponseBody
+	public void removeUser(@PathVariable("user-id") Long id) {
+		us.deleteUser(id);
+		System.out.println("user removed");
+	}
     
 	
 	@PostMapping(value="/Role/{idRole}")

@@ -8,6 +8,8 @@ public interface UserServiceInt {
 
 	void save(User user);
 	public void addRole(User user , Long idRole);
+
+	void deleteUser(Long id);
 	
 
 }
