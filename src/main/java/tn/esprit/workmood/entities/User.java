@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -32,6 +34,7 @@ public class User implements Serializable {
 	private String emailAddress;
 	private String name;
 	private String firstName;
+	@Temporal(TemporalType.DATE)
 	private Date subDate;
 	private String passwd;
 	private String confirmPasswd;
