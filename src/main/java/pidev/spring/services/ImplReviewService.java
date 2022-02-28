@@ -85,6 +85,24 @@ public class ImplReviewService implements IReviewServices {
     }
 	
 	
-
+	@Override
+	public Review addReviewCompanyEtAffecter(Review R, Long idUser) {
+		R.setEmployeeName(null);
+		User u = userRepo.findById(idUser).orElse(null);
+		R.setUser(u);
+		ReviewRepo.save(R);
+        List<Review> Review = new ArrayList<>();
+        List<User> users = userRepo.findAll();
+        
+        for(User U : users){
+        	System.out.println(U.getEmailAddress());
+            if(R.getSocieteName() .equals( U.getEmailAddress())){
+            	//System.out.println(R.getContentReview());
+            	//System.out.println(U.toString());
+            }
+            
+        }
+        return R;
+    }
 	
 }

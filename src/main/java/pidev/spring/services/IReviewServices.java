@@ -23,6 +23,8 @@ List<Review> retrieveAllReview();
 	
 	Review addReviewEmployeEtAffecter(Review R, Long idUser);
 	
+	Review addReviewCompanyEtAffecter(Review R, Long idUser);
+	
 	
 
 }

@@ -77,12 +77,20 @@ public class ReviewController {
 			}
 			
 			
-			@PostMapping("/add-reviewetAffecter/{idUser}")
+			@PostMapping("/add-reviewetAffecterE/{idUser}")
 			@ResponseBody
 			public Review addReviewAffecE(@RequestBody Review r, @PathVariable Long idUser)
 			{
 				//Review review = reveiwServ.addReviewCompany(r,idUser);
 			return reveiwServ.addReviewEmployeEtAffecter(r, idUser);
+			}
+			
+			@PostMapping("/add-reviewetAffecterS/{idUser}")
+			@ResponseBody
+			public Review addReviewAffecS(@RequestBody Review r, @PathVariable Long idUser)
+			{
+				//Review review = reveiwServ.addReviewCompany(r,idUser);
+			return reveiwServ.addReviewCompanyEtAffecter(r, idUser);
 			}
 			
 			
