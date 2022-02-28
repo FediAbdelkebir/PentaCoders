@@ -10,19 +10,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import pidev.spring.entities.Article;
+import pidev.spring.entities.ArticleCategory;
 import pidev.spring.service.IarticleService;
 
 @RestController 
 @RequestMapping("/article")
-
 public class ArticleController {
 
 	@Autowired 
-	IarticleService articleservice;
+	IarticleService articleservice; 
 	
 	//http:localhost:8081/SpringMVC/article/retrieve-all-article
   	@GetMapping("/retrieve-all-article")
@@ -62,8 +63,14 @@ public class ArticleController {
 	@ResponseBody
 	public void removeArticle(@PathVariable("article-id") Long id) {
 		articleservice.deleteArticle(id);
+	} 
+	
+	// Select by article Categorie 
+	@GetMapping("/articleCat") 
+     @ResponseBody 
+	 List<Article> retrieveByCat(@RequestParam ArticleCategory category){
+		 return articleservice.retrieveByCategorie(category);
 	}
-
-// 
+	
 
 }

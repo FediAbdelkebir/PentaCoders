@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -42,18 +41,13 @@ public class Article  {
 	@Temporal(TemporalType.DATE)
 	private Date date_creation;  
 	private String Image;  
-	@Enumerated(EnumType.STRING)
-	private ArticleCategory Articlecat;
+	@Enumerated(EnumType.STRING) 
+	private ArticleCategory category;
        @OneToMany(cascade = CascadeType.ALL, mappedBy="article") 
        @JsonIgnore
        private Set<Comment> Comments; 
        @ManyToOne(cascade = CascadeType.ALL) 
        @JsonIgnore
-       User user;     
-	
-	
-	
-	
-	
+       User user;     	
 
 }

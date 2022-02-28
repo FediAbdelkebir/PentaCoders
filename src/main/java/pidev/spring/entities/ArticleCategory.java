@@ -5,7 +5,7 @@ public enum ArticleCategory {
 	Technology,
 	Health,
 	Education,
-	Entertainment,
+	Entertainment
 	
 	
 	

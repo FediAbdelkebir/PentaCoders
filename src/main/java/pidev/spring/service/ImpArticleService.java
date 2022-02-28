@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pidev.spring.entities.Article;
+import pidev.spring.entities.ArticleCategory;
 import pidev.spring.entities.User;
 import pidev.spring.repositories.Articlerepo;
 import pidev.spring.repositories.UserRepo;
@@ -51,7 +52,23 @@ public class ImpArticleService implements IarticleService {
 	public void deleteArticle(Long id) {
 		// TODO Auto-generated method stub 
 		articlerepo.deleteById(id);
-	} 
+	}
+
+	@Override
+	public List<Article> retrieveByCategorie(ArticleCategory category) {
+		// TODO Auto-generated method stub
+		return articlerepo.findByCategory(category);
+	}
+
+	//@Override
+	//public List<Article> retrieveByCategorie(ArticleCategory Articlecat) {
+		//TODO Auto-generated method stub
+		//return articlerepo.findByArticlecat(Articlecat);
+	//}
+
+
+
+
 
 	
 
