@@ -50,7 +50,7 @@ public class Offer implements Serializable{
 	@Enumerated(EnumType.STRING)
 	@Column
 	private CategoryOffer category;
-	@Column
+	@Column(nullable=true, length=64)
 	private String image;
 	@Column 
 	private int point; 
@@ -64,10 +64,5 @@ public class Offer implements Serializable{
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JsonIgnore
 	private Set<User> users;
-
-	public void affectUser(User u) {
-		users.add(u);
-	}
-	
 	
 }

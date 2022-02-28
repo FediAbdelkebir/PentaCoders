@@ -16,6 +16,6 @@ public interface IServiceOffer {
 	void affectUserToOffer(int idOffer, Long idUser);
 	List<Offer> retrieveByCategory(CategoryOffer category);
 	
-	void retrieveFullOffer(Long idUser);
+	List<Offer> retrieveFullOffer(Long idUser);
 	
 }

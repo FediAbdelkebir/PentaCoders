@@ -21,7 +21,7 @@ public class ServiceReclamation implements IServiceReclamation{
 	UserRepo userRepo;
 	
 	@Override
-	public List<Reclamation> retrieveAllReclamations() {
+	public List<Reclamation> retrieveAllReclamations(Long idUser) {
 		List<Reclamation> reclamations = (List<Reclamation>) reclamationRepo.findAll();
 		return reclamations;
 	}
@@ -48,7 +48,7 @@ public class ServiceReclamation implements IServiceReclamation{
 	}
 
 	@Override
-	public Reclamation retrieveReclamation(int id) {
+	public Reclamation retrieveReclamation(int id, Long idUser) {
 		Reclamation r = reclamationRepo.findById(id).orElse(null);
 		r.setStatus(StatusReclamation.INPROGRESS);
 		r.setProcessingDate(null);
@@ -58,7 +58,7 @@ public class ServiceReclamation implements IServiceReclamation{
 	}
 
 	@Override
-	public void deleteReclamation(int id) {
+	public void deleteReclamation(int id, Long idUser) {
 		reclamationRepo.deleteById(id);
 	}
 	
@@ -71,7 +71,7 @@ public class ServiceReclamation implements IServiceReclamation{
 	}
 	
 	@Override
-	public List<Reclamation> retrieveByType(StatusReclamation status) {
+	public List<Reclamation> retrieveByType(StatusReclamation status, Long idUser) {
 		return reclamationRepo.findAllByStatus(status);
 	}
 
@@ -94,6 +94,12 @@ public class ServiceReclamation implements IServiceReclamation{
 		reclamationRepo.save(reclamation);
 		// notifier l'user, envoyer mail
 	}
+
+	@Override
+	public List<Reclamation> retrieveAllReclamationsByKeyword(String keyword, Long idUser) { 
+		return (List<Reclamation>) reclamationRepo.findAll();
+	}
+	
 	
 	
 	

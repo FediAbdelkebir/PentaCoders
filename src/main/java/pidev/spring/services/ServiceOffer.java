@@ -1,5 +1,6 @@
 package pidev.spring.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pidev.spring.entities.CategoryOffer;
@@ -26,8 +27,12 @@ public class ServiceOffer implements IServiceOffer{
 	}
 
 	@Override
-	public Offer addOffer(Offer o, Long idUser) {
-		o.setImage(null); // à modifier
+	public Offer addOffer(Offer o, Long idUser) { //, MultipartFile file
+		//MultipartFile file;
+		//String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+		//o.setImage(fileName); // à modifier
+		
+		
 		o.getPersonsNumber();
 		offerRepo.save(o);
 		System.out.println(o.getIdOffer());
@@ -79,9 +84,15 @@ public class ServiceOffer implements IServiceOffer{
 	}
 
 	@Override
-	public void retrieveFullOffer(Long idUser) {
-		
-		
+	public List<Offer> retrieveFullOffer(Long idUser) {
+		List<Offer> full = new ArrayList<>();
+		List<Offer> offers = offerRepo.findAll();
+		for(Offer o : offers){
+			if(o.getLimitedNumber() == o.getPersonsNumber()){
+				full.add(o);
+			}
+		}
+		return full;
 	}
 	
 	

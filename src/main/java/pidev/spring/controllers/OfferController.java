@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,7 +41,7 @@ public class OfferController {
 	@PostMapping("/AddOffer/{idUser}")
 	@ResponseBody
 	@ApiOperation(value="Add offer")
-	Offer addOffer(@RequestBody Offer o, @PathVariable Long idUser){
+	Offer addOffer(@RequestBody Offer o, @PathVariable Long idUser, @RequestParam MultipartFile file){
 		return offerService.addOffer(o, idUser);
 	}
 	
@@ -76,6 +77,13 @@ public class OfferController {
 	@ApiOperation(value="Find by category")
 	List<Offer> retrieveByCategory(@RequestParam CategoryOffer category){
 		return offerService.retrieveByCategory(category);
+	}
+	
+	@GetMapping("/ShowFullOffers")
+	@ResponseBody
+	@ApiOperation(value="Show full offers")
+	List<Offer> retrieveFullOffer(Long idUser){
+		return offerService.retrieveFullOffer(idUser);
 	}
 	
 

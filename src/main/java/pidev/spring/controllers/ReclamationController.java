@@ -31,8 +31,8 @@ public class ReclamationController {
 	@GetMapping("/ShowAllReclamations")
 	@ResponseBody
 	@ApiOperation(value="Show all Reclamation")
-	List<Reclamation> retrieveAllReclamations(){
-		return reclamationService.retrieveAllReclamations();
+	List<Reclamation> retrieveAllReclamations(Long idUser){
+		return reclamationService.retrieveAllReclamations(idUser);
 	}
 	
 	@PostMapping("/AddReclamation/{idUser}")
@@ -52,14 +52,14 @@ public class ReclamationController {
 	@GetMapping("/ShowReclamation/{id}")
 	@ResponseBody
 	@ApiOperation(value="Show reclamation by id ")
-	Reclamation retrieveReclamation(@PathVariable(name="id") int id){
-		return reclamationService.retrieveReclamation(id);
+	Reclamation retrieveReclamation(@PathVariable(name="id") int id, Long idUser){
+		return reclamationService.retrieveReclamation(id, idUser);
 	}
 	
 	@DeleteMapping("/DeleteReclamation/{id}")
 	@ApiOperation(value="Delete reclamation")
-	void deleteReclamation(@PathVariable(name="id") int id){
-		reclamationService.deleteReclamation(id);
+	void deleteReclamation(@PathVariable(name="id") int id, Long idUser){
+		reclamationService.deleteReclamation(id, idUser);
 	}
 	
 
@@ -73,8 +73,8 @@ public class ReclamationController {
 	@GetMapping("/FindReclamationByType")
 	@ResponseBody
 	@ApiOperation(value="Find by type")
-	List<Reclamation> retrieveByType(@RequestParam StatusReclamation status){
-		return reclamationService.retrieveByType(status);
+	List<Reclamation> retrieveByType(@RequestParam StatusReclamation status, Long idUser){
+		return reclamationService.retrieveByType(status, idUser);
 	}
 	
 	@GetMapping("/FindReclamationByCreationDateAsc")
@@ -96,6 +96,13 @@ public class ReclamationController {
 	@ApiOperation(value="Treat reclamation")
 	void treatReclamation(@PathVariable int idReclamation, @PathVariable Long idUser){
 		reclamationService.treatReclamation(idReclamation, idUser);
+	}
+
+	@GetMapping("/ShowByKeyword/{keyword}")
+	@ResponseBody
+	@ApiOperation(value="Find by keyword")
+	List<Reclamation> retrieveAllReclamationsByKeyword(@PathVariable String keyword, Long idUser){
+		return reclamationService.retrieveAllReclamationsByKeyword(keyword, idUser);
 	}
 
 }
