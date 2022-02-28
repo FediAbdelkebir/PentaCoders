@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 import pidev.spring.entities.SurveyAnswer;
 import pidev.spring.entities.SurveyQuestion;
 
-@Repository
-public interface SurveyRepository  extends JpaRepository<SurveyQuestion, Integer>  {
-	
-	
-	//List<SurveyQuestion> findBySurveyAnswer( );
 
+@Repository
+public interface AnswersRepository extends JpaRepository<SurveyAnswer, Integer>{
+	
+	
+	
 }

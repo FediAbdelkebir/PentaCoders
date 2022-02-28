@@ -65,7 +65,7 @@ public class User implements Serializable {
 	
 	@ManyToMany(mappedBy = "users" , cascade=CascadeType.ALL)
 	@JsonIgnore
-	private Set<Messagerie> messageries;
+	private Set<ChatMessage> messageries;
 	
 	@OneToOne
 	private Badge badge;

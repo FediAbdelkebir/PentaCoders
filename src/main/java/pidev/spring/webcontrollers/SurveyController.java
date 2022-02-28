@@ -33,6 +33,13 @@ public class SurveyController {
 	List<SurveyQuestion> listSurvey = SurveyServ.retrieveAllSurvey();
 	return listSurvey;
 	}
+	//affiche by id
+	
+	@GetMapping("/retrieve-Survey/{Survey-id}")
+	@ResponseBody
+	public SurveyQuestion retrieveSurvey(@PathVariable("Survey-id") Integer id) {
+	return SurveyServ.retrieveSurvey(id);
+	}
 	
 			//update survey
 			@PutMapping("/modify-survey/{idUser}")
@@ -57,6 +64,12 @@ public class SurveyController {
 			@ResponseBody
 			public void RemoveSurvey(@PathVariable("survey-id") Integer id) {
 				SurveyServ.deleteSurvey(id);
+			}
+			
+			@PutMapping("/ajouter-reponse/{idUser}/{idquestion}/{idAnswer}")
+			@ResponseBody
+			public SurveyQuestion AjouterReponse(@PathVariable Integer idquestion, @PathVariable Long idUser, @PathVariable Integer idAnswer) {
+			return SurveyServ.AjouterReponse(idquestion, idUser, idAnswer);
 			}
 			
 	

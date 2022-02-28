@@ -12,7 +12,7 @@ public class PidevApplication {
 
 	public static void main(String[] args) {
 		String url = "jdbc:mysql://localhost:3306/Woorkmood?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-				String username = "root";
+		String username = "root";
 		String password = "";
 
 		System.out.println("Connecting database...");
@@ -20,9 +20,15 @@ public class PidevApplication {
 		try (Connection connection = DriverManager.getConnection(url, username, password)) {
 		    System.out.println("Database connected!");
 		    
+		    
 		} catch (SQLException e) {
 		    throw new IllegalStateException("Cannot connect the database!", e);
 		}
+		
+		
+		
+		
+		
 		SpringApplication.run(PidevApplication.class, args);
 	}
 

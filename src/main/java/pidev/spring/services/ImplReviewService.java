@@ -1,5 +1,6 @@
 package pidev.spring.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import pidev.spring.entities.Review;
 import pidev.spring.entities.User;
 import pidev.spring.repositories.ReviewRepository;
 import pidev.spring.repositories.UserRepository;
+
 
 @Service
 public class ImplReviewService implements IReviewServices {
@@ -61,6 +63,28 @@ public class ImplReviewService implements IReviewServices {
 		ReviewRepo.deleteById(id);
 		
 	}
+
+	@Override
+	public Review addReviewEmployeEtAffecter(Review R, Long idUser) {
+		R.setSocieteName(null);
+		User u = userRepo.findById(idUser).orElse(null);
+		R.setUser(u);
+		ReviewRepo.save(R);
+        List<Review> Review = new ArrayList<>();
+        List<User> users = userRepo.findAll();
+        
+        for(User U : users){
+        	System.out.println(U.getEmailAddress());
+            if(R.getEmployeeName() .equals( U.getEmailAddress())){
+            	//System.out.println(R.getContentReview());
+            	//System.out.println(U.toString());
+            }
+            
+        }
+        return R;
+    }
+	
+	
 
 	
 }

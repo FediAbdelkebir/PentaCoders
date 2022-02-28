@@ -3,11 +3,15 @@ package pidev.spring.entities;
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -28,10 +32,10 @@ public class SurveyAnswer implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	//answer Ennum fiha faible moyenne bien TresBien Excellent
 	@Column
 	private String answer;
 	
-	// cle mtaa  idquestion hnee
+	
+	
 	
 }

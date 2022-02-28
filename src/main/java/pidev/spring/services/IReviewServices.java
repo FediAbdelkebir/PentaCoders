@@ -21,6 +21,8 @@ List<Review> retrieveAllReview();
 	
 	void deleteReview(Integer id);
 	
+	Review addReviewEmployeEtAffecter(Review R, Long idUser);
+	
 	
 
 }

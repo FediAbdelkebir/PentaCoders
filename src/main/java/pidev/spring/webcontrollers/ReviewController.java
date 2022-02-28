@@ -76,6 +76,17 @@ public class ReviewController {
 				reveiwServ.deleteReview(id);
 			}
 			
+			
+			@PostMapping("/add-reviewetAffecter/{idUser}")
+			@ResponseBody
+			public Review addReviewAffecE(@RequestBody Review r, @PathVariable Long idUser)
+			{
+				//Review review = reveiwServ.addReviewCompany(r,idUser);
+			return reveiwServ.addReviewEmployeEtAffecter(r, idUser);
+			}
+			
+			
+			
 	
 	
 }

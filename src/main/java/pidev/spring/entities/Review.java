@@ -50,6 +50,7 @@ public class Review implements Serializable{
 	@Column
 	private TypeReview review;
 	
+	
 	@ManyToOne
 	@JsonIgnore
 	private User user;
