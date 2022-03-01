@@ -1,6 +1,11 @@
 package pidev.spring.services;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
+import com.lowagie.text.DocumentException;
 
 import pidev.spring.entities.CategoryOffer;
 import pidev.spring.entities.Offer;
@@ -15,7 +20,7 @@ public interface IServiceOffer {
 	
 	void affectUserToOffer(int idOffer, Long idUser);
 	List<Offer> retrieveByCategory(CategoryOffer category);
-	
 	List<Offer> retrieveFullOffer(Long idUser);
+	void getCoupon(HttpServletResponse response, int idOffer, Long idUser) throws DocumentException, IOException ;
 	
 }

@@ -1,6 +1,12 @@
 package pidev.spring.controllers;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,8 +21,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.lowagie.text.DocumentException;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import pidev.spring.config.PDFExporter;
 import pidev.spring.entities.CategoryOffer;
 import pidev.spring.entities.Offer;
 import pidev.spring.services.ServiceOffer;
@@ -85,6 +94,30 @@ public class OfferController {
 	List<Offer> retrieveFullOffer(Long idUser){
 		return offerService.retrieveFullOffer(idUser);
 	}
+	
+	/*@GetMapping("/GetCoupon/{idUser}/{idOffer}")
+	public void getCoupon(@PathVariable int idOffer, @PathVariable Long idUser){
+		offerService.getCoupon(idOffer, idUser);
+	}*/
+	
+	
+	@GetMapping("/GetCoupon/{idUser}/{idOffer}")
+    public void exportToPDF(HttpServletResponse response, @PathVariable int idOffer, @PathVariable Long idUser) throws DocumentException, IOException {
+        offerService.getCoupon(response, idOffer, idUser);
+		/*response.setContentType("application/pdf");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+         
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=offers_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+         
+        List<Offer> listUsers = offerService.retrieveAllOffers();
+         
+        PDFExporter exporter = new PDFExporter(listUsers);
+        exporter.export(response);*/
+         
+    }
 	
 
 }

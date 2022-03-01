@@ -13,5 +13,6 @@ import pidev.spring.entities.Offer;
 public interface OfferRepo extends JpaRepository<Offer, Integer>{
 	
 	List<Offer> findAllByCategory(CategoryOffer category);
+	List<Offer> findByUsersBadgePoint(int point);
 	
 }
