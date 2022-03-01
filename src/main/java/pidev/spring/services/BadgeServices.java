@@ -3,6 +3,8 @@ package pidev.spring.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.Badge;
@@ -46,5 +48,36 @@ public class BadgeServices {
 		return UserRepository.save(User);
 		
 	}
-	
+	//SortBadgeBy Id Asc
+	public List<Badge> SortBadgesByIdAsc(){
+		return BadgeRepository.findAllByOrderByIdAsc();
+	}
+	//SortBadgeBy Id Desc
+	public List<Badge> SortBadgesByIdDesc(){
+		return BadgeRepository.findAllByOrderByIdDesc();
+	}
+	//SortBadgeBy Title Asc
+	public List<Badge> SortBadgesByTitleAsc(){
+		return BadgeRepository.findAllByOrderByTitleAsc();
+	}
+	//SortBadgeBy Title Desc
+	public List<Badge> SortBadgesByTitleDesc(){
+		return BadgeRepository.findAllByOrderByTitleDesc();
+	}
+	//SortBadgeBy Description Asc
+	public List<Badge> SortBadgesByDescriptionAsc(){
+		return BadgeRepository.findAllByOrderByDescriptionAsc();
+	}
+	//SortBadgeBy Title Desc
+	public List<Badge> SortBadgesByDescriptionDesc(){
+		return BadgeRepository.findAllByOrderByDescriptionDesc();
+	}
+	//SortBadgeBy Top 10 Title Asc
+	public List<Badge> SortBadgesTop10ByOrderByTitleAsc(){
+		return BadgeRepository.findTop10ByOrderByTitleAsc();
+	}
+	//SortBadgeBy Top 10 Title Desc
+	public List<Badge> SortBadgesTop10ByOrderByTitleDesc(){
+			return BadgeRepository.findTop10ByOrderByTitleDesc();
+	}
 }
