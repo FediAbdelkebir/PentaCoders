@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.Badge;
+import pidev.spring.entities.User;
 import pidev.spring.repositories.BadgeRepository;
 
 @Service
 public class BadgeServices {
 	@Autowired
 	BadgeRepository BadgeRepository;
+	@Autowired
+	UserRepository UserRepository;
 	public Badge addBadge(Badge c) {
 		return BadgeRepository.save(c);
 	}
@@ -34,14 +37,14 @@ public class BadgeServices {
 	public List<Badge> listedesBadges() {
 		return BadgeRepository.findAll();
 	}
-	/*
-	public void ajouterEtaffecterListebadge (List<Badge> lb, Long idCentre) {
-		//ajouter à la fois la liste des badges suivante
-		BadgeRepository.saveAll(lb);
-		
+	//Affecter Badge To User
+	public User AffecterBadgeToUser (int badge, int userid) {
 		//l’affecter au centre commercial crée dans la question
-		CentreCommercial C=CR.findById(idCentre).orElse(null);
-		C.getBadges().addAll(lb);
-		CR.save(C);
-	}*/
+		Badge Badge=BadgeRepository.findById(badge).orElse(null);
+		User User=UserRepository.findById(userid).orElse(null);
+		User.setBadge(Badge);
+		return UserRepository.save(User);
+		
+	}
+	
 }
