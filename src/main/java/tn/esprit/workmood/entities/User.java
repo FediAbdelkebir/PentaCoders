@@ -41,7 +41,7 @@ public class User implements Serializable {
 	private String confirmPasswd;
 	private boolean enabled;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy="users",cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Set<Role> roles;
 	

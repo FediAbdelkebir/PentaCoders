@@ -1,5 +1,6 @@
 package tn.esprit.workmood.services;
 
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,6 @@ public class UserServiceImpl implements UserServiceInt{
 	return userRepository.save(user); }
 	
 	
-	
-	
 	@Override
 	public User findUserByUsername(String username) {
 		return userRepository.findByUsername(username);
@@ -38,17 +37,18 @@ public class UserServiceImpl implements UserServiceInt{
 
 
 	@Override
-	public void save(User user) {
-		//user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+	public void save(User user , Long idRole ) {
+		
+		Role role = roleRepository.findById(idRole).get();
+		
+		user.setPasswd(bCryptPasswordEncoder.encode(user.getPasswd()));
+		role.getUsers().add(user);
+		userRepository.save(user);
 		//user.setRoles(new HashSet<>(roleRepository.findAll()));
-		userRepository.save(user);
+		
+		
 	}
-	public void addRole(User user , Long idRole){
-		Role role = roleRepository.findById(idRole).orElse(null);
-		userRepository.save(user);
-		user.getRoles().add(role);
-		userRepository.save(user);
-	}
+	
 	
 	@Override
 	public void deleteUser(Long id) {
@@ -62,11 +62,7 @@ public class UserServiceImpl implements UserServiceInt{
 		Role role = roleRepository.findById(idRole).get();
 		
 		user.getRoles().add(role);
-		userRepository.save(user);
-		
-		
-		
-		
+		userRepository.save(user);	
 	}
 	@Override
 	public List<User> retrieveUsers() {

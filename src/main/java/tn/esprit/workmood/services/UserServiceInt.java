@@ -9,8 +9,8 @@ public interface UserServiceInt {
 	
 	User findUserByUsername(String username);
 
-	void save(User user);
-	public void addRole(User user , Long idRole);
+	void save(User user , Long idRole );
+	
 	
 	public void assignRolesToUser(Long idUser ,Long idRole );
 

@@ -32,7 +32,7 @@ public class Role implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Name name;
 	
-	@ManyToMany(mappedBy="roles",cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Set<User> users;
 

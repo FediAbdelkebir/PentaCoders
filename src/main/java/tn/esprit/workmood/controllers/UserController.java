@@ -25,16 +25,16 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 	
-	@PostMapping(value = "/registration")
+	@PostMapping(value = "/add-user/{idRole}")
 	@ResponseBody
-    public String registration(@RequestBody User user, BindingResult bindingResult) {
+    public String registration(@RequestBody User user, BindingResult bindingResult  , @PathVariable("idRole") Long idRole) {
         userValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
         	
             return "registration failed  :     "+bindingResult.getAllErrors();
         }
-        us.save(user);
+        us.save(user, idRole );
 		return "registred";
         
 	}
@@ -46,12 +46,7 @@ public class UserController {
 	}
     
 	
-	@PostMapping(value="/Role/{idRole}")
-	@ResponseBody
-	void addRole(@RequestBody User user , @PathVariable Long idRole){
-		us.addRole(user, idRole);
-		
-	}
+	
 	
 	@PutMapping(value="/add-role/{idUser}/{idRole}")
 	@ResponseBody
