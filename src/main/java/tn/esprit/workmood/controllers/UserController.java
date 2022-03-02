@@ -60,6 +60,12 @@ public class UserController {
 		
 		return us.retrieveUsers();
 	}
+	@PutMapping(value="/get-user")
+	@ResponseBody
+	User retrieveUser(String username){
+		
+		return us.retriveUser(username);
+	}
 	
 
 }

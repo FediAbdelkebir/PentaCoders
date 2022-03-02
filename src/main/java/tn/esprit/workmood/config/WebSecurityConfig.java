@@ -1,20 +1,19 @@
-/*package tn.esprit.workmood.config;
+package tn.esprit.workmood.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
-import tn.esprit.workmood.services.UserServiceInt;
+import tn.esprit.workmood.validator.AuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -30,13 +29,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-	http.authorizeRequests() .antMatchers("/registration").permitAll()
+	http.csrf().disable();
+	http.sessionManagement().sessionCreationPolicy(null);
+	http.authorizeRequests().anyRequest().permitAll();
+	http.addFilter(new AuthenticationFilter(authenticationManagerBean()));
+	}
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception{
+		return super.authenticationManagerBean();}
+		
+	/*.authorizeRequests() .antMatchers("/registration").permitAll()
 	.antMatchers("/remove-user/{user-id}").permitAll()
 	.antMatchers("/get**}").permitAll()
 	.antMatchers("/get-all-users").permitAll()
 	.anyRequest()
 	.authenticated()
 	.and()
-	.httpBasic().and().csrf().disable();
-	}}
-*/
+	.and().csrf().disable();*/
+
+	
+	}

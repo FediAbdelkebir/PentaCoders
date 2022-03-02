@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,7 +42,7 @@ public class User implements Serializable {
 	private String confirmPasswd;
 	private boolean enabled;
 	
-	@ManyToMany(mappedBy="users",cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy="users",cascade = CascadeType.ALL , fetch= FetchType.EAGER)
 	@JsonIgnore
 	private Set<Role> roles;
 	

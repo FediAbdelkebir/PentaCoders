@@ -24,10 +24,13 @@ public class UserServiceImpl implements UserServiceInt{
 	public User findUserByUserName(String userName) {
 	return userRepository.findByUsername(userName);
 	}
-	public User saveUser(User user) {
+	
+	
+	/*public User saveUser(User user) {
 	user.setPasswd(bCryptPasswordEncoder.encode(user.getPasswd()));
+	user.setConfirmPasswd(bCryptPasswordEncoder.encode(user.getConfirmPasswd()));
 	user.setEnabled(true);
-	return userRepository.save(user); }
+	return userRepository.save(user); }*/
 	
 	
 	@Override
@@ -42,6 +45,8 @@ public class UserServiceImpl implements UserServiceInt{
 		Role role = roleRepository.findById(idRole).get();
 		
 		user.setPasswd(bCryptPasswordEncoder.encode(user.getPasswd()));
+		user.setConfirmPasswd(bCryptPasswordEncoder.encode(user.getConfirmPasswd()));
+		user.setEnabled(true);
 		role.getUsers().add(user);
 		userRepository.save(user);
 		//user.setRoles(new HashSet<>(roleRepository.findAll()));
@@ -64,10 +69,16 @@ public class UserServiceImpl implements UserServiceInt{
 		user.getRoles().add(role);
 		userRepository.save(user);	
 	}
+	
 	@Override
 	public List<User> retrieveUsers() {
 		
 		return userRepository.findAll();
+	}
+	@Override
+	public User retriveUser(String username) {
+		
+		return userRepository.findByUsername(username);
 	}
 
 }
