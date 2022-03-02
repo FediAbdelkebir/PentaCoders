@@ -6,12 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.Event;
+import pidev.spring.entities.Event;
+import pidev.spring.entities.User;
 import pidev.spring.repositories.EventRepository;
+import pidev.spring.repositories.UserRepository;
 
 @Service
 public class EventServices {
 	@Autowired
 	EventRepository EventRepository;
+	@Autowired
+	UserRepository UserRepository;
 	//Ajout
 	public Event addEvent(Event c) {
 		return EventRepository.save(c);
@@ -50,4 +55,86 @@ public class EventServices {
 		C.getEvents().addAll(lb);
 		CR.save(C);
 	}*/
+	
+	//Affecter Event To User
+		public User AffecterEventToUser (int badge, long userid) {
+			//l’affecter au centre commercial crée dans la question
+			Event Event=EventRepository.findById(badge).orElse(null);
+			User User=UserRepository.findById(userid).orElse(null);
+			//User.setEvent(Event);
+			return UserRepository.save(User);
+			
+		}
+		//SortEventBy Id Asc
+		public List<Event> SortEventsByIdAsc(){
+			return EventRepository.findAllByOrderByIdAsc();
+		}
+		//SortEventBy Id Desc
+		public List<Event> SortEventsByIdDesc(){
+			return EventRepository.findAllByOrderByIdDesc();
+		}
+		//SortEventBy Title Asc
+		public List<Event> SortEventsByTitleAsc(){
+			return EventRepository.findAllByOrderByTitleAsc();
+		}
+		//SortEventBy Title Desc
+		public List<Event> SortEventsByTitleDesc(){
+			return EventRepository.findAllByOrderByTitleDesc();
+		}
+		//SortEventBy DateStart Asc
+		public List<Event> SortEventsByDateStartAsc(){
+			return EventRepository.findAllByOrderByDateStartAsc();
+		}
+		//SortEventBy DateStart Desc
+		public List<Event> SortEventsByDateStartDesc(){
+			return EventRepository.findAllByOrderByDateStartDesc();
+		}
+		//SortEventBy DateEnd Asc
+		public List<Event> SortEventsByDateEndAsc(){
+			return EventRepository.findAllByOrderByDateEndAsc();
+		}
+		//SortEventBy DateStart Desc
+		public List<Event> SortEventsByDateEndDesc(){
+			return EventRepository.findAllByOrderByDateEndDesc();
+		}
+		//SortEventBy NbrPlace Asc
+		public List<Event> SortEventsByNbrplaceAsc(){
+			return EventRepository.findAllByOrderByNbrplaceAsc();
+		}
+		//SortEventBy Nbrplace Desc
+		public List<Event> SortEventsByNbrplaceDesc(){
+			return EventRepository.findAllByOrderByNbrplaceDesc();
+		}
+		//SortEventBy Type Asc
+		public List<Event> SortEventsByTypeAsc(){
+			return EventRepository.findAllByOrderByTypeAsc();
+		}
+		//SortEventBy Type Desc
+		public List<Event> SortEventsByTypeDesc(){
+			return EventRepository.findAllByOrderByTypeDesc();
+		}
+		//SortEventBy Type Asc
+		public List<Event> SortEventsByTrouphyAsc(){
+			return EventRepository.findAllByOrderByTrouphyAsc();
+		}
+		//SortEventBy Type Desc
+		public List<Event> SortEventsByTrouphyDesc(){
+			return EventRepository.findAllByOrderByTrouphyDesc();
+		}
+		//SortEventBy Description Asc
+		public List<Event> SortEventsByDescriptionAsc(){
+			return EventRepository.findAllByOrderByDescriptionAsc();
+		}
+		//SortEventBy Title Desc
+		public List<Event> SortEventsByDescriptionDesc(){
+			return EventRepository.findAllByOrderByDescriptionDesc();
+		}
+		//SortEventBy Top 10 Title Asc
+		public List<Event> SortEventsTop10ByOrderByTitleAsc(){
+			return EventRepository.findTop10ByOrderByTitleAsc();
+		}
+		//SortEventBy Top 10 Title Desc
+		public List<Event> SortEventsTop10ByOrderByTitleDesc(){
+				return EventRepository.findTop10ByOrderByTitleDesc();
+		}
 }
