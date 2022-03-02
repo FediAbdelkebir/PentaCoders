@@ -25,7 +25,6 @@ import com.lowagie.text.Font;
 import com.lowagie.text.FontFactory;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
 @Service
@@ -44,14 +43,8 @@ public class ServiceOffer implements IServiceOffer {
 
 	@Override
 	public Offer addOffer(Offer o, Long idUser) {
-		o.setImage(null); // à modifier
-		o.getPersonsNumber();
-		offerRepo.save(o);
-		System.out.println(o.getIdOffer());
 		User u = userRepo.findById(idUser).orElse(null);
-		System.out.println(u.getIdUser());
-		System.out.println(o.getIdOffer());
-		o.getUsers().add(u);
+		u.getOffers().add(o);
 		return offerRepo.save(o);
 	}
 
@@ -59,8 +52,6 @@ public class ServiceOffer implements IServiceOffer {
 	public void affectUserToOffer(int idOffer, Long idUser) {
 		Offer o = offerRepo.findById(idOffer).orElse(null);
 		User u = userRepo.findById(idUser).orElse(null);
-		// System.out.println(u.getIdUser());
-		// System.out.println(o.getIdOffer());
 		o.getUsers().add(u);
 		offerRepo.save(o);
 	}
@@ -107,22 +98,22 @@ public class ServiceOffer implements IServiceOffer {
 	}
 
 	@Override
-	public void getCoupon(HttpServletResponse response, int idOffer, Long idUser) throws DocumentException, IOException {
+	public void getCoupon(HttpServletResponse response, int idOffer, Long idUser)
+			throws DocumentException, IOException {
 		Offer o = offerRepo.findById(idOffer).orElse(null);
 		User u = userRepo.findById(idUser).orElse(null);
-		
 		if (u.getBadge().getPoint() >= o.getPoint()) {
-			//creation coupon
+			// creation coupon
 			response.setContentType("application/pdf");
 			DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
 			String currentDateTime = dateFormatter.format(new Date());
-			
+
 			String headerKey = "Content-Disposition";
 			String headerValue = "attachment; filename=" + o.getTitle() + "_" + currentDateTime + ".pdf";
 			response.setHeader(headerKey, headerValue);
-			
-			export(response,o, u);
-			
+
+			export(response, o, u);
+
 			// update du point user
 			int up = u.getBadge().getPoint() - o.getPoint();
 			u.getBadge().setPoint(up);
@@ -132,46 +123,47 @@ public class ServiceOffer implements IServiceOffer {
 	}
 
 	public void export(HttpServletResponse response, Offer offer, User user) throws DocumentException, IOException {
-        Document document = new Document(PageSize.A6.rotate());
-        PdfWriter.getInstance(document, response.getOutputStream());
-        
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date todayy = new Date();
-        Date tomorroww = new Date(todayy.getTime() + (1000 * 60 * 60 * 360));
-        String s = dateFormatter.format(tomorroww);
+		Document document = new Document(PageSize.A5.rotate());
+		PdfWriter.getInstance(document, response.getOutputStream());
 
-        document.open();
-        
-        Font font1 = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-        font1.setSize(20);
-        font1.setColor(Color.PINK);
-        
-        Paragraph p = new Paragraph(offer.getTitle(), font1);
-        p.setAlignment(Paragraph.ALIGN_CENTER);
-         
-        document.add(p);
-        
-        Font font2 = FontFactory.getFont(FontFactory.HELVETICA);
-        font2.setSize(20);
-        font2.setColor(Color.BLACK);
-       
-        Paragraph p1 = new Paragraph(user.getFirstname() + " " + user.getLastName(), font2);
-        Paragraph p2 = new Paragraph(String.valueOf(user.getBadge().getPoint()), font2);
-        Paragraph p3 = new Paragraph(offer.getAddress(), font2);
-        Paragraph p4 = new Paragraph("Expiration Date : "+s, font2);
-        
-        document.add(p1);
-        document.add(p2);
-        document.add(p3);
-        document.add(p4);
-        
-        document.close();
-         
-    }
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date todayy = new Date();
+		Date tomorroww = new Date(todayy.getTime() + (1000 * 60 * 60 * 360));
+		String s = dateFormatter.format(tomorroww);
+
+		document.open();
+
+		Font font1 = FontFactory.getFont(FontFactory.COURIER_BOLD, Font.ITALIC);
+		font1.setSize(20);
+		font1.setColor(Color.PINK);
+
+		Paragraph p = new Paragraph(offer.getTitle() + "\n\n", font1);
+		p.setAlignment(Paragraph.ALIGN_CENTER);
+
+		document.add(p);
+
+		Font font2 = FontFactory.getFont(FontFactory.COURIER, Font.ITALIC);
+		font2.setSize(20);
+		font2.setColor(Color.BLACK);
+
+		Paragraph p1 = new Paragraph(user.getFirstname() + " " + user.getLastName(), font2);
+		Paragraph p2 = new Paragraph("Address : " + offer.getAddress(), font2);
+		Paragraph p3 = new Paragraph("Category : " + offer.getCategory().toString(), font2);
+		Paragraph p4 = new Paragraph("Expiration Date : " + s, font2);
+
+		document.add(p1);
+		document.add(p2);
+		document.add(p3);
+		document.add(p4);
+
+		document.close();
+
+	}
 
 	@Override
 	public List<Offer> searchOffer(String title) {
 		return offerRepo.searchOffer(title);
 	}
+
 
 }

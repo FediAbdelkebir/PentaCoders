@@ -24,5 +24,6 @@ public interface IServiceOffer {
 	void getCoupon(HttpServletResponse response, int idOffer, Long idUser) throws DocumentException, IOException ;
 	
 	List<Offer> searchOffer(String title);
+	//void reserverOffer(int idOffer,int idUser); // nbrPerso+1
 	
 }

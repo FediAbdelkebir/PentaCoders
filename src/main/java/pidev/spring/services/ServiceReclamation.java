@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.Reclamation;
@@ -19,6 +21,8 @@ public class ServiceReclamation implements IServiceReclamation{
 	ReclamationRepo reclamationRepo;
 	@Autowired
 	UserRepo userRepo;
+	@Autowired
+	JavaMailSender emailSender;
 	
 	@Override
 	public List<Reclamation> retrieveAllReclamations(Long idUser) {
@@ -87,12 +91,14 @@ public class ServiceReclamation implements IServiceReclamation{
 
 	@Override
 	public void treatReclamation(int idReclamation, Long idUser) {
+		User u = userRepo.findById(idUser).orElse(null);
 		Reclamation reclamation = reclamationRepo.findById(idReclamation).orElse(null);
 		reclamation.setStatus(StatusReclamation.PROCESSED);
 		reclamation.setProcessingDate(new Date());
 		reclamation.setResponse("response of reclamation");
 		reclamationRepo.save(reclamation);
 		// notifier l'user, envoyer mail
+		sendSimpleEmail(u.getEmailAddress().toString(), "Reclamation Processes", "Response of reclamation : \n" + reclamation.getResponse());
 	}
 
 	@Override
@@ -100,7 +106,13 @@ public class ServiceReclamation implements IServiceReclamation{
 		return (List<Reclamation>) reclamationRepo.findAll();
 	}
 	
-	
+	public void sendSimpleEmail(String toAddress, String subject, String message) {
+		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+		simpleMailMessage.setTo(toAddress);
+		simpleMailMessage.setSubject(subject);
+		simpleMailMessage.setText(message);
+		emailSender.send(simpleMailMessage);
+	}
 	
 	
 	

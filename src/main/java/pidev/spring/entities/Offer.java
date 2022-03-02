@@ -61,7 +61,7 @@ public class Offer implements Serializable{
 	@Column 
 	private int personsNumber; 
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.ALL, mappedBy = "offers")
 	@JsonIgnore
 	private Set<User> users;
 	

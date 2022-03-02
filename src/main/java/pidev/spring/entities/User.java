@@ -68,7 +68,7 @@ public class User implements Serializable {
 	@OneToOne
 	private Badge badge;
 	
-	@ManyToMany(cascade=CascadeType.ALL, mappedBy = "users")
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JsonIgnore
 	private Set<Offer> offers;
 	
