@@ -1,5 +1,8 @@
 package tn.esprit.workmood.services;
 
+import java.util.List;
+
+import tn.esprit.workmood.entities.Role;
 import tn.esprit.workmood.entities.User;
 
 public interface UserServiceInt {
@@ -8,8 +11,12 @@ public interface UserServiceInt {
 
 	void save(User user);
 	public void addRole(User user , Long idRole);
+	
+	public void assignRolesToUser(Long idUser ,Long idRole );
 
 	void deleteUser(Long id);
+	
+	List<User> retrieveUsers();
 	
 
 }
