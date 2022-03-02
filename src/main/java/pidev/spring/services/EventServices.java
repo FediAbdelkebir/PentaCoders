@@ -1,11 +1,13 @@
 package pidev.spring.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.Event;
+import pidev.spring.entities.EventType;
 import pidev.spring.entities.Event;
 import pidev.spring.entities.User;
 import pidev.spring.repositories.EventRepository;
@@ -45,6 +47,23 @@ public class EventServices {
 	public List<Event> listedesEvents() {
 		return EventRepository.findAll();
 	}
+	//Find By Title
+	public Event FindEventByTitle(String Title) {
+		return EventRepository.findByTitle(Title);
+	}
+	//Find By DateStart
+	public List<Event> FindEventByDateStart(Date DateStart) {
+		return EventRepository.findByDateStart(DateStart);
+	}
+	//Find By DateEnd
+	public List<Event> FindEventByDateEnd(Date DateEnd) {
+		return EventRepository.findByDateEnd(DateEnd);
+	}
+	//Find By Type
+	public List<Event> FindEventByType(EventType EventType) {
+		return EventRepository.findByType(EventType);
+	}
+
 	/*
 	public void ajouterEtaffecterListeevent (List<Event> lb, Long idCentre) {
 		//ajouter à la fois la liste des events suivante
@@ -137,4 +156,6 @@ public class EventServices {
 		public List<Event> SortEventsTop10ByOrderByTitleDesc(){
 				return EventRepository.findTop10ByOrderByTitleDesc();
 		}
-}
+		/////
+		
+		}

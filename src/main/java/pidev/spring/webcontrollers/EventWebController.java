@@ -1,5 +1,6 @@
 package pidev.spring.webcontrollers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import pidev.spring.entities.Event;
+import pidev.spring.entities.EventType;
 import pidev.spring.entities.Event;
 import pidev.spring.entities.User;
 import pidev.spring.services.EventServices;
@@ -73,7 +75,34 @@ List<Event> Events(){
 		System.out.println(ES.retrieveEvent(idEvent));
 			return ES.retrieveEvent(idEvent);
 	}
-	
+//Find By Title
+	@GetMapping("/FindEvent/Title/{Title}")
+	@ResponseBody
+	Event FindEventById(@PathVariable("Title") String Title){
+		System.out.println(ES.FindEventByTitle(Title));
+			return ES.FindEventByTitle(Title);
+	}
+//Find By DateStart
+		@GetMapping("/FindEvent/DateStart/{DateStart}")
+		@ResponseBody
+		List<Event> FindEventByDateStart(@PathVariable("DateStart") Date DateStart){
+			System.out.println(ES.FindEventByDateStart(DateStart));
+				return ES.FindEventByDateStart(DateStart);
+		}
+//Find By DateEnd
+		@GetMapping("/FindEvent/DateEnd/{DateEnd}")
+		@ResponseBody
+		List<Event> FindEventByDateEnd(@PathVariable("DateEnd") Date DateEnd){
+			System.out.println(ES.FindEventByDateEnd(DateEnd));
+			return ES.FindEventByDateEnd(DateEnd);
+		}
+//Find By Type
+		@GetMapping("/FindEvent/Type/{Type}")
+		@ResponseBody
+		List<Event> FindEventByType(@PathVariable("Type") EventType Type){
+					System.out.println(ES.FindEventByType(Type));
+					return ES.FindEventByType(Type);
+				}
 	//AffecterEventToUser
 			@PostMapping("/AffecterEventToUser/{badge}/{userid}")
 			@ResponseBody
@@ -81,109 +110,109 @@ List<Event> Events(){
 				return ES.AffecterEventToUser(badge, userid);
 			}
 	//SortEventsByIdDesc
-			@PostMapping("/SortEventsByIdDesc")
+			@GetMapping("/SortEventsByIdDesc")
 			@ResponseBody
 			List<Event> SortEventsByIdDesc(){
 				return ES.SortEventsByIdDesc();
 			}
 	//SortEventsByIdAsc
-			@PostMapping("/SortEventsByIdAsc")
+			@GetMapping("/SortEventsByIdAsc")
 			@ResponseBody
 			List<Event> SortEventsByIdAsc(){
 				return ES.SortEventsByIdAsc();
 			}
 	//SortEventsByTitleAsc
-			@PostMapping("/SortEventsByTitleAsc")
+			@GetMapping("/SortEventsByTitleAsc")
 			@ResponseBody
 			List<Event> SortEventsByTitleAsc(){
 				return ES.SortEventsByTitleAsc();
 			}
 	//SortEventsByTitleDesc
-			@PostMapping("/SortEventsByTitleDesc")
+			@GetMapping("/SortEventsByTitleDesc")
 			@ResponseBody
 			List<Event> SortEventsByTitleDesc(){
 				return ES.SortEventsByTitleDesc();
 			}
 	//SortEventsByDescriptionAsc
-			@PostMapping("/SortEventsByDescriptionAsc")
+			@GetMapping("/SortEventsByDescriptionAsc")
 			@ResponseBody
 			List<Event> SortEventsByDescriptionAsc(){
 				return ES.SortEventsByDescriptionAsc();
 			}
 	//SortEventsByDescriptionDesc
-			@PostMapping("/SortEventsByDescriptionDesc")
+			@GetMapping("/SortEventsByDescriptionDesc")
 			@ResponseBody
 			List<Event> SortEventsByDescriptionDesc(){
 				return ES.SortEventsByDescriptionDesc();
 			}
 //SortEventsByDateStartAsc
-			@PostMapping("/SortEventsByDateStartAsc")
+			@GetMapping("/SortEventsByDateStartAsc")
 			@ResponseBody
 			List<Event> SortEventsByDateStartAsc(){
 				return ES.SortEventsByDateStartAsc();
 			}
 //SortEventsByDateStartDesc
-			@PostMapping("/SortEventsByDateStartDesc")
+			@GetMapping("/SortEventsByDateStartDesc")
 			@ResponseBody
 			List<Event> SortEventsByDateStartDesc(){
 				return ES.SortEventsByDateStartDesc();
 			}
 //SortEventsByDateEndAsc
-			@PostMapping("/SortEventsByDateEndAsc")
+			@GetMapping("/SortEventsByDateEndAsc")
 			@ResponseBody
 			List<Event> SortEventsByDateEndAsc(){
 				return ES.SortEventsByDateEndAsc();
 			}
 //SortEventsByDateEndDesc
-			@PostMapping("/SortEventsByDateEndDesc")
+			@GetMapping("/SortEventsByDateEndDesc")
 			@ResponseBody
 			List<Event> SortEventsByDateEndDesc(){
 				return ES.SortEventsByDateEndDesc();
 			}
 //SortEventsByNbrplaceAsc
-			@PostMapping("/SortEventsByNbrplaceAsc")
+			@GetMapping("/SortEventsByNbrplaceAsc")
 			@ResponseBody
 			List<Event> SortEventsByNbrplaceAsc(){
 				return ES.SortEventsByNbrplaceAsc();
 			}
 //SortEventsByNbrPlaceDesc
-			@PostMapping("/SortEventsByNbrPlaceDesc")
+			@GetMapping("/SortEventsByNbrPlaceDesc")
 			@ResponseBody
 			List<Event> SortEventsByNbrPlaceDesc(){
 				return ES.SortEventsByNbrplaceDesc();
 			}
 //SortEventsByTypeAsc
-			@PostMapping("/SortEventsByTypeAsc")
+			@GetMapping("/SortEventsByTypeAsc")
 			@ResponseBody
 			List<Event> SortEventsByTypeAsc(){
 				return ES.SortEventsByTypeAsc();
 			}
 //SortEventsByTypeDesc
-			@PostMapping("/SortEventsByTypeDesc")
+			@GetMapping("/SortEventsByTypeDesc")
 			@ResponseBody
 			List<Event> SortEventsByTypeDesc(){
 				return ES.SortEventsByTypeDesc();
 			}
 //SortEventsByTrouphyAsc
-			@PostMapping("/SortEventsByTrouphyAsc")
+			@GetMapping("/SortEventsByTrouphyAsc")
 			@ResponseBody
 			List<Event> SortEventsByTrouphyAsc(){
 				return ES.SortEventsByTrouphyAsc();
 			}
 //SortEventsByTrouphyDesc
-			@PostMapping("/SortEventsByTrouphyDesc")
+			@GetMapping("/SortEventsByTrouphyDesc")
 			@ResponseBody
 			List<Event> SortEventsByTrouphyDesc(){
 				return ES.SortEventsByTrouphyDesc();
 			}
 	//SortEventsTop10ByOrderByTitleAsc
-			@PostMapping("/SortEventsTop10ByOrderByTitleAsc")
+			@GetMapping("/SortEventsTop10ByOrderByTitleAsc")
 			@ResponseBody
 			List<Event> SortEventsTop10ByOrderByTitleAsc(){
 				return ES.SortEventsTop10ByOrderByTitleAsc();
 			}
 	//SortEventsTop10ByOrderByTitleDesc
-			@PostMapping("SortEventsTop10ByOrderByTitleDesc")
+			@GetMapping("SortEventsTop10ByOrderByTitleDesc")
 			@ResponseBody
 			List<Event> SortEventsTop10ByOrderByTitleDesc(){
 				return ES.SortEventsTop10ByOrderByTitleDesc();

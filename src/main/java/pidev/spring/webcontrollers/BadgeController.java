@@ -45,7 +45,7 @@ public class BadgeController {
 			
 		}
 		//Delete
-			@GetMapping("/DeleteBadge/{idBadge}")
+			@PostMapping("/DeleteBadge/{idBadge}")
 			@ResponseBody
 	void DeleteBadge(@PathVariable("idBadge") int idBadge){
 				try{
@@ -78,49 +78,49 @@ public class BadgeController {
 			return BS.AffecterBadgeToUser(badge, userid);
 		}
 //SortBadgesByIdDesc
-		@PostMapping("/SortBadgesByIdDesc")
+		@GetMapping("/SortBadgesByIdDesc")
 		@ResponseBody
 		List<Badge> SortBadgesByIdDesc(){
 			return BS.SortBadgesByIdDesc();
 		}
 //SortBadgesByIdAsc
-		@PostMapping("/SortBadgesByIdAsc")
+		@GetMapping("/SortBadgesByIdAsc")
 		@ResponseBody
 		List<Badge> SortBadgesByIdAsc(){
 			return BS.SortBadgesByIdAsc();
 		}
 //SortBadgesByTitleAsc
-		@PostMapping("/SortBadgesByTitleAsc")
+		@GetMapping("/SortBadgesByTitleAsc")
 		@ResponseBody
 		List<Badge> SortBadgesByTitleAsc(){
 			return BS.SortBadgesByTitleAsc();
 		}
 //SortBadgesByTitleDesc
-		@PostMapping("/SortBadgesByTitleDesc")
+		@GetMapping("/SortBadgesByTitleDesc")
 		@ResponseBody
 		List<Badge> SortBadgesByTitleDesc(){
 			return BS.SortBadgesByTitleDesc();
 		}
 //SortBadgesByDescriptionAsc
-		@PostMapping("/SortBadgesByDescriptionAsc")
+		@GetMapping("/SortBadgesByDescriptionAsc")
 		@ResponseBody
 		List<Badge> SortBadgesByDescriptionAsc(){
 			return BS.SortBadgesByDescriptionAsc();
 		}
 //SortBadgesByDescriptionDesc
-		@PostMapping("/SortBadgesByDescriptionDesc")
+		@GetMapping("/SortBadgesByDescriptionDesc")
 		@ResponseBody
 		List<Badge> SortBadgesByDescriptionDesc(){
 			return BS.SortBadgesByDescriptionDesc();
 		}
 //SortBadgesTop10ByOrderByTitleAsc
-		@PostMapping("/SortBadgesTop10ByOrderByTitleAsc")
+		@GetMapping("/SortBadgesTop10ByOrderByTitleAsc")
 		@ResponseBody
 		List<Badge> SortBadgesTop10ByOrderByTitleAsc(){
 			return BS.SortBadgesTop10ByOrderByTitleAsc();
 		}
 //SortBadgesTop10ByOrderByTitleDesc
-		@PostMapping("SortBadgesTop10ByOrderByTitleDesc")
+		@GetMapping("SortBadgesTop10ByOrderByTitleDesc")
 		@ResponseBody
 		List<Badge> SortBadgesTop10ByOrderByTitleDesc(){
 			return BS.SortBadgesTop10ByOrderByTitleDesc();
