@@ -25,7 +25,6 @@ import com.lowagie.text.DocumentException;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import pidev.spring.config.PDFExporter;
 import pidev.spring.entities.CategoryOffer;
 import pidev.spring.entities.Offer;
 import pidev.spring.services.ServiceOffer;

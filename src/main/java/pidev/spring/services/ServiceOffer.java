@@ -4,13 +4,13 @@ import java.awt.Color;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import pidev.spring.config.PDFExporter;
 import pidev.spring.entities.CategoryOffer;
 import pidev.spring.entities.Offer;
 import pidev.spring.entities.User;
@@ -135,7 +135,12 @@ public class ServiceOffer implements IServiceOffer {
 	public void export(HttpServletResponse response, Offer offer, User user) throws DocumentException, IOException {
         Document document = new Document(PageSize.A6.rotate());
         PdfWriter.getInstance(document, response.getOutputStream());
-         
+        
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date todayy = new Date();
+        Date tomorroww = new Date(todayy.getTime() + (1000 * 60 * 60 * 360));
+        String s = dateFormatter.format(tomorroww);
+
         document.open();
         
         Font font1 = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
@@ -154,12 +159,12 @@ public class ServiceOffer implements IServiceOffer {
         Paragraph p1 = new Paragraph(user.getFirstname() + " " + user.getLastName(), font2);
         Paragraph p2 = new Paragraph(String.valueOf(user.getBadge().getPoint()), font2);
         Paragraph p3 = new Paragraph(offer.getAddress(), font2);
-        Paragraph p4 = new Paragraph("Expiration Date : " + new Date(), font2);
+        Paragraph p4 = new Paragraph("Expiration Date : "+s, font2);
         
         document.add(p1);
         document.add(p2);
         document.add(p3);
-        //document.add(p4);
+        document.add(p4);
         
          
         document.close();
