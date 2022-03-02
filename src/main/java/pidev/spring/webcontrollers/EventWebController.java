@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import pidev.spring.entities.Event;
+import pidev.spring.entities.Event;
+import pidev.spring.entities.User;
 import pidev.spring.services.EventServices;
 
 @RestController
@@ -71,4 +73,119 @@ List<Event> Events(){
 		System.out.println(ES.retrieveEvent(idEvent));
 			return ES.retrieveEvent(idEvent);
 	}
+	
+	//AffecterEventToUser
+			@PostMapping("/AffecterEventToUser/{badge}/{userid}")
+			@ResponseBody
+			User FindEventById(@PathVariable("badge") int badge,@PathVariable("userid") int userid){
+				return ES.AffecterEventToUser(badge, userid);
+			}
+	//SortEventsByIdDesc
+			@PostMapping("/SortEventsByIdDesc")
+			@ResponseBody
+			List<Event> SortEventsByIdDesc(){
+				return ES.SortEventsByIdDesc();
+			}
+	//SortEventsByIdAsc
+			@PostMapping("/SortEventsByIdAsc")
+			@ResponseBody
+			List<Event> SortEventsByIdAsc(){
+				return ES.SortEventsByIdAsc();
+			}
+	//SortEventsByTitleAsc
+			@PostMapping("/SortEventsByTitleAsc")
+			@ResponseBody
+			List<Event> SortEventsByTitleAsc(){
+				return ES.SortEventsByTitleAsc();
+			}
+	//SortEventsByTitleDesc
+			@PostMapping("/SortEventsByTitleDesc")
+			@ResponseBody
+			List<Event> SortEventsByTitleDesc(){
+				return ES.SortEventsByTitleDesc();
+			}
+	//SortEventsByDescriptionAsc
+			@PostMapping("/SortEventsByDescriptionAsc")
+			@ResponseBody
+			List<Event> SortEventsByDescriptionAsc(){
+				return ES.SortEventsByDescriptionAsc();
+			}
+	//SortEventsByDescriptionDesc
+			@PostMapping("/SortEventsByDescriptionDesc")
+			@ResponseBody
+			List<Event> SortEventsByDescriptionDesc(){
+				return ES.SortEventsByDescriptionDesc();
+			}
+//SortEventsByDateStartAsc
+			@PostMapping("/SortEventsByDateStartAsc")
+			@ResponseBody
+			List<Event> SortEventsByDateStartAsc(){
+				return ES.SortEventsByDateStartAsc();
+			}
+//SortEventsByDateStartDesc
+			@PostMapping("/SortEventsByDateStartDesc")
+			@ResponseBody
+			List<Event> SortEventsByDateStartDesc(){
+				return ES.SortEventsByDateStartDesc();
+			}
+//SortEventsByDateEndAsc
+			@PostMapping("/SortEventsByDateEndAsc")
+			@ResponseBody
+			List<Event> SortEventsByDateEndAsc(){
+				return ES.SortEventsByDateEndAsc();
+			}
+//SortEventsByDateEndDesc
+			@PostMapping("/SortEventsByDateEndDesc")
+			@ResponseBody
+			List<Event> SortEventsByDateEndDesc(){
+				return ES.SortEventsByDateEndDesc();
+			}
+//SortEventsByNbrplaceAsc
+			@PostMapping("/SortEventsByNbrplaceAsc")
+			@ResponseBody
+			List<Event> SortEventsByNbrplaceAsc(){
+				return ES.SortEventsByNbrplaceAsc();
+			}
+//SortEventsByNbrPlaceDesc
+			@PostMapping("/SortEventsByNbrPlaceDesc")
+			@ResponseBody
+			List<Event> SortEventsByNbrPlaceDesc(){
+				return ES.SortEventsByNbrplaceDesc();
+			}
+//SortEventsByTypeAsc
+			@PostMapping("/SortEventsByTypeAsc")
+			@ResponseBody
+			List<Event> SortEventsByTypeAsc(){
+				return ES.SortEventsByTypeAsc();
+			}
+//SortEventsByTypeDesc
+			@PostMapping("/SortEventsByTypeDesc")
+			@ResponseBody
+			List<Event> SortEventsByTypeDesc(){
+				return ES.SortEventsByTypeDesc();
+			}
+//SortEventsByTrouphyAsc
+			@PostMapping("/SortEventsByTrouphyAsc")
+			@ResponseBody
+			List<Event> SortEventsByTrouphyAsc(){
+				return ES.SortEventsByTrouphyAsc();
+			}
+//SortEventsByTrouphyDesc
+			@PostMapping("/SortEventsByTrouphyDesc")
+			@ResponseBody
+			List<Event> SortEventsByTrouphyDesc(){
+				return ES.SortEventsByTrouphyDesc();
+			}
+	//SortEventsTop10ByOrderByTitleAsc
+			@PostMapping("/SortEventsTop10ByOrderByTitleAsc")
+			@ResponseBody
+			List<Event> SortEventsTop10ByOrderByTitleAsc(){
+				return ES.SortEventsTop10ByOrderByTitleAsc();
+			}
+	//SortEventsTop10ByOrderByTitleDesc
+			@PostMapping("SortEventsTop10ByOrderByTitleDesc")
+			@ResponseBody
+			List<Event> SortEventsTop10ByOrderByTitleDesc(){
+				return ES.SortEventsTop10ByOrderByTitleDesc();
+			}
 }
