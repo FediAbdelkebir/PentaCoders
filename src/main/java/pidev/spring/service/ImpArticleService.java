@@ -3,6 +3,8 @@ package pidev.spring.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import pidev.spring.entities.Article;
 import pidev.spring.entities.ArticleCategory;
@@ -59,6 +61,28 @@ public class ImpArticleService implements IarticleService {
 		// TODO Auto-generated method stub
 		return articlerepo.findByCategory(category);
 	}
+
+	@Override
+	public List<Article> retrieveByDate() {
+		 //TODO Auto-generated method stub
+		return articlerepo.findByOrderByDateCreation();
+	} 
+	
+	
+
+	@Override
+	public Page<Article> findarticlewithPagination(int offset,int pagesize) {
+		Page<Article> art = articlerepo.findAll(PageRequest.of(offset, pagesize)); 
+		return art;
+	}
+
+	@Override
+	public List<Article> searchTitle(String title) {
+		// TODO Auto-generated method stub
+		return articlerepo.searchTitle(title);
+	} 
+	
+	
 
 	//@Override
 	//public List<Article> retrieveByCategorie(ArticleCategory Articlecat) {

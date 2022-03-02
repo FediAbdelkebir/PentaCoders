@@ -3,6 +3,7 @@ package pidev.spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -70,7 +71,27 @@ public class ArticleController {
      @ResponseBody 
 	 List<Article> retrieveByCat(@RequestParam ArticleCategory category){
 		 return articleservice.retrieveByCategorie(category);
-	}
+	} 
+	
+	@GetMapping("/retrieve-articlebydate")
+    @ResponseBody
+ 	public List<Article> retrieveByDate() {
+	List<Article> listarticle = articleservice.retrieveByDate();
+		 return listarticle;
+    }   
+	
+	@GetMapping("/find-articlewithpagination/{offset}/{pagesize}") 
+	@ResponseBody 
+	public Page<Article> findarticlewithPagination (@PathVariable("offset") int offset,@PathVariable("pagesize") int pagesize){
+		return articleservice.findarticlewithPagination(offset, pagesize);
+	} 
+	
+	@GetMapping(value="/search-title/{title}")
+	@ResponseBody
+	public List<Article> getTitlesearch(@PathVariable("title") String title) {
+	return articleservice.searchTitle(title);
+			}
+	
 	
 
 }

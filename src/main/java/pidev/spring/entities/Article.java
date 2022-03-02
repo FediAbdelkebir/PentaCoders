@@ -36,10 +36,10 @@ public class Article  {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long id; 
-	private String Title; 
+	private String title; 
 	private String Description; 
 	@Temporal(TemporalType.DATE)
-	private Date date_creation;  
+	private Date dateCreation;  
 	private String Image;  
 	@Enumerated(EnumType.STRING) 
 	private ArticleCategory category;

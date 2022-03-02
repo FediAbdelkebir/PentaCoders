@@ -2,6 +2,7 @@ package pidev.spring.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.Article;
@@ -12,7 +13,10 @@ public interface IarticleService {
 	Article AjouterArticle(Article a, Long idUser);  
 	Article UpdateArticle(Article a ,Long idUser); 
 	  List<Article> retrieveAllArticles(); 
-	   List<Article> retrieveByCategorie(ArticleCategory category);
+	  List<Article> retrieveByCategorie(ArticleCategory category); 
+	  List<Article> retrieveByDate(); 
+	  Page<Article> findarticlewithPagination(int offset,int pagesize); 
+	  List<Article> searchTitle(String title);
 	  Article retrieveArticles(Long id); 
 	  void deleteArticle(Long id); 
 }
