@@ -32,18 +32,18 @@ public class Event implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column
-	private String Title;
+	private String title;
 	@Column
-	private String Description;
+	private String description;
 	@Column 
-	private Date DateStart;
+	private Date dateStart;
 	@Column 
 	@Temporal(TemporalType.DATE)
-	private Date DateEnd;
+	private Date dateEnd;
 	@Column 
-	private int Nbrplace;
+	private int nbrplace;
 	@Column 
-	private EventType Type;
+	private EventType type;
 	@Column 
-	private boolean Trouphy;
+	private boolean trouphy;
 }

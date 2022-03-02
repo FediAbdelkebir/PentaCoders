@@ -29,7 +29,7 @@ public class Badge implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column
-	private String Title;
+	private String title;
 	@Column
-	private String Description;
+	private String description;
 }
