@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Component;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
@@ -17,9 +19,10 @@ import com.lowagie.text.pdf.PdfWriter;
 import pidev.spring.entities.Offer;
 import pidev.spring.entities.User;
 
+
 public class PDFExporter {
-	private Offer offer;
-	private User user;
+	public Offer offer;
+	public User user;
     
     public PDFExporter(Offer offer, User user) {
         this.offer = offer;
@@ -70,7 +73,7 @@ public class PDFExporter {
         Font font1 = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         font1.setSize(20);
         font1.setColor(Color.PINK);
-        System.out.println(user.toString());
+        
         Paragraph p = new Paragraph(offer.getTitle(), font1);
         p.setAlignment(Paragraph.ALIGN_CENTER);
          
@@ -79,8 +82,8 @@ public class PDFExporter {
         Font font2 = FontFactory.getFont(FontFactory.HELVETICA);
         font2.setSize(20);
         font2.setColor(Color.BLACK);
-        
-        System.out.println(user.toString());
+        System.out.println("test");
+        System.out.println(user.getLastName());
         Paragraph p1 = new Paragraph(user.getFirstname() + " " + user.getLastName(), font2);
         Paragraph p2 = new Paragraph(String.valueOf(user.getBadge().getPoint()), font2);
         Paragraph p3 = new Paragraph(offer.getAddress(), font2);

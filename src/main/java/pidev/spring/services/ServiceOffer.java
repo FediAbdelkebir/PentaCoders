@@ -111,59 +111,59 @@ public class ServiceOffer implements IServiceOffer {
 	public void getCoupon(HttpServletResponse response, int idOffer, Long idUser) throws DocumentException, IOException {
 		Offer o = offerRepo.findById(idOffer).orElse(null);
 		User u = userRepo.findById(idUser).orElse(null);
-
+		
 		if (u.getBadge().getPoint() >= o.getPoint()) {
 			//creation coupon
 			response.setContentType("application/pdf");
 			DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
 			String currentDateTime = dateFormatter.format(new Date());
-
+			
 			String headerKey = "Content-Disposition";
-			String headerValue = "attachment; filename=offers_" + currentDateTime + ".pdf";
+			String headerValue = "attachment; filename=" + o.getTitle() + "_" + currentDateTime + ".pdf";
 			response.setHeader(headerKey, headerValue);
-
-			PDFExporter exporter = new PDFExporter(o, u);
-			exporter.export(response);
-	
+			
+			export(response,o, u);
+			
 			// update du point user
 			int up = u.getBadge().getPoint() - o.getPoint();
 			u.getBadge().setPoint(up);
+			userRepo.save(u);
 		}
 
 	}
 
-	private void export(HttpServletResponse response, int idOffer, Long idUser) throws DocumentException, IOException {
-		Offer o = offerRepo.findById(idOffer).orElse(null);
-		User u = userRepo.findById(idUser).orElse(null);
-		Document document = new Document(PageSize.A6.rotate());
-		PdfWriter.getInstance(document, response.getOutputStream());
-
-		document.open();
-		Font font1 = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-		font1.setSize(20);
-		font1.setColor(Color.PINK);
-
-		Paragraph p = new Paragraph(o.getTitle(), font1);
-		p.setAlignment(Paragraph.ALIGN_CENTER);
-
-		document.add(p);
-
-		Font font2 = FontFactory.getFont(FontFactory.HELVETICA);
-		font2.setSize(20);
-		font2.setColor(Color.BLACK);
-
-		Paragraph p1 = new Paragraph(u.getFirstname() + " " + u.getLastName(), font2);
-		Paragraph p2 = new Paragraph(String.valueOf(u.getBadge().getPoint()), font2);
-		Paragraph p3 = new Paragraph(o.getAddress(), font2);
-		// Paragraph p4 = new Paragraph(o.getTitle(), font2);
-
-		document.add(p1);
-		document.add(p2);
-		document.add(p3);
-		// document.add(p4);
-
-		document.close();
-
-	}
+	public void export(HttpServletResponse response, Offer offer, User user) throws DocumentException, IOException {
+        Document document = new Document(PageSize.A6.rotate());
+        PdfWriter.getInstance(document, response.getOutputStream());
+         
+        document.open();
+        
+        Font font1 = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+        font1.setSize(20);
+        font1.setColor(Color.PINK);
+        
+        Paragraph p = new Paragraph(offer.getTitle(), font1);
+        p.setAlignment(Paragraph.ALIGN_CENTER);
+         
+        document.add(p);
+        
+        Font font2 = FontFactory.getFont(FontFactory.HELVETICA);
+        font2.setSize(20);
+        font2.setColor(Color.BLACK);
+       
+        Paragraph p1 = new Paragraph(user.getFirstname() + " " + user.getLastName(), font2);
+        Paragraph p2 = new Paragraph(String.valueOf(user.getBadge().getPoint()), font2);
+        Paragraph p3 = new Paragraph(offer.getAddress(), font2);
+        Paragraph p4 = new Paragraph("Expiration Date : " + new Date(), font2);
+        
+        document.add(p1);
+        document.add(p2);
+        document.add(p3);
+        //document.add(p4);
+        
+         
+        document.close();
+         
+    }
 
 }

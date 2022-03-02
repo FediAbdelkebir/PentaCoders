@@ -95,28 +95,9 @@ public class OfferController {
 		return offerService.retrieveFullOffer(idUser);
 	}
 	
-	/*@GetMapping("/GetCoupon/{idUser}/{idOffer}")
-	public void getCoupon(@PathVariable int idOffer, @PathVariable Long idUser){
-		offerService.getCoupon(idOffer, idUser);
-	}*/
-	
-	
 	@GetMapping("/GetCoupon/{idUser}/{idOffer}")
     public void exportToPDF(HttpServletResponse response, @PathVariable int idOffer, @PathVariable Long idUser) throws DocumentException, IOException {
         offerService.getCoupon(response, idOffer, idUser);
-		/*response.setContentType("application/pdf");
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-        String currentDateTime = dateFormatter.format(new Date());
-         
-        String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=offers_" + currentDateTime + ".pdf";
-        response.setHeader(headerKey, headerValue);
-         
-        List<Offer> listUsers = offerService.retrieveAllOffers();
-         
-        PDFExporter exporter = new PDFExporter(listUsers);
-        exporter.export(response);*/
-         
     }
 	
 
