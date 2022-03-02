@@ -2,6 +2,7 @@ package pidev.spring.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 
 import pidev.spring.entities.SurveyQuestion;
 
@@ -20,5 +21,6 @@ public interface ISurveyServices {
 	
 	void deleteSurvey(Integer id);
 	
+	Page<SurveyQuestion> findquestionwithPagination(int offset,int pagesize);
 
 }

@@ -3,6 +3,7 @@ package pidev.spring.webcontrollers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -71,6 +72,13 @@ public class SurveyController {
 			public SurveyQuestion AjouterReponse(@PathVariable Integer idquestion, @PathVariable Long idUser, @PathVariable Integer idAnswer) {
 			return SurveyServ.AjouterReponse(idquestion, idUser, idAnswer);
 			}
+			
+			//pagination
+			@GetMapping("/find-Questionwithpagination/{offset}/{pagesize}") 
+			@ResponseBody 
+			public Page<SurveyQuestion> findarticlewithPagination (@PathVariable("offset") int offset,@PathVariable("pagesize") int pagesize){
+				return SurveyServ.findquestionwithPagination(offset, pagesize);
+			} 
 			
 	
 	

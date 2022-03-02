@@ -3,6 +3,8 @@ package pidev.spring.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.Review;
@@ -66,6 +68,12 @@ public class ImplSurveyService implements ISurveyServices {
 		User u = userRepo.findById(idUser).orElse(null);
 		surveyQuestion.setUser(u);
 		return SurveyRepo.save(surveyQuestion);
+	}
+
+	@Override
+	public Page<SurveyQuestion> findquestionwithPagination(int offset, int pagesize) {
+		Page<SurveyQuestion> question = SurveyRepo.findAll(PageRequest.of(offset, pagesize)); 
+		return question;
 	}
 	
 
