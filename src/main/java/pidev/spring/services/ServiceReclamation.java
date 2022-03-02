@@ -98,7 +98,7 @@ public class ServiceReclamation implements IServiceReclamation{
 		reclamation.setResponse("response of reclamation");
 		reclamationRepo.save(reclamation);
 		// notifier l'user, envoyer mail
-		sendSimpleEmail(u.getEmailAddress().toString(), "Reclamation Processes", "Response of reclamation : \n" + reclamation.getResponse());
+		sendSimpleEmail(u.getEmailAddress().toString(), "Reclamation Processes", "Response of reclamation : \n\t" + reclamation.getResponse());
 	}
 
 	@Override
