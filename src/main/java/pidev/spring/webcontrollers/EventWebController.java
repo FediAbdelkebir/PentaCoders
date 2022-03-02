@@ -18,12 +18,27 @@ import pidev.spring.entities.EventType;
 import pidev.spring.entities.Event;
 import pidev.spring.entities.User;
 import pidev.spring.services.EventServices;
+import pidev.spring.services.MailSenderFactory;
 
 @RestController
 @RequestMapping("/Evenements")
 public class EventWebController {
 	@Autowired
 	EventServices ES;
+	@Autowired
+	MailSenderFactory MSF;
+	
+	@PostMapping("/MailTest")
+	@ResponseBody //trajaa retour
+void MailTest() {
+		try {
+			MSF.sendSimpleEmail("abdelkebir.fedi@esprit.tn", "Tester", "Testmessage");
+			
+		}catch(Exception e){
+			System.out.println("An Error Occured While Adding an Event ");
+		}
+		
+	}
 	//Add
 	@PostMapping("/AddEvent")
 	@ResponseBody //trajaa retour

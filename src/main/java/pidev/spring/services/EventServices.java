@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.Event;
@@ -19,6 +21,7 @@ public class EventServices {
 	EventRepository EventRepository;
 	@Autowired
 	UserRepository UserRepository;
+
 	//Ajout
 	public Event addEvent(Event c) {
 		return EventRepository.save(c);

@@ -6,6 +6,8 @@ import pidev.spring.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.Badge;
@@ -18,6 +20,7 @@ public class BadgeServices {
 	BadgeRepository BadgeRepository;
 	@Autowired
 	UserRepository UserRepository;
+
 	public Badge addBadge(Badge c) {
 		return BadgeRepository.save(c);
 	}
@@ -46,6 +49,7 @@ public class BadgeServices {
 		Badge Badge=BadgeRepository.findById(badge).orElse(null);
 		User User=UserRepository.findById(userid).orElse(null);
 		//User.setBadge(Badge);
+		//sendSimpleEmail(User.getEmailAddress().toString(), "objet", "UserAffected");
 		return UserRepository.save(User);
 		
 	}
