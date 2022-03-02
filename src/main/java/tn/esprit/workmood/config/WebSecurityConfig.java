@@ -9,49 +9,37 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
  
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new UserDetailsServiceImpl();
-    }
-     
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-     
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService());
-        authProvider.setPasswordEncoder(passwordEncoder());
-         
-        return authProvider;
-    }
- 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider());
+    	PasswordEncoder encoder = 
+          PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    	auth
+          .inMemoryAuthentication()
+          .withUser("username")
+          .password(encoder.encode("passwd"))
+          .roles("USER")
+          .and()
+          .withUser("admin")
+          .password(encoder.encode("admin"))
+          .roles("USER", "ADMIN");
     }
- 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-            .antMatchers("/").hasAnyAuthority("MANAGER" ,"ADMIN", "EMPLOYEE")
-            .antMatchers("/registration").hasAnyAuthority("ADMIN", "EMPLOYEE","MANAGER")
-            //.antMatchers("/edit/**").hasAnyAuthority("ADMIN", "EDITOR")
-            .antMatchers("/remove-user").hasAuthority("ADMIN")
-            //.anyRequest().authenticated()
-            .and()
-            .formLogin().permitAll()
-            .and()
-            .logout().permitAll()
-            .and()
-            .exceptionHandling().accessDeniedPage("/403")
-            ;
-    }
-}
+    	http.httpBasic()
+        .and()
+        .authorizeRequests()
+        .antMatchers("/work-mood")
+        .hasRole("ADMIN")
+        .antMatchers("/login*")
+        .hasRole("ADMIN")
+        .and()
+        .formLogin();
+}}

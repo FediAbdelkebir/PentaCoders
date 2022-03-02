@@ -4,7 +4,7 @@ import tn.esprit.workmood.entities.User;
 
 public interface UserServiceInt {
 	
-	User findByUsername(String username);
+	User findUserByUsername(String username);
 
 	void save(User user);
 	public void addRole(User user , Long idRole);

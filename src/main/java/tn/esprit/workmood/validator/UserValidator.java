@@ -27,7 +27,7 @@ public class UserValidator implements Validator {
         if ((user.getUsername().length()) < 6 || (user.getUsername().length() > 32)) {
             errors.rejectValue("username", "Size.user.username");
         }
-        if (us.findByUsername(user.getUsername()) != null) {
+        if (us.findUserByUsername(user.getUsername()) != null) {
             errors.rejectValue("username", "Duplicate.userForm.username");
         }
 

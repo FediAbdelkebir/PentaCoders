@@ -1,6 +1,7 @@
 package tn.esprit.workmood.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.workmood.entities.Role;
@@ -16,8 +17,20 @@ public class UserServiceImpl implements UserServiceInt{
 	private RoleRepository roleRepository;
 	
 	
+	BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+	public User findUserByUserName(String userName) {
+	return userRepository.findByUsername(userName);
+	}
+	public User saveUser(User user) {
+	user.setPasswd(bCryptPasswordEncoder.encode(user.getPasswd()));
+	user.setEnabled(true);
+	return userRepository.save(user); }
+	
+	
+	
+	
 	@Override
-	public User findByUsername(String username) {
+	public User findUserByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}
 
