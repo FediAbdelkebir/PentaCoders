@@ -2,6 +2,7 @@ package pidev.spring.services;
 
 import java.util.List;
 
+import pidev.spring.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -40,11 +41,11 @@ public class BadgeServices {
 		return BadgeRepository.findAll();
 	}
 	//Affecter Badge To User
-	public User AffecterBadgeToUser (int badge, int userid) {
+	public User AffecterBadgeToUser (int badge, long userid) {
 		//l’affecter au centre commercial crée dans la question
 		Badge Badge=BadgeRepository.findById(badge).orElse(null);
 		User User=UserRepository.findById(userid).orElse(null);
-		User.setBadge(Badge);
+		//User.setBadge(Badge);
 		return UserRepository.save(User);
 		
 	}

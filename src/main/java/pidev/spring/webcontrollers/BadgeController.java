@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import pidev.spring.entities.Badge;
+import pidev.spring.entities.User;
 import pidev.spring.services.BadgeServices;
 
 @RestController
@@ -69,5 +70,59 @@ public class BadgeController {
 		Badge FindBadgeById(@PathVariable("idBadge") int idBadge){
 			System.out.println(BS.retrieveBadge(idBadge));
 				return BS.retrieveBadge(idBadge);
+		}
+//AffecterBadgeToUser
+		@PostMapping("/AffecterBadgeToUser/{badge}/{userid}")
+		@ResponseBody
+		User FindBadgeById(@PathVariable("badge") int badge,@PathVariable("userid") int userid){
+			return BS.AffecterBadgeToUser(badge, userid);
+		}
+//SortBadgesByIdDesc
+		@PostMapping("/SortBadgesByIdDesc")
+		@ResponseBody
+		List<Badge> SortBadgesByIdDesc(){
+			return BS.SortBadgesByIdDesc();
+		}
+//SortBadgesByIdAsc
+		@PostMapping("/SortBadgesByIdAsc")
+		@ResponseBody
+		List<Badge> SortBadgesByIdAsc(){
+			return BS.SortBadgesByIdAsc();
+		}
+//SortBadgesByTitleAsc
+		@PostMapping("/SortBadgesByTitleAsc")
+		@ResponseBody
+		List<Badge> SortBadgesByTitleAsc(){
+			return BS.SortBadgesByTitleAsc();
+		}
+//SortBadgesByTitleDesc
+		@PostMapping("/SortBadgesByTitleDesc")
+		@ResponseBody
+		List<Badge> SortBadgesByTitleDesc(){
+			return BS.SortBadgesByTitleDesc();
+		}
+//SortBadgesByDescriptionAsc
+		@PostMapping("/SortBadgesByDescriptionAsc")
+		@ResponseBody
+		List<Badge> SortBadgesByDescriptionAsc(){
+			return BS.SortBadgesByDescriptionAsc();
+		}
+//SortBadgesByDescriptionDesc
+		@PostMapping("/SortBadgesByDescriptionDesc")
+		@ResponseBody
+		List<Badge> SortBadgesByDescriptionDesc(){
+			return BS.SortBadgesByDescriptionDesc();
+		}
+//SortBadgesTop10ByOrderByTitleAsc
+		@PostMapping("/SortBadgesTop10ByOrderByTitleAsc")
+		@ResponseBody
+		List<Badge> SortBadgesTop10ByOrderByTitleAsc(){
+			return BS.SortBadgesTop10ByOrderByTitleAsc();
+		}
+//SortBadgesTop10ByOrderByTitleDesc
+		@PostMapping("SortBadgesTop10ByOrderByTitleDesc")
+		@ResponseBody
+		List<Badge> SortBadgesTop10ByOrderByTitleDesc(){
+			return BS.SortBadgesTop10ByOrderByTitleDesc();
 		}
 }
