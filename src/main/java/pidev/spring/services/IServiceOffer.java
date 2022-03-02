@@ -23,4 +23,6 @@ public interface IServiceOffer {
 	List<Offer> retrieveFullOffer(Long idUser);
 	void getCoupon(HttpServletResponse response, int idOffer, Long idUser) throws DocumentException, IOException ;
 	
+	List<Offer> searchOffer(String title);
+	
 }

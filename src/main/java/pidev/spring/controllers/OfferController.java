@@ -1,9 +1,6 @@
 package pidev.spring.controllers;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -98,6 +95,12 @@ public class OfferController {
     public void exportToPDF(HttpServletResponse response, @PathVariable int idOffer, @PathVariable Long idUser) throws DocumentException, IOException {
         offerService.getCoupon(response, idOffer, idUser);
     }
+	
+	@GetMapping("/SearchOffer/{title}")
+	@ResponseBody
+	public List<Offer> searchOffer(@PathVariable("title") String title) {
+	return offerService.searchOffer(title);
+}
 	
 
 }

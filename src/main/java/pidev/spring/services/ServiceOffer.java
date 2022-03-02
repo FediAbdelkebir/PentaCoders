@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -166,9 +165,13 @@ public class ServiceOffer implements IServiceOffer {
         document.add(p3);
         document.add(p4);
         
-         
         document.close();
          
     }
+
+	@Override
+	public List<Offer> searchOffer(String title) {
+		return offerRepo.searchOffer(title);
+	}
 
 }
