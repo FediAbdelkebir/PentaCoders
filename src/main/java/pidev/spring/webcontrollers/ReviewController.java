@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import pidev.spring.entities.CategoryReview;
 import pidev.spring.entities.Review;
+import pidev.spring.entities.TypeReview;
 import pidev.spring.services.IReviewServices;
 
 
@@ -93,8 +96,34 @@ public class ReviewController {
 			return reveiwServ.addReviewCompanyEtAffecter(r, idUser);
 			}
 			
+			//filtre by categorie
 			
+			@GetMapping("/ReviewCategorie") 
+		     @ResponseBody 
+			 List<Review> retrieveByCat(@RequestParam CategoryReview categorie){
+				 return reveiwServ.retrieveByCategorie(categorie);
+			}
 			
-	
+			// filtre by annonyme et public 
+			
+			@GetMapping("/ReviewType") 
+		     @ResponseBody 
+			 List<Review> retrieveByType(@RequestParam TypeReview review){
+				 return reveiwServ.retrieveByType(review);
+			}
+			
+			//search by nameEmployee
+			@GetMapping(value="/search-EmplName/{EmployeeName}")
+	    	@ResponseBody
+	    	public List<Review> getSearchEmployeeName(@PathVariable("EmployeeName") String EmployeeName) {
+	    	return reveiwServ.searchReviewEm(EmployeeName);
+	}
+			
+			//search by nameSociete
+			@GetMapping(value="/search-SocieteName/{SocieteName}")
+	    	@ResponseBody
+	    	public List<Review> getSearchSocieteName(@PathVariable("SocieteName") String SocieteName) {
+	    	return reveiwServ.searchReviewSociete(SocieteName);
+	}
 	
 }

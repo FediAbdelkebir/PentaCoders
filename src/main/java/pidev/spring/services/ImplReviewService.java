@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import pidev.spring.entities.CategoryReview;
 import pidev.spring.entities.Review;
+import pidev.spring.entities.TypeReview;
 import pidev.spring.entities.User;
 import pidev.spring.repositories.ReviewRepository;
 import pidev.spring.repositories.UserRepository;
@@ -104,5 +106,31 @@ public class ImplReviewService implements IReviewServices {
         }
         return R;
     }
+	
+	//filtre by category
+	@Override
+	public List<Review> retrieveByCategorie(CategoryReview categorie) {
+		
+		return ReviewRepo.findByCategory(categorie);
+	} 
+	//filtre by Annonyme et public
+	@Override
+	public List<Review> retrieveByType(TypeReview review) {
+		
+		return ReviewRepo.findByReview(review);
+	}
+	//search By Name Employee
+	@Override
+	public List<Review> searchReviewEm(String EmployeeName) {
+		
+		return ReviewRepo.searchReviewEmp(EmployeeName);
+	}
+
+	//search by name Societe
+	@Override
+	public List<Review> searchReviewSociete(String SocieteName) {
+		
+		return ReviewRepo.searchReviewSociete(SocieteName);
+	} 
 	
 }

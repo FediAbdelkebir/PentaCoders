@@ -2,7 +2,9 @@ package pidev.spring.services;
 
 import java.util.List;
 
+import pidev.spring.entities.CategoryReview;
 import pidev.spring.entities.Review;
+import pidev.spring.entities.TypeReview;
 
 
 
@@ -25,6 +27,12 @@ List<Review> retrieveAllReview();
 	
 	Review addReviewCompanyEtAffecter(Review R, Long idUser);
 	
+	List<Review> retrieveByCategorie(CategoryReview categorie); 
 	
+	List<Review> retrieveByType(TypeReview review);
+	
+	List<Review> searchReviewEm(String EmployeeName);
+	
+	List<Review> searchReviewSociete(String SocieteName);
 
 }
