@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pidev.spring.repositories.Commentrepo;
 
 public class BadWordFilter { 
+	
 	@Autowired 
 	Commentrepo commentrepo; 
 	
@@ -38,7 +39,7 @@ public class BadWordFilter {
 
 	    // remove leetspeak
 	    modifiedInput = modifiedInput.replaceAll("1", "i").replaceAll("!", "i").replaceAll("3", "e").replaceAll("4", "a")
-	        .replaceAll("@", "a").replaceAll("5", "s").replaceAll("7", "t").replaceAll("0", "o").replaceAll("9", "g");
+	        .replaceAll("5", "s").replaceAll("7", "t").replaceAll("0", "o").replaceAll("9", "g");
 
 	    // ignore any character that is not a letter
 	    modifiedInput = modifiedInput.toLowerCase().replaceAll("[^a-zA-Z]", "");
@@ -70,12 +71,7 @@ public class BadWordFilter {
 
 	    String inputToReturn = input;
 	    for (String swearWord : badWordsFound) {
-	      char[] charsStars = new char[swearWord.length()];
-	      Arrays.fill(charsStars, '*');
-	      final String stars = new String(charsStars);
-
-	      // The "(?i)" is to make the replacement case insensitive.
-	      inputToReturn = inputToReturn.replaceAll("(?i)" + swearWord, stars);
+	    	System.out.println(swearWord + " qualified as a bad word in a comment");
 	    }
 
 	    return inputToReturn;
