@@ -29,7 +29,9 @@ public class ImpCommentService implements IcommentService {
 		// TODO Auto-generated method stub  
 		c.setArticle(null);
 		User u =userRepo.findById(idUser).orElse(null); 
-		c.setUser(u);
+		c.setUser(u); 
+		BadWordFilter.getCensoredText(c.getDescription()); 
+		//System.out.println(c.getDescription());
 		return commentrepo.save(c); 
 	} 
 	
