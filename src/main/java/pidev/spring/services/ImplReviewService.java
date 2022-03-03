@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.CategoryReview;
@@ -22,6 +24,9 @@ public class ImplReviewService implements IReviewServices {
 	ReviewRepository ReviewRepo;
 	@Autowired 
 	UserRepository userRepo;
+	@Autowired 
+	 JavaMailSender emailSender;
+	
 	
 	@Override
 	public List<Review> retrieveAllReview() {
@@ -41,6 +46,7 @@ public class ImplReviewService implements IReviewServices {
 		r.setSocieteName(null);
 		User u = userRepo.findById(idUser).orElse(null);
 		r.setUser(u);
+		sendSimpleEmail(u.getEmailAddress().toString(), "Review", "you have new Reveiw");
 		return ReviewRepo.save(r);
 	}
 
@@ -132,5 +138,13 @@ public class ImplReviewService implements IReviewServices {
 		
 		return ReviewRepo.searchReviewSociete(SocieteName);
 	} 
+	
+	public void sendSimpleEmail(String toAddress, String subject, String message) {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setTo(toAddress);
+        simpleMailMessage.setSubject(subject);
+        simpleMailMessage.setText(message);
+        emailSender.send(simpleMailMessage);
+    }
 	
 }

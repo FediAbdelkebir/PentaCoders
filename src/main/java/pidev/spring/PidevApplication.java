@@ -40,9 +40,9 @@ public class PidevApplication {
 		
 		SpringApplication.run(PidevApplication.class, args);
 	}
-	@EventListener(ApplicationReadyEvent.class)
-    public void sendMail(){
-        senderService.sendEmail("ammani.hazem@esprit.tn", "hello!", "Review added");
-       
-	}
+//	@EventListener(ApplicationReadyEvent.class)
+//    public void sendMail(){
+//        senderService.sendEmail("ammani.hazem@esprit.tn", "hello!", "Review added");
+//       
+//	}
 	}
