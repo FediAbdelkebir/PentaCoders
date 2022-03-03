@@ -38,33 +38,47 @@ public class commentController {
  // http://localhost:8081/SpringMVC/article/retrieve-article/1
  	@GetMapping("/retrieve-commentaire/{commentaire-id}")		
  	@ResponseBody
- 	public Comment retrievePost(@PathVariable("commentaire-id") Long id) {
+ 	public Comment retrieveComment(@PathVariable("commentaire-id") Long id) {
  		
  		return  commentservice.retrieveComm(id);
  		}
 
 
  	// http://localhost:8081/SpringMVC/article/add-article
- 	@PostMapping("/add-comment/{idUser}")
+ 	@PostMapping("/add-comment-inpost/{idUser}")
  	@ResponseBody
- 	Comment addpost(@RequestBody Comment c,@PathVariable Long idUser)
+ 	Comment addcommentpost(@RequestBody Comment c,@PathVariable Long idUser)
  	{
- 		Comment comment = commentservice.AjouterComm(c,idUser);
+ 		Comment comment = commentservice.AjouterCommInPost(c, idUser);
+ 	    return comment;
+ 	 } 
+ 	// add comment in article
+ 	@PostMapping("/add-comment-inarticle/{idUser}")
+ 	@ResponseBody
+ 	Comment addcommentarticle(@RequestBody Comment c,@PathVariable Long idUser)
+ 	{
+ 		Comment comment = commentservice.AjouterCommInArticle(c, idUser);
  	    return comment;
  	 }
 
    //http://localhost:8087/SpringMVC/centre/modify-article
-    @PutMapping("/modify-comment/{idUser}")
+    @PutMapping("/modify-comment-inarticle/{idUser}")
     @ResponseBody
-     public Comment modifycomment(@RequestBody Comment c,@PathVariable Long idUser) {
-     return commentservice.UpdateComm(c,idUser);
+     public Comment modifycommentInArticle(@RequestBody Comment c,@PathVariable Long idUser) {
+     return commentservice.UpdateCommInArticle(c, idUser);
+   }    
+    
+    @PutMapping("/modify-comment-inpost/{idUser}")
+    @ResponseBody
+     public Comment modifycommentInPost(@RequestBody Comment c,@PathVariable Long idUser) {
+     return commentservice.UpdateCommInPost(c, idUser);
    }   
     
 
  	// http://localhost:8081/SpringMVC/article/remove-article/{article-id}
  	@DeleteMapping("/remove-comment/{comment-id}")
  	@ResponseBody
- 	public void removePost(@PathVariable("comment-id") Long id) {
+ 	public void removeComment(@PathVariable("comment-id") Long id) {
  		commentservice.deleteComm(id); 
  	}
  	

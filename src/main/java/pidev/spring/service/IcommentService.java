@@ -7,8 +7,10 @@ import pidev.spring.entities.Comment;
 
 public interface IcommentService {
    
-    Comment AjouterComm(Comment c,Long idUser);  
-    Comment UpdateComm(Comment c, Long idUser); 
+    Comment AjouterCommInPost(Comment c,Long idUser); 
+    Comment AjouterCommInArticle(Comment c,Long idUser);
+    Comment UpdateCommInPost(Comment c, Long idUser); 
+    Comment UpdateCommInArticle(Comment c, Long idUser); 
 	  List<Comment> retrieveAllComm(); 
 	  Comment retrieveComm(Long id); 
 	  void deleteComm(Long id); 

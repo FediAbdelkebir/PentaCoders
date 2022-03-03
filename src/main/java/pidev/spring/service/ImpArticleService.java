@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import pidev.spring.entities.Article;
 import pidev.spring.entities.ArticleCategory;
@@ -20,14 +22,19 @@ public class ImpArticleService implements IarticleService {
 	Articlerepo articlerepo;  
 	
 	@Autowired 
-	UserRepo userRepo; 
+	UserRepo userRepo;  
+	@Autowired
+    JavaMailSender emailSender;
 	
 	@Override
 	public Article AjouterArticle(Article a , Long idUser) {
 		// TODO Auto-generated method stub 
 		User u =userRepo.findById(idUser).orElse(null); 
-		a.setUser(u);
-		return  articlerepo.save(a);
+		a.setUser(u); 
+		sendSimpleEmail(u.getEmailAddress().toString(), "Article", "votre article est ajouté avec succes");
+	
+		return  articlerepo.save(a); 
+		
 	}
 
 	@Override
@@ -90,7 +97,13 @@ public class ImpArticleService implements IarticleService {
 		//return articlerepo.findByArticlecat(Articlecat);
 	//}
 
-
+	public void sendSimpleEmail(String toAddress, String subject, String message) {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setTo(toAddress);
+        simpleMailMessage.setSubject(subject);
+        simpleMailMessage.setText(message);
+        emailSender.send(simpleMailMessage);
+    }
 
 
 

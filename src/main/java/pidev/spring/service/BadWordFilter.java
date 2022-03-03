@@ -33,7 +33,7 @@ public class BadWordFilter {
 		  loadBadWords();
 	    if (input == null) {
 	      return "";
-	    }
+	    } 
 
 	    String modifiedInput = input;
 

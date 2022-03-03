@@ -10,12 +10,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 
-import pidev.spring.entities.MailSenderFactoryImpl;
+
 
 @SpringBootApplication 
 public class PidevApplication {
-	@Autowired
-    private MailSenderFactoryImpl senderService; 
+	//@Autowired
+   // private MailSenderFactoryImpl senderService; 
 	
 	public static void main(String[] args) {
 		String url = "jdbc:mysql://localhost:3306/Workmood?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
@@ -32,8 +32,8 @@ public class PidevApplication {
 		SpringApplication.run(PidevApplication.class, args);
 	} 
 	
-	@EventListener(ApplicationReadyEvent.class)
-    public void sendMail(){
-        senderService.sendEmail("oussema.jebari@esprit.tn", "The subject", "The body of Email");
-	}
+	//@EventListener(ApplicationReadyEvent.class)
+    //public void sendMail(){
+      //  senderService.sendEmail("oussema.jebari@esprit.tn", "The subject", "The body of Email");
+	//}
 }

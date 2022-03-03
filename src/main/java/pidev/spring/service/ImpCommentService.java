@@ -25,16 +25,36 @@ public class ImpCommentService implements IcommentService {
 	UserRepo userRepo; 
 
 	@Override
-	public Comment AjouterComm(Comment c, Long idUser) {
-		// TODO Auto-generated method stub 
+	public Comment AjouterCommInPost(Comment c, Long idUser) {
+		// TODO Auto-generated method stub  
+		c.setArticle(null);
 		User u =userRepo.findById(idUser).orElse(null); 
 		c.setUser(u);
 		return commentrepo.save(c); 
-	}
+	} 
+	
+	@Override
+	public Comment AjouterCommInArticle(Comment c, Long idUser) {
+		// TODO Auto-generated method stub
+		c.setPost(null);
+		User u =userRepo.findById(idUser).orElse(null); 
+		c.setUser(u);
+		return commentrepo.save(c);
+	} 
 
 	@Override
-	public Comment UpdateComm(Comment c, Long idUser) {
+	public Comment UpdateCommInPost(Comment c, Long idUser) {
+		// TODO Auto-generated method stub  
+		c.setArticle(null);
+		User u =userRepo.findById(idUser).orElse(null); 
+		c.setUser(u);
+		return commentrepo.save(c); 
+	} 
+	
+	@Override
+	public Comment UpdateCommInArticle(Comment c, Long idUser) {
 		// TODO Auto-generated method stub 
+		c.setPost(null);
 		User u =userRepo.findById(idUser).orElse(null); 
 		c.setUser(u);
 		return commentrepo.save(c); 
@@ -57,7 +77,11 @@ public class ImpCommentService implements IcommentService {
 		// TODO Auto-generated method stub 
 		commentrepo.deleteById(id);
 		
-	} 
+	}
+
+	
+
+	
 	
 	// controle bad words function 
 	
