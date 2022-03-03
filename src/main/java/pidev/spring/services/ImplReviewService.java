@@ -39,6 +39,7 @@ public class ImplReviewService implements IReviewServices {
 		r.setEmployeeName(null);
 		User u = userRepo.findById(idUser).orElse(null);
 		r.setUser(u);
+		sendSimpleEmail(u.getEmailAddress().toString(), "Review", "you have new Reveiw");
 		return ReviewRepo.save(r);
 	}
 	@Override
@@ -89,6 +90,7 @@ public class ImplReviewService implements IReviewServices {
             }
             
         }
+		sendSimpleEmail(u.getEmailAddress().toString(), "Review", "you have new Reveiw");
         return R;
     }
 	
@@ -110,6 +112,7 @@ public class ImplReviewService implements IReviewServices {
             }
             
         }
+		sendSimpleEmail(u.getEmailAddress().toString(), "Review", "you have new Reveiw ");
         return R;
     }
 	
