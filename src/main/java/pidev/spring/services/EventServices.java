@@ -79,7 +79,7 @@ public class EventServices {
 	}*/
 	
 	//Affecter Event To User
-		public User AffecterEventToUser (int badge, long userid) {
+		public User AffecterEventToUser (int badge, int userid) {
 			//l’affecter au centre commercial crée dans la question
 			Event Event=EventRepository.findById(badge).orElse(null);
 			User User=UserRepository.findById(userid).orElse(null);

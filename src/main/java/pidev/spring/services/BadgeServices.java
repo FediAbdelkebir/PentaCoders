@@ -1,14 +1,30 @@
 package pidev.spring.services;
 
+import java.awt.Color;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import pidev.spring.repositories.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Font;
+import com.lowagie.text.FontFactory;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
 
 import pidev.spring.entities.Badge;
 import pidev.spring.entities.User;
@@ -44,7 +60,7 @@ public class BadgeServices {
 		return BadgeRepository.findAll();
 	}
 	//Affecter Badge To User
-	public User AffecterBadgeToUser (int badge, long userid) {
+	public User AffecterBadgeToUser (int badge, int userid) {
 		//l’affecter au centre commercial crée dans la question
 		Badge Badge=BadgeRepository.findById(badge).orElse(null);
 		User User=UserRepository.findById(userid).orElse(null);
@@ -85,4 +101,58 @@ public class BadgeServices {
 	public List<Badge> SortBadgesTop10ByOrderByTitleDesc(){
 			return BadgeRepository.findTop10ByOrderByTitleDesc();
 	}
+	public void PDFBadge(HttpServletResponse response, int idOffer, int idUser) throws DocumentException, IOException {
+		Badge o = BadgeRepository.findById(idOffer).orElse(null);
+		User u = UserRepository.findById(idUser).orElse(null);
+		
+		
+			//creation coupon
+			response.setContentType("application/pdf");
+			DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+			String currentDateTime = dateFormatter.format(new Date());
+			
+			String headerKey = "Content-Disposition";
+			String headerValue = "attachment; filename=" + o.getTitle() + "_" + currentDateTime + ".pdf";
+			response.setHeader(headerKey, headerValue);
+			
+			export(response,o, u);
+	}
+	public void export(HttpServletResponse response, Badge Badge, User user) throws DocumentException, IOException {
+        Document document = new Document(PageSize.A6.rotate());
+        PdfWriter.getInstance(document, response.getOutputStream());
+        
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date todayy = new Date();
+        Date tomorroww = new Date(todayy.getTime() + (1000 * 60 * 60 * 360));
+        String s = dateFormatter.format(tomorroww);
+
+        document.open();
+        
+        Font font1 = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+        font1.setSize(20);
+        font1.setColor(Color.PINK);
+        
+        Paragraph p = new Paragraph(Badge.getTitle(), font1);
+        p.setAlignment(Paragraph.ALIGN_CENTER);
+         
+        document.add(p);
+        
+        Font font2 = FontFactory.getFont(FontFactory.HELVETICA);
+        font2.setSize(20);
+        font2.setColor(Color.BLACK);
+       
+        Paragraph p1 = new Paragraph(user.getFirstname() + " " + user.getLastname(), font2);
+        Paragraph p2 = new Paragraph(String.valueOf(Badge.getTitle()), font2);
+        Paragraph p3 = new Paragraph(Badge.getDescription(), font2);
+        Paragraph p4 = new Paragraph("Expiration Date : "+s, font2);
+        
+        document.add(p1);
+        document.add(p2);
+        document.add(p3);
+        document.add(p4);
+        
+         
+        document.close();
+         
+    }
 }

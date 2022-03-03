@@ -1,7 +1,11 @@
 package pidev.spring.webcontrollers;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -120,9 +124,14 @@ public class BadgeController {
 			return BS.SortBadgesTop10ByOrderByTitleAsc();
 		}
 //SortBadgesTop10ByOrderByTitleDesc
-		@GetMapping("SortBadgesTop10ByOrderByTitleDesc")
+		@GetMapping("/SortBadgesTop10ByOrderByTitleDesc")
 		@ResponseBody
 		List<Badge> SortBadgesTop10ByOrderByTitleDesc(){
 			return BS.SortBadgesTop10ByOrderByTitleDesc();
 		}
+		@GetMapping("/GetCoupon/{idUser}/{idBadge}")
+		@ResponseBody
+	    public void exportToPDF(HttpServletResponse response, @PathVariable int idBadge, @PathVariable int idUser) throws DocumentException, IOException {
+	        BS.PDFBadge(response, idBadge, idUser);
+	    }
 }
