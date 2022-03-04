@@ -138,12 +138,16 @@ public class ServiceOffer implements IServiceOffer {
 
 				export(response, o, u);
 
-				// mise à jours nombre de personnes de l'offre
+				// mise à jour nombre de personnes de l'offre
 				o.setPersonsNumber(o.getPersonsNumber() + 1);
 
-				// mise à jours les points du user
+				// mise à jour les points du user
 				int up = u.getBadge().getPoint() - o.getPoint();
 				u.getBadge().setPoint(up);
+				
+				// affecter user à l'offer
+				u.getOffers().add(o);
+			
 				userRepo.save(u);
 				offerRepo.save(o);
 			}
@@ -191,6 +195,11 @@ public class ServiceOffer implements IServiceOffer {
 	@Override
 	public List<Offer> searchOffer(String title) {
 		return offerRepo.searchOffer(title);
+	}
+
+	@Override
+	public void deleteExpiredOffer() {
+	
 	}
 
 }

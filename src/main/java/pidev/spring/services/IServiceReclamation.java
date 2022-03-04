@@ -12,6 +12,7 @@ public interface IServiceReclamation {
 	//Reclamation updateReclamation(Reclamation r, Long idUser);
 	Reclamation retrieveReclamation(int id, Long idUser);
 	void deleteReclamation(int id, Long idUser);
+	
 	void affectUserToReclamation(int idReclamation, Long idUser);
 	
 	List<Reclamation> retrieveByType(StatusReclamation status, Long idUser);
@@ -27,7 +28,5 @@ public interface IServiceReclamation {
 	int nbrReclamationTypeWaiting(Long idUser);
 	int nbrReclamationTypeProcessed(Long idUser);
 	int nbrReclamationTypeInprogress(Long idUser);
-	
-	
 	
 }
