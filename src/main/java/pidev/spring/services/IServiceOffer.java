@@ -19,11 +19,20 @@ public interface IServiceOffer {
 	void deleteOffer(int id);
 	
 	void affectUserToOffer(int idOffer, Long idUser);
+	
 	List<Offer> retrieveByCategory(CategoryOffer category);
-	List<Offer> retrieveFullOffer(Long idUser);
-	void getCoupon(HttpServletResponse response, int idOffer, Long idUser) throws DocumentException, IOException ;
+	List<Offer> retrieveByDateExpAsc();
+	List<Offer> retrieveByDateExpDesc();
+	List<Offer> retrieveByPointAsc();
+	List<Offer> retrieveByPointDesc();
 	
 	List<Offer> searchOffer(String title);
+	
+	List<Offer> retrieveFullOffer(Long idUser);
+	void getOfferAndCoupon(HttpServletResponse response, int idOffer, Long idUser) throws DocumentException, IOException ;
+	
 	//void reserverOffer(int idOffer,int idUser); // nbrPerso+1
+	//deleteoffre avec dateExp
+	//kol user yaffichilou les offers li même point que li aandou
 	
 }

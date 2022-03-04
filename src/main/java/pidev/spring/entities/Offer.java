@@ -50,7 +50,7 @@ public class Offer implements Serializable{
 	@Enumerated(EnumType.STRING)
 	@Column
 	private CategoryOffer category;
-	@Column(nullable=true, length=64)
+	@Column
 	private String image;
 	@Column 
 	private int point; 

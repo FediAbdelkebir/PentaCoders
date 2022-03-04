@@ -59,7 +59,4 @@ public class Reclamation implements Serializable{
 	@JsonIgnore
 	private User user;
 	
-	
-	
-	
 }

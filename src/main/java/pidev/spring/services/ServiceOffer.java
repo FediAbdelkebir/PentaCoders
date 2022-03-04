@@ -84,6 +84,26 @@ public class ServiceOffer implements IServiceOffer {
 	public List<Offer> retrieveByCategory(CategoryOffer category) {
 		return offerRepo.findAllByCategory(category);
 	}
+	
+	@Override
+	public List<Offer> retrieveByDateExpAsc(){
+		return offerRepo.findByOrderByDateExpAsc();
+	}
+	
+	@Override
+	public List<Offer> retrieveByDateExpDesc(){
+		return offerRepo.findByOrderByDateExpDesc();
+	}
+	
+	@Override
+	public List<Offer> retrieveByPointAsc(){
+		return offerRepo.findByOrderByPointAsc();
+	}
+	
+	@Override
+	public List<Offer> retrieveByPointDesc(){
+		return offerRepo.findByOrderByPointDesc();
+	}
 
 	@Override
 	public List<Offer> retrieveFullOffer(Long idUser) {
@@ -98,12 +118,13 @@ public class ServiceOffer implements IServiceOffer {
 	}
 
 	@Override
-	public void getCoupon(HttpServletResponse response, int idOffer, Long idUser)
+	public void getOfferAndCoupon(HttpServletResponse response, int idOffer, Long idUser)
 			throws DocumentException, IOException {
 		Offer o = offerRepo.findById(idOffer).orElse(null);
 		User u = userRepo.findById(idUser).orElse(null);
 		if (u.getBadge().getPoint() >= o.getPoint()) {
-			// creation coupon
+			
+			// création coupon PDF
 			response.setContentType("application/pdf");
 			DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
 			String currentDateTime = dateFormatter.format(new Date());

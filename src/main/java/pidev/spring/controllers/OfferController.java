@@ -83,6 +83,34 @@ public class OfferController {
 		return offerService.retrieveByCategory(category);
 	}
 	
+	@GetMapping("/FindOfferByDateExpAsc")
+	@ResponseBody
+	@ApiOperation(value="Find by DateExp Asc")
+	List<Offer> retrieveByDateExpAsc(){
+		return offerService.retrieveByDateExpAsc();
+	}
+	
+	@GetMapping("/FindOfferByDateExpDesc")
+	@ResponseBody
+	@ApiOperation(value="Find by DateExp Desc")
+	List<Offer> retrieveByDateExpDesc(){
+		return offerService.retrieveByDateExpDesc();
+	}
+	
+	@GetMapping("/FindOfferByPointAsc")
+	@ResponseBody
+	@ApiOperation(value="Find by Point Asc")
+	List<Offer> retrieveByPointAsc(){
+		return offerService.retrieveByPointAsc();
+	}
+	
+	@GetMapping("/FindOfferByPointDesc")
+	@ResponseBody
+	@ApiOperation(value="Find by Point Desc")
+	List<Offer> retrieveByPointDesc(){
+		return offerService.retrieveByPointDesc();
+	}
+	
 	@GetMapping("/ShowFullOffers")
 	@ResponseBody
 	@ApiOperation(value="Show full offers")
@@ -90,9 +118,9 @@ public class OfferController {
 		return offerService.retrieveFullOffer(idUser);
 	}
 	
-	@GetMapping("/GetCoupon/{idUser}/{idOffer}")
-    public void exportToPDF(HttpServletResponse response, @PathVariable int idOffer, @PathVariable Long idUser) throws DocumentException, IOException {
-        offerService.getCoupon(response, idOffer, idUser);
+	@GetMapping("/GetOfferAndCoupon/{idUser}/{idOffer}")
+    public void getOfferAndCoupon(HttpServletResponse response, @PathVariable int idOffer, @PathVariable Long idUser) throws DocumentException, IOException {
+        offerService.getOfferAndCoupon(response, idOffer, idUser);
     }
 	
 	@GetMapping("/SearchOffer/{title}")

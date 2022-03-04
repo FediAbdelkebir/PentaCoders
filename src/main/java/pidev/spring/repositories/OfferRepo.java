@@ -1,6 +1,5 @@
 package pidev.spring.repositories;
 
-
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,7 +14,12 @@ import pidev.spring.entities.Offer;
 public interface OfferRepo extends JpaRepository<Offer, Integer>{
 	
 	List<Offer> findAllByCategory(CategoryOffer category);
-	List<Offer> findByUsersBadgePoint(int point);
+	List<Offer> findByOrderByDateExpAsc();
+	List<Offer> findByOrderByDateExpDesc();
+	List<Offer> findByOrderByPointAsc();
+	List<Offer> findByOrderByPointDesc();
+	
+	//List<Offer> findByUsersBadgePoint(int point);
 	
 	@Query("SELECT o FROM Offer o WHERE o.title LIKE CONCAT('%',:s,'%')")
 	public List<Offer> searchOffer(@Param("s") String s);

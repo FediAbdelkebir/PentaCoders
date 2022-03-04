@@ -40,7 +40,7 @@ public class ServiceReclamation implements IServiceReclamation{
 		return reclamationRepo.save(r);
 	}
 
-	@Override
+	/*@Override
 	public Reclamation updateReclamation(Reclamation r, Long idUser) {
 		Reclamation reclamation = reclamationRepo.findById(r.getIdReclamation()).orElse(null);
 		reclamation.setObjet(r.getObjet());
@@ -49,7 +49,7 @@ public class ServiceReclamation implements IServiceReclamation{
 		User u = userRepo.findById(idUser).orElse(null);
 		reclamation.setUser(u);
 		return reclamationRepo.save(reclamation);
-	}
+	}*/
 
 	@Override
 	public Reclamation retrieveReclamation(int id, Long idUser) {
@@ -90,6 +90,21 @@ public class ServiceReclamation implements IServiceReclamation{
 	}
 
 	@Override
+	public List<Reclamation> retrieveByProcessingDateAsc() {
+		return reclamationRepo.findByOrderByProcessingDateAsc();
+	}
+
+	@Override
+	public List<Reclamation> retrieveByProcessingDateDesc() {
+		return reclamationRepo.findByOrderByProcessingDateDesc();
+	}
+	
+	@Override
+	public List<Reclamation> retrieveAllReclamationsByKeyword(String keyword, Long idUser) { 
+		return reclamationRepo.findByKeyword(keyword);
+	}
+	
+	@Override
 	public void treatReclamation(int idReclamation, Long idUser) {
 		User u = userRepo.findById(idUser).orElse(null);
 		Reclamation reclamation = reclamationRepo.findById(idReclamation).orElse(null);
@@ -100,11 +115,6 @@ public class ServiceReclamation implements IServiceReclamation{
 		// notifier l'user, envoyer mail
 		sendSimpleEmail(u.getEmailAddress().toString(), "Reclamation Processes", "Response of reclamation : \n\t" + reclamation.getResponse());
 	}
-
-	@Override
-	public List<Reclamation> retrieveAllReclamationsByKeyword(String keyword, Long idUser) { 
-		return (List<Reclamation>) reclamationRepo.findAll();
-	}
 	
 	public void sendSimpleEmail(String toAddress, String subject, String message) {
 		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
@@ -113,7 +123,27 @@ public class ServiceReclamation implements IServiceReclamation{
 		simpleMailMessage.setText(message);
 		emailSender.send(simpleMailMessage);
 	}
-	
+
+	@Override
+	public int nbrReclamationByUser(Long idUser){
+		return reclamationRepo.findByUserIdUser(idUser).size();
+		
+	}
+
+	@Override
+	public int nbrReclamationTypeWaiting(Long idUser) {
+		return reclamationRepo.findAllByStatus(StatusReclamation.WAITING).size();
+	}
+
+	@Override
+	public int nbrReclamationTypeProcessed(Long idUser) {
+		return reclamationRepo.findAllByStatus(StatusReclamation.PROCESSED).size();
+	}
+
+	@Override
+	public int nbrReclamationTypeInprogress(Long idUser) {
+		return reclamationRepo.findAllByStatus(StatusReclamation.INPROGRESS).size();
+	}
 	
 	
 }

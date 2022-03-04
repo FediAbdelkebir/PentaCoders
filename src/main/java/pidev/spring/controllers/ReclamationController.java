@@ -42,12 +42,12 @@ public class ReclamationController {
 		return reclamationService.addReclamation(r, idUser);
 	}
 	
-	@PutMapping("/UpdateReclamation/{idUser}")
+	/*@PutMapping("/UpdateReclamation/{idUser}")
 	@ResponseBody
 	@ApiOperation(value="Update reclamation")
 	Reclamation updateReclamation(@RequestBody Reclamation r, @PathVariable Long idUser){
 		return reclamationService.updateReclamation(r,idUser);
-	}
+	}*/
 	
 	@GetMapping("/ShowReclamation/{id}")
 	@ResponseBody
@@ -91,6 +91,20 @@ public class ReclamationController {
 		return reclamationService.retrieveByCreationDateDesc();
 	}
 	
+	@GetMapping("/FindReclamationByProcessingDateAsc")
+	@ResponseBody
+	@ApiOperation(value="Find by processing date Asc")
+	List<Reclamation> retrieveByProcessingDateAsc(){
+		return reclamationService.retrieveByProcessingDateAsc();
+	}
+	
+	@GetMapping("/FindReclamationByProcessingDateDesc")
+	@ResponseBody
+	@ApiOperation(value="Find by processing date Desc")
+	List<Reclamation> retrieveByProcessingDateDesc(){
+		return reclamationService.retrieveByProcessingDateDesc();
+	}
+	
 	@PutMapping("/TreatReclamation/{idReclamation}/{idUser}")
 	@ResponseBody
 	@ApiOperation(value="Treat reclamation")
@@ -103,6 +117,34 @@ public class ReclamationController {
 	@ApiOperation(value="Find by keyword")
 	List<Reclamation> retrieveAllReclamationsByKeyword(@PathVariable String keyword, Long idUser){
 		return reclamationService.retrieveAllReclamationsByKeyword(keyword, idUser);
+	}
+	
+	@GetMapping("/CountReclamationByUser/{idUser}")
+	@ResponseBody
+	@ApiOperation(value="Count Reclamations")
+	int nbrReclamationByUser(@PathVariable Long idUser){
+		return reclamationService.nbrReclamationByUser(idUser);
+	}
+	
+	@GetMapping("/CountReclamationByTypeWaiting/{idUser}")
+	@ResponseBody
+	@ApiOperation(value="Count Reclamations : Waiting")
+	int nbrReclamationTypeWaiting(Long idUser){
+		return reclamationService.nbrReclamationTypeWaiting(idUser);
+	}
+	
+	@GetMapping("/CountReclamationByTypeProcessed/{idUser}")
+	@ResponseBody
+	@ApiOperation(value="Count Reclamations : Processed")
+	int nbrReclamationTypeProcessed(Long idUser){
+		return reclamationService.nbrReclamationTypeProcessed(idUser);
+	}
+	
+	@GetMapping("/CountReclamationByTypeInProgress/{idUser}")
+	@ResponseBody
+	@ApiOperation(value="Count Reclamations : Inprogress")
+	int nbrReclamationTypeInprogress(Long idUser){
+		return reclamationService.nbrReclamationTypeInprogress(idUser);
 	}
 
 }
