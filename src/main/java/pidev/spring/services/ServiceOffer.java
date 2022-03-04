@@ -84,24 +84,24 @@ public class ServiceOffer implements IServiceOffer {
 	public List<Offer> retrieveByCategory(CategoryOffer category) {
 		return offerRepo.findAllByCategory(category);
 	}
-	
+
 	@Override
-	public List<Offer> retrieveByDateExpAsc(){
+	public List<Offer> retrieveByDateExpAsc() {
 		return offerRepo.findByOrderByDateExpAsc();
 	}
-	
+
 	@Override
-	public List<Offer> retrieveByDateExpDesc(){
+	public List<Offer> retrieveByDateExpDesc() {
 		return offerRepo.findByOrderByDateExpDesc();
 	}
-	
+
 	@Override
-	public List<Offer> retrieveByPointAsc(){
+	public List<Offer> retrieveByPointAsc() {
 		return offerRepo.findByOrderByPointAsc();
 	}
-	
+
 	@Override
-	public List<Offer> retrieveByPointDesc(){
+	public List<Offer> retrieveByPointDesc() {
 		return offerRepo.findByOrderByPointDesc();
 	}
 
@@ -122,25 +122,32 @@ public class ServiceOffer implements IServiceOffer {
 			throws DocumentException, IOException {
 		Offer o = offerRepo.findById(idOffer).orElse(null);
 		User u = userRepo.findById(idUser).orElse(null);
-		if (u.getBadge().getPoint() >= o.getPoint()) {
-			
-			// création coupon PDF
-			response.setContentType("application/pdf");
-			DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-			String currentDateTime = dateFormatter.format(new Date());
+		
+		//tester si l'offre est encore valable
+		if (o.getPersonsNumber() < o.getLimitedNumber()) { 
+			// Comparer les points d'user et les points de l'offre
+			if (u.getBadge().getPoint() >= o.getPoint()) {
+				// création coupon PDF
+				response.setContentType("application/pdf");
+				DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+				String currentDateTime = dateFormatter.format(new Date());
 
-			String headerKey = "Content-Disposition";
-			String headerValue = "attachment; filename=" + o.getTitle() + "_" + currentDateTime + ".pdf";
-			response.setHeader(headerKey, headerValue);
+				String headerKey = "Content-Disposition";
+				String headerValue = "attachment; filename=" + o.getTitle() + "_" + currentDateTime + ".pdf";
+				response.setHeader(headerKey, headerValue);
 
-			export(response, o, u);
+				export(response, o, u);
 
-			// update du point user
-			int up = u.getBadge().getPoint() - o.getPoint();
-			u.getBadge().setPoint(up);
-			userRepo.save(u);
+				// mise à jours nombre de personnes de l'offre
+				o.setPersonsNumber(o.getPersonsNumber() + 1);
+
+				// mise à jours les points du user
+				int up = u.getBadge().getPoint() - o.getPoint();
+				u.getBadge().setPoint(up);
+				userRepo.save(u);
+				offerRepo.save(o);
+			}
 		}
-
 	}
 
 	public void export(HttpServletResponse response, Offer offer, User user) throws DocumentException, IOException {
@@ -149,7 +156,7 @@ public class ServiceOffer implements IServiceOffer {
 
 		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date todayy = new Date();
-		Date tomorroww = new Date(todayy.getTime() + (1000 * 60 * 60 * 360));
+		Date tomorroww = new Date(todayy.getTime() + (1000 * 60 * 60 * 360)); // 15 jours avant l'éxpiration du coupon 
 		String s = dateFormatter.format(tomorroww);
 
 		document.open();
@@ -185,6 +192,5 @@ public class ServiceOffer implements IServiceOffer {
 	public List<Offer> searchOffer(String title) {
 		return offerRepo.searchOffer(title);
 	}
-
 
 }
