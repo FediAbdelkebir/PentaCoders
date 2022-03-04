@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -118,6 +119,55 @@ List<Event> Events(){
 					System.out.println(ES.FindEventByType(Type));
 					return ES.FindEventByType(Type);
 				}
+//Find By Multiple Critére :
+	//findByDateStartAndDateEnd
+		@GetMapping("/FindEvent/FindByDateStartAndDateEnd/{DateStart}/{DateEnd}")
+		@ResponseBody
+		List<Event> findByDateStartAndDateEnd(@PathVariable("DateStart") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date StartDate,@PathVariable("DateEnd") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date DateEnd){
+			return ES.findByDateStartAndDateEnd(StartDate,DateEnd);
+		}
+	//findByDateStartAndTrouphy
+		@GetMapping("/FindEvent/FindByDateStartAndTrouphy/{DateStart}/{Trouphy}")
+		@ResponseBody
+		List<Event> findByDateStartAndTrouphy(@PathVariable("DateStart") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date StartDate,@PathVariable("Trouphy") boolean Trouphy){
+			return ES.findByDateStartAndTrouphy(StartDate,Trouphy);
+		}
+	//findByDateEndAndTrouphy
+		@GetMapping("/FindEvent/FindByDateEndAndTrouphy/{DateEnd}/{Trouphy}")
+		@ResponseBody
+		List<Event> FindByDateEndAndTrouphy(@PathVariable("DateEnd") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date DateEnd,@PathVariable("Trouphy") boolean Trouphy){
+			return ES.findByDateEndAndTrouphy(DateEnd,Trouphy);
+		}
+		//findByDateStartAndType
+		@GetMapping("/FindEvent/FindByDateStartAndType/{DateStart}/{Type}")
+		@ResponseBody
+		List<Event> findByDateStartAndType(@PathVariable("DateStart") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date StartDate,@PathVariable("Type") EventType Type){
+			return ES.findByDateStartAndType(StartDate,Type);
+		}
+	//FindByDateEndAndType
+		@GetMapping("/FindEvent/FindByDateEndAndType/{DateEnd}/{Type}")
+		@ResponseBody
+		List<Event> FindByDateEndAndType(@PathVariable("DateEnd") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date DateEnd,@PathVariable("Type") EventType Type){
+			return ES.FindByDateEndAndType(DateEnd,Type);
+		}
+	//findByTypeAndTrouphy
+		@GetMapping("/FindEvent/FindByTypeAndTrouphy/{Type}/{Trouphy}")
+		@ResponseBody
+		List<Event> FindByTypeAndTrouphy(@PathVariable("Type") EventType Type,@PathVariable("Trouphy") boolean Trouphy){
+			return ES.findByTypeAndTrouphy(Type,Trouphy);
+		}
+	//findByDateStartAndDateEndAndTrouphy
+		@GetMapping("/FindEvent/FindByDateStartAndDateEnd/{DateStart}/{DateEnd}/{Trouphy}")
+		@ResponseBody
+		List<Event> findByDateStartAndDateEndAndTrouphy(@PathVariable("DateStart") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date StartDate,@PathVariable("DateEnd") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date DateEnd,@PathVariable("Trouphy") boolean Trouphy){
+			return ES.findByDateStartAndDateEndAndTrouphy(StartDate,DateEnd,Trouphy);
+		}
+	//findByDateStartAndDateEndAndTrouphyAndType
+		@GetMapping("/FindEvent/FindByDateStartAndDateEnd/{DateStart}/{DateEnd}/{Trouphy}/{Type}")
+		@ResponseBody
+		List<Event> findByDateStartAndDateEndAndTrouphyAndType(@PathVariable("DateStart") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date StartDate,@PathVariable("DateEnd") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date DateEnd,@PathVariable("Trouphy") boolean Trouphy,@PathVariable("Type") EventType Type){
+			return ES.findByDateStartAndDateEndAndTrouphyAndType(StartDate,DateEnd,Trouphy,Type);
+		}
 	//AffecterEventToUser
 			@PostMapping("/AffecterEventToUser/{badge}/{userid}")
 			@ResponseBody
@@ -232,4 +282,34 @@ List<Event> Events(){
 			List<Event> SortEventsTop10ByOrderByTitleDesc(){
 				return ES.SortEventsTop10ByOrderByTitleDesc();
 			}
+	//Nombre TOTAL Events
+			@GetMapping("/TotalNumberEvents")
+			@ResponseBody
+	int TotalNumberEvents(){
+				return ES.TotalNumberEvents();
+				}
+	//Nombre Total CHALLENGE
+			@GetMapping("/TotalNumberEventsChallenge")
+			@ResponseBody
+	int TotalNumberEventsChallenge(){
+				return ES.TotalNumberEventsChallenge();
+				}
+	//Nombre Total FORMATION
+			@GetMapping("/TotalNumberEventsFORMATION")
+			@ResponseBody
+	int TotalNumberEventsFORMATION(){
+				return ES.TotalNumberEventsFormation();
+				}
+	//Nombre Total Trouphy=true
+			@GetMapping("/TotalNumberEventsTrouphyTrue")
+			@ResponseBody
+	int TotalNumberEventsTrouphyTrue(){
+				return ES.TotalNumberEventsTrouphyTrue();
+				}
+	//Nombre Total Trouphy=false
+			@GetMapping("/TotalNumberEventsTrouphyFalse")
+			@ResponseBody
+	int TotalNumberEventsTrouphyFalse(){
+				return ES.TotalNumberEventsTrouphyFalse();
+				}
 }

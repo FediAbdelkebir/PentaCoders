@@ -1,5 +1,6 @@
 package pidev.spring.services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -159,6 +160,238 @@ public class EventServices {
 		public List<Event> SortEventsTop10ByOrderByTitleDesc(){
 				return EventRepository.findTop10ByOrderByTitleDesc();
 		}
-		/////
+//Multiple Critére Search 
+		//find DateStart + DateEnd
+		public List<Event> findByDateStartAndDateEnd(Date StartDate,Date DateEnd){
+			List<Event> E = new ArrayList<Event>();
+			try {
+				List<Event> TryE = new ArrayList<Event>();
+				TryE=EventRepository.findAllByDateStartAndDateEnd(StartDate,DateEnd);
+				if(TryE.size()==0) {
+					System.out.println("There Are No Events In The DataBase With The Provided Starting Date or Ending Date ");
+				}else {
+					System.out.println("Events Avariable : ");
+					System.out.println(TryE);
+					E=TryE;
+				}
+			}catch(Exception e ) {
+				System.out.println("Error Could Not Retrive findByDateStartAndDateEnd");
+			}
+			return E;
+		}
+		//findBy DateStart + Trouphy
+		public List<Event> findByDateStartAndTrouphy(Date StartDate,boolean trouphy){
+			List<Event> E = new ArrayList<Event>();
+			try {
+				List<Event> TryE = new ArrayList<Event>();
+				TryE=EventRepository.findByDateStartAndTrouphy(StartDate,trouphy);
+				if(TryE.size()==0) {
+					System.out.println("There Are No Events In The DataBase With The Provided Starting Date or Trouphy");
+				}else {
+					System.out.println("Events Avariable : ");
+					System.out.println(TryE);
+					E=TryE;
+				}
+			}catch(Exception e ) {
+				System.out.println("Error Could Not Retrive findByDateStartAndTrouphy");
+			}
+			return E;
+		}
+		//findBy DateEnd + Trouphy
+				public List<Event> findByDateEndAndTrouphy(Date StartEnd,boolean trouphy){
+					List<Event> E = new ArrayList<Event>();
+					try {
+						List<Event> TryE = new ArrayList<Event>();
+						TryE=EventRepository.findByDateEndAndTrouphy(StartEnd,trouphy);
+						if(TryE.size()==0) {
+							System.out.println("There Are No Events In The DataBase With The Provided Ending Date or Trouphy");
+						}else {
+							System.out.println("Events Avariable : ");
+							System.out.println(TryE);
+							E=TryE;
+						}
+					}catch(Exception e ) {
+						System.out.println("Error Could Not Retrive findByDateEndAndTrouphy");
+					}
+					return E;
+				}
+		//findBy DateStart + DateEnd + Trouphy 
+		public List<Event> findByDateStartAndDateEndAndTrouphy(Date StartDate,Date DateEnd,boolean trouphy){
+			List<Event> E = new ArrayList<Event>();
+			try {
+				List<Event> TryE = new ArrayList<Event>();
+				TryE=EventRepository.findByDateStartAndDateEndAndTrouphy(StartDate,DateEnd,trouphy);
+				if(TryE.size()==0) {
+					System.out.println("There Are No Events In The DataBase With The Provided Starting Date or Ending Date Or Trouphy.");
+				}else {
+					System.out.println("Events Avariable : ");
+					System.out.println(TryE);
+					E=TryE;
+				}
+			}catch(Exception e ) {
+				System.out.println("Error Could Not Retrive findByDateStartAndDateEndAndTrouphy");
+			}
+			return E;
+		}
+		//findBy DateStart + DateEnd + Trouphy + Type
+		public List<Event> findByDateStartAndDateEndAndTrouphyAndType(Date StartDate,Date DateEnd,boolean trouphy,EventType Type){
+			List<Event> E = new ArrayList<Event>();
+			try {
+				List<Event> TryE = new ArrayList<Event>();
+				TryE=EventRepository.findByDateStartAndDateEndAndTrouphyAndType(StartDate,DateEnd,trouphy,Type);
+				if(TryE.size()==0) {
+					System.out.println("There Are No Events In The DataBase With The Provided Starting Date , Ending Date , Trouphy Or Type.");
+				}else {
+					System.out.println("Events Avariable : ");
+					System.out.println(TryE);
+					E=TryE;
+				}
+			}catch(Exception e ) {
+				System.out.println("Error Could Not Retrive findByDateStartAndDateEndAndTrouphyAndType");
+			}
+			return E;
+		}
+		//findBy Type + Trouphy 
+		public List<Event> findByTypeAndTrouphy(EventType type, boolean trouphy){
+			List<Event> E = new ArrayList<Event>();
+			try {
+				List<Event> TryE = new ArrayList<Event>();
+				TryE=EventRepository.findByTypeAndTrouphy(type,trouphy);
+				if(TryE.size()==0) {
+					System.out.println("There Are No Events In The DataBase With The Provided Type Or Trouphy");
+				}else {
+					System.out.println("Events Avariable : ");
+					System.out.println(TryE);
+					E=TryE;
+				}
+			}catch(Exception e ) {
+				System.out.println("Error Could Not Retrive findByTypeAndTrouphy");
+			}
+			return E;
+		}
 		
+		public List<Event> findByDateStartAndType(Date startDate, EventType type) {
+			List<Event> E = new ArrayList<Event>();
+			try {
+				List<Event> TryE = new ArrayList<Event>();
+				TryE=EventRepository.findByDateStartAndType(startDate,type);
+				if(TryE.size()==0) {
+					System.out.println("There Are No Events In The DataBase With The Provided Type Or StartDate");
+				}else {
+					System.out.println("Events Avariable : ");
+					System.out.println(TryE);
+					E=TryE;
+				}
+			}catch(Exception e ) {
+				System.out.println("Error Could Not Retrive findByDateStartAndType");
+			}
+			return E;
+		}
+		public List<Event> FindByDateEndAndType(Date dateEnd, EventType type) {
+			List<Event> E = new ArrayList<Event>();
+			try {
+				List<Event> TryE = new ArrayList<Event>();
+				TryE=EventRepository.findByDateEndAndType(dateEnd,type);
+				if(TryE.size()==0) {
+					System.out.println("There Are No Events In The DataBase With The Provided Type Or Ending Date");
+				}else {
+					System.out.println("Events Avariable : ");
+					System.out.println(TryE);
+					E=TryE;
+				}
+			}catch(Exception e ) {
+				System.out.println("Error Could Not Retrive FindByDateEndAndType");
+			}
+			return E;
+		}
+		
+		/////
+		//Nombre Total Events
+		public int TotalNumberEvents() {
+			int nbr = 0;
+			try {
+				int trynbr;
+				trynbr=EventRepository.findAll().size();
+				if(trynbr==0) {
+					System.out.println("There Are No Events In The DataBase, please Consider Adding Somme Of Them To Start Counting.");
+				}else {
+					System.out.println("Total Number Of Events is : "+trynbr);
+					nbr=trynbr;
+				}
+			}catch(Exception e){
+				System.out.println("Error Could Not Retrive TotalNumberEvents");
+			}
+			return nbr;
+		}
+		//Nombre CHALLENGRE
+		public int TotalNumberEventsChallenge() {
+			int nbr = 0;
+			try {
+				int trynbr;
+				trynbr=EventRepository.findByType(EventType.CHALLENGE).size();
+				if(trynbr==0) {
+					System.out.println("There Are No Events With The Type CHALLENGE In The DataBase, please Consider Adding Somme Of Them To Start Counting.");
+				}else {
+					System.out.println("Total Number Of Events Where The Type is CHALLENGE : "+trynbr);
+					nbr=trynbr;
+				}
+			}catch(Exception e){
+				System.out.println("Error Could Not Retrive TotalNumberEventsCHALLENGE");
+			}
+			return nbr;
+		}
+		//Nombre FORMATION
+		public int TotalNumberEventsFormation() {
+			int nbr = 0;
+			try {
+				int trynbr;
+				trynbr=EventRepository.findByType(EventType.FORMATION).size();
+				if(trynbr==0) {
+					System.out.println("There Are No Events With The Type FORMATION In The DataBase, please Consider Adding Somme Of Them To Start Counting.");
+				}else {
+					System.out.println("Total Number Of Events Where The Type is FORMATION : "+trynbr);
+					nbr=trynbr;
+				}
+			}catch(Exception e){
+				System.out.println("Error Could Not Retrive TotalNumberEventsFORMATION");
+			}
+			return nbr;
+		}
+		//Number of Events With Trouphies=true
+		public int TotalNumberEventsTrouphyTrue() {
+			int nbr = 0;
+			try {
+				int trynbr;
+				trynbr=EventRepository.findByTrouphy(true).size();
+				if(trynbr==0) {
+					System.out.println("There Are No Events With Trouphies In The DataBase, please Consider Adding Somme Of Them To Start Counting.");
+				}else {
+					System.out.println("Total Number Of Events With Trouphies : "+trynbr);
+					nbr=trynbr;
+				}
+			}catch(Exception e){
+				System.out.println("Error Could Not Retrive TotalNumberEventsTrouphyTrue");
+			}
+			return nbr;
+		}
+		//Number of Events With Trouphies=true
+		public int TotalNumberEventsTrouphyFalse() {
+			int nbr = 0;
+			try {
+				int trynbr;
+				trynbr=EventRepository.findByTrouphy(false).size();
+				if(trynbr==0) {
+					System.out.println("There Are No Events With No Trouphies In The DataBase, please Consider Adding Somme Of Them To Start Counting.");
+				}else {
+					System.out.println("Total Number Of Events With No Trouphies : "+trynbr);
+					nbr=trynbr;
+				}
+			}catch(Exception e){
+				System.out.println("Error Could Not Retrive TotalNumberEventsTrouphyFalse");
+			}
+			return nbr;
+		}
+		
+		
+
 		}
