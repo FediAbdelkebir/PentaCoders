@@ -34,7 +34,7 @@ public class Post  {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;      
+	private int idPost;      
 	private String contenu; 
 	@Temporal(TemporalType.DATE)
 	private Date creation_time; 

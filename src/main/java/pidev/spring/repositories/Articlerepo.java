@@ -17,7 +17,8 @@ import pidev.spring.entities.ArticleCategory;
 public interface Articlerepo extends JpaRepository<Article, Long>{ 
 	
 	     public List<Article> findByCategory(ArticleCategory category);  
-	     public List<Article> findByOrderByDateCreation();      
+	     public List<Article> findByOrderByDateCreationAsc(); 
+	     public List<Article> findByOrderByDateCreationDesc();
 	     @Query("SELECT a FROM Article a WHERE a.title LIKE CONCAT('%',:string,'%')")
 	 	 public List<Article> searchTitle(@Param("string") String title);
 

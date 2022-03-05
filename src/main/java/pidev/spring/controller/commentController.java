@@ -45,33 +45,33 @@ public class commentController {
 
 
  	// http://localhost:8081/SpringMVC/article/add-article
- 	@PostMapping("/add-comment-inpost/{idUser}")
+ 	@PostMapping("/add-comment-inpost/{idUser}/{idPost}")
  	@ResponseBody
- 	Comment addcommentpost(@RequestBody Comment c,@PathVariable Long idUser)
+ 	Comment addcommentpost(@RequestBody Comment c,@PathVariable Long idUser,@PathVariable int idPost)
  	{
- 		Comment comment = commentservice.AjouterCommInPost(c, idUser);
+ 		Comment comment = commentservice.AjouterCommInPost(c, idUser,idPost);
  	    return comment;
  	 } 
  	// add comment in article
  	@PostMapping("/add-comment-inarticle/{idUser}")
  	@ResponseBody
- 	Comment addcommentarticle(@RequestBody Comment c,@PathVariable Long idUser)
+ 	Comment addcommentarticle(@RequestBody Comment c,@PathVariable Long idUser,@PathVariable Long idArticle)
  	{
- 		Comment comment = commentservice.AjouterCommInArticle(c, idUser);
+ 		Comment comment = commentservice.AjouterCommInArticle(c, idUser,idArticle);
  	    return comment;
  	 }
 
    //http://localhost:8087/SpringMVC/centre/modify-article
     @PutMapping("/modify-comment-inarticle/{idUser}")
     @ResponseBody
-     public Comment modifycommentInArticle(@RequestBody Comment c,@PathVariable Long idUser) {
-     return commentservice.UpdateCommInArticle(c, idUser);
+     public Comment modifycommentInArticle(@RequestBody Comment c,@PathVariable Long idUser,@PathVariable Long idArticle) {
+     return commentservice.UpdateCommInArticle(c, idUser,idArticle);
    }    
     
     @PutMapping("/modify-comment-inpost/{idUser}")
     @ResponseBody
-     public Comment modifycommentInPost(@RequestBody Comment c,@PathVariable Long idUser) {
-     return commentservice.UpdateCommInPost(c, idUser);
+     public Comment modifycommentInPost(@RequestBody Comment c,@PathVariable Long idUser,@PathVariable int idPost) {
+     return commentservice.UpdateCommInPost(c, idUser,idPost);
    }   
     
 

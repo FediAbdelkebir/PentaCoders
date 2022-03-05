@@ -73,10 +73,18 @@ public class ArticleController {
 		 return articleservice.retrieveByCategorie(category);
 	} 
 	
-	@GetMapping("/retrieve-articlebydate")
+	@GetMapping("/retrieve-articlebydateasc")
     @ResponseBody
- 	public List<Article> retrieveByDate() {
-	List<Article> listarticle = articleservice.retrieveByDate();
+ 	public List<Article> retrieveByDateasc() {
+	List<Article> listarticle = articleservice.retrieveByDateAsc();
+		 return listarticle;
+    }   
+	
+
+	@GetMapping("/retrieve-articlebydatedsc")
+    @ResponseBody
+ 	public List<Article> retrieveByDatedsc() {
+	List<Article> listarticle = articleservice.retrieveByDateDesc();
 		 return listarticle;
     }   
 	

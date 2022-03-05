@@ -14,7 +14,8 @@ public interface IarticleService {
 	Article UpdateArticle(Article a ,Long idUser); 
 	  List<Article> retrieveAllArticles(); 
 	  List<Article> retrieveByCategorie(ArticleCategory category); 
-	  List<Article> retrieveByDate(); 
+	  List<Article> retrieveByDateAsc(); 
+	  List<Article> retrieveByDateDesc(); 
 	  Page<Article> findarticlewithPagination(int offset,int pagesize); 
 	  List<Article> searchTitle(String title);
 	  Article retrieveArticles(Long id); 

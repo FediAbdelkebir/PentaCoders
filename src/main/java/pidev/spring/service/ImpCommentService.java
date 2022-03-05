@@ -11,9 +11,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import pidev.spring.entities.Article;
 import pidev.spring.entities.Comment;
+import pidev.spring.entities.Post;
 import pidev.spring.entities.User;
+import pidev.spring.repositories.Articlerepo;
 import pidev.spring.repositories.Commentrepo;
+import pidev.spring.repositories.Postrepo;
 import pidev.spring.repositories.UserRepo;
 
 @Service
@@ -23,42 +27,54 @@ public class ImpCommentService implements IcommentService {
 	Commentrepo commentrepo; 
 	@Autowired 
 	UserRepo userRepo; 
+	@Autowired 
+	Postrepo postrepo; 
+	@Autowired 
+	Articlerepo articlerepo;
 
 	@Override
-	public Comment AjouterCommInPost(Comment c, Long idUser) {
+	public Comment AjouterCommInPost(Comment c, Long idUser,int idPost) {
 		// TODO Auto-generated method stub  
 		c.setArticle(null);
-		User u =userRepo.findById(idUser).orElse(null); 
+		User u =userRepo.findById(idUser).orElse(null);  
+		Post p=postrepo.findById(idPost).orElse(null); 
 		c.setUser(u); 
-		BadWordFilter.getCensoredText(c.getDescription()); 
-		//System.out.println(c.getDescription());
+		c.setPost(p); 
+		BadWordFilter.getCensoredText(c.getDescription());
+		 //System.out.println(c.getDescription());  
 		return commentrepo.save(c); 
 	} 
 	
 	@Override
-	public Comment AjouterCommInArticle(Comment c, Long idUser) {
+	public Comment AjouterCommInArticle(Comment c, Long idUser,Long idArticle) {
 		// TODO Auto-generated method stub
 		c.setPost(null);
 		User u =userRepo.findById(idUser).orElse(null); 
+		Article a =articlerepo.findById(idArticle).orElse(null); 
 		c.setUser(u);
+		c.setArticle(a);
 		return commentrepo.save(c);
 	} 
 
 	@Override
-	public Comment UpdateCommInPost(Comment c, Long idUser) {
+	public Comment UpdateCommInPost(Comment c, Long idUser,int idPost) {
 		// TODO Auto-generated method stub  
 		c.setArticle(null);
 		User u =userRepo.findById(idUser).orElse(null); 
-		c.setUser(u);
+		Post p=postrepo.findById(idPost).orElse(null); 
+		c.setUser(u); 
+		c.setPost(p); 
 		return commentrepo.save(c); 
 	} 
 	
 	@Override
-	public Comment UpdateCommInArticle(Comment c, Long idUser) {
+	public Comment UpdateCommInArticle(Comment c, Long idUser,Long idArticle) {
 		// TODO Auto-generated method stub 
 		c.setPost(null);
-		User u =userRepo.findById(idUser).orElse(null); 
+		User u =userRepo.findById(idUser).orElse(null);  
+		Article a =articlerepo.findById(idArticle).orElse(null); 
 		c.setUser(u);
+		c.setArticle(a);
 		return commentrepo.save(c); 
 	}
 

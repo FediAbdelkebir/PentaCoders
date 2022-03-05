@@ -70,11 +70,16 @@ public class ImpArticleService implements IarticleService {
 	}
 
 	@Override
-	public List<Article> retrieveByDate() {
+	public List<Article> retrieveByDateAsc() {
 		 //TODO Auto-generated method stub
-		return articlerepo.findByOrderByDateCreation();
+		return articlerepo.findByOrderByDateCreationAsc();
 	} 
 	
+	@Override
+	public List<Article> retrieveByDateDesc() {
+		// TODO Auto-generated method stub
+		return articlerepo.findByOrderByDateCreationDesc();
+	}
 	
 
 	@Override
@@ -104,6 +109,8 @@ public class ImpArticleService implements IarticleService {
         simpleMailMessage.setText(message);
         emailSender.send(simpleMailMessage);
     }
+
+	
 
 
 

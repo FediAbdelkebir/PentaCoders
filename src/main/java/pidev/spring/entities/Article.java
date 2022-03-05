@@ -35,7 +35,7 @@ public class Article  {
 
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
-	private Long id; 
+	private Long idArticle; 
 	private String title; 
 	private String Description; 
 	@Temporal(TemporalType.DATE)
