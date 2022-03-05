@@ -2,6 +2,7 @@ package pidev.spring.webcontrollers;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -168,11 +169,30 @@ List<Event> Events(){
 		List<Event> findByDateStartAndDateEndAndTrouphyAndType(@PathVariable("DateStart") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date StartDate,@PathVariable("DateEnd") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date DateEnd,@PathVariable("Trouphy") boolean Trouphy,@PathVariable("Type") EventType Type){
 			return ES.findByDateStartAndDateEndAndTrouphyAndType(StartDate,DateEnd,Trouphy,Type);
 		}
+	//findAllByStartDateLessThanEqualAndDateEndGreaterThanEqual
+		@GetMapping("/FindEvent/FindAllBetween/{DateStart}/{DateEnd}")
+		@ResponseBody
+		List<Event> findAllByStartDateLessThanEqualAndDateEndGreaterThanEqual(@PathVariable("DateStart") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date StartDate,@PathVariable("DateEnd") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date DateEnd){
+			return ES.findAllByDateStartGreaterThanEqualAndDateEndLessThanEqual(StartDate,DateEnd);
+		}
+////
 	//AffecterEventToUser
-			@PostMapping("/AffecterEventToUser/{badge}/{userid}")
+			@PostMapping("/AffecterEventToUser/{Event}/{userid}")
 			@ResponseBody
-			User FindEventById(@PathVariable("badge") int badge,@PathVariable("userid") int userid){
-				return ES.AffecterEventToUser(badge, userid);
+			String FindEventById(@PathVariable("Event") int Event,@PathVariable("userid") int userid){
+				return ES.AffecterEventToUser(Event, userid);
+			}
+	//RemoveUserFromEvent
+			@GetMapping("/RemoveUserFromEvent/{idEvent}/{idUser}")
+			@ResponseBody
+			String RemoveUserFromEvent(@PathVariable("idEvent") int idEvent,@PathVariable("idUser") int idUser){
+				return ES.RemoveUserFromEvent(idEvent, idUser);
+			}
+	//RemoveUserFromEvent
+			@GetMapping("/UserJoinedEvents/{idUser}")
+			@ResponseBody
+			Set<Event> UserJoinedEvents(@PathVariable("idUser") int idUser){
+				return ES.UserJoinedEvents(idUser);
 			}
 	//SortEventsByIdDesc
 			@GetMapping("/SortEventsByIdDesc")

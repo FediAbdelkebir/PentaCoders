@@ -2,16 +2,21 @@ package pidev.spring.entities;
 import java.io.Serializable;
 
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -27,7 +32,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode
+
 public class Event implements Serializable{
 	@ApiModelProperty(hidden = true)
 	@Id
@@ -51,4 +56,9 @@ public class Event implements Serializable{
 	private EventType type;
 	@Column 
 	private boolean trouphy;
+	
+	@Column
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JsonIgnore
+	private Set<User> users;
 }

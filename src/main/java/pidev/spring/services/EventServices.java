@@ -3,6 +3,7 @@ package pidev.spring.services;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -79,15 +80,45 @@ public class EventServices {
 		CR.save(C);
 	}*/
 	
-	//Affecter Event To User
-		public User AffecterEventToUser (int badge, int userid) {
+	//Affecter User To Event
+		public String AffecterEventToUser (int idEvent, int userid) {
 			//l’affecter au centre commercial crée dans la question
-			Event Event=EventRepository.findById(badge).orElse(null);
-			User User=UserRepository.findById(userid).orElse(null);
-			//User.setEvent(Event);
-			return UserRepository.save(User);
 			
+			Event Event=EventRepository.findById(idEvent).orElse(null);
+			User User=UserRepository.findById(userid).orElse(null);
+			if(Event.getUsers().contains(User)) {
+				System.out.println("User Already Joined This Event");
+				return "User Already Joined This Event";
+			}else {
+				Event.getUsers().add(User);
+				UserRepository.save(User);
+				return "Affecting User..";
+						
+			}
 		}
+	//Remove User From Event
+		public String RemoveUserFromEvent (int idEvent, int userid) {
+			//l’affecter au centre commercial crée dans la question
+			
+			Event Event=EventRepository.findById(idEvent).orElse(null);
+			User User=UserRepository.findById(userid).orElse(null);
+			if(!Event.getUsers().contains(User)) {
+				System.out.println("User Already Not Part Of This Event");
+				return "User Already Not Part Of This Event";
+			}else {
+				Event.getUsers().remove(User);
+				UserRepository.save(User);
+				return "Removing User..";
+						
+			}
+		}
+		//Find User Joined Events
+		public Set<Event> UserJoinedEvents (int userid) {
+			//l’affecter au centre commercial crée dans la question
+			User User=UserRepository.findById(userid).orElse(null);
+			return User.getEvents();
+		}
+				
 		//SortEventBy Id Asc
 		public List<Event> SortEventsByIdAsc(){
 			return EventRepository.findAllByOrderByIdAsc();
@@ -304,7 +335,23 @@ public class EventServices {
 			}
 			return E;
 		}
-		
+		public List<Event> findAllByDateStartGreaterThanEqualAndDateEndLessThanEqual(Date startDate, Date endDate) {
+			List<Event> E = new ArrayList<Event>();
+			try {
+				List<Event> TryE = new ArrayList<Event>();
+				TryE=EventRepository.findAllByDateStartGreaterThanEqualAndDateEndLessThanEqual(startDate,endDate);
+				if(TryE.size()==0) {
+					System.out.println("There Are No Events In The DataBase Between The Two  Provided Dates ");
+				}else {
+					System.out.println("Events Avariable Between "+startDate+"And "+endDate+" : ");
+					System.out.println(TryE);
+					E=TryE;
+				}
+			}catch(Exception e ) {
+				System.out.println("Error Could Not Retrive findAllByStartDateLessThanEqualAndDateEndGreaterThanEqual");
+			}
+			return E;
+		}
 		/////
 		//Nombre Total Events
 		public int TotalNumberEvents() {

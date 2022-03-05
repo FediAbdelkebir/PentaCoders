@@ -52,13 +52,15 @@ public interface EventRepository extends JpaRepository<Event, Integer>  {
 	List<Event> findByDateStart(Date StartDate);
 	
 	List<Event> findByDateEnd(Date DateEnd);
-	
+	//2
 	List<Event> findAllByDateStartAndDateEnd(Date StartDate,Date DateEnd);
 	List<Event> findByDateStartAndTrouphy(Date startDate, boolean trouphy);
-	List<Event> findByDateEndAndTrouphy(Date startEnd, boolean trouphy);
+	List<Event> findByDateEndAndTrouphy(Date startDate, boolean trouphy);
 	List<Event> findByTypeAndTrouphy(EventType type, boolean trouphy);
 	List<Event> findByDateStartAndType(Date startDate, EventType type);
 	List<Event> findByDateEndAndType(Date dateEnd, EventType type);
+	List<Event> findAllByDateStartGreaterThanEqualAndDateEndLessThanEqual(Date startDate, Date dateEnd);
+	//3
 	List<Event> findByDateStartAndDateEndAndTrouphy(Date StartDate,Date DateEnd,boolean trouphy);
 	
 	List<Event> findByType(EventType EventType);
