@@ -8,6 +8,8 @@ import tn.esprit.workmood.entities.User;
 public interface UserServiceInt {
 	
 	User findUserByUsername(String username);
+	User findUserByEmailAddress(String email);
+	
 
 	void save(User user , Long idRole );
 	
@@ -18,5 +20,7 @@ public interface UserServiceInt {
 	
 	List<User> retrieveUsers();
 	User retriveUser(Long idUser);
+	
+	User resetPasswd(String email);
 
 }

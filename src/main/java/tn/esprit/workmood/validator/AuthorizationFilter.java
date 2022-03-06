@@ -49,7 +49,7 @@ public class AuthorizationFilter extends OncePerRequestFilter {
 				Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
 				
 				for (String role : roles ){
-					
+					System.out.println(role.toString());
 					authorities.add(new SimpleGrantedAuthority(role.toString()));}
 			    UsernamePasswordAuthenticationToken authenticationToken= new UsernamePasswordAuthenticationToken(username ,null , authorities);
 			    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
