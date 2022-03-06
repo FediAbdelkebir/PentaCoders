@@ -177,13 +177,13 @@ if (WordFiltre.getCensoredText(R.getContentReview())=="Bad"){
         return R;
     }
 	
-	//filtre by category
+	//filtre by categoryyy
 	@Override
 	public List<Review> retrieveByCategorie(CategoryReview categorie) {
 		
 		return ReviewRepo.findByCategory(categorie);
 	} 
-	//filtre by Annonyme et public
+	//filtre by Annonyme et publiccc
 	@Override
 	public List<Review> retrieveByType(TypeReview review) {
 		
