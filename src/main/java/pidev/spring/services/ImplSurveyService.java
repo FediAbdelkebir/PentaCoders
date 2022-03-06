@@ -92,9 +92,9 @@ public class ImplSurveyService implements ISurveyServices {
 			}
 		}
 	}
-	/*@Override
-	public List<SurveyQuestion> retrieveByDateAsc() {
-		return SurveyRepo.findByDateExp();
-	} */
+	@Override
+	public List<SurveyQuestion> retrieveByDateExpAsc() {
+		return SurveyRepo.findByOrderByDateExpAsc();
+	} 
 
 }

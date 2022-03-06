@@ -12,7 +12,9 @@ import pidev.spring.entities.SurveyQuestion;
 public interface SurveyRepository  extends JpaRepository<SurveyQuestion, Integer>  {
 	
 	
-//	public List<SurveyQuestion> findByOrderDateExpAsc  ();
+
+	  public List<SurveyQuestion> findByOrderByDateExpAsc();
+	  public List<SurveyQuestion> findByOrderByDateExpDesc();
 
 
 }
