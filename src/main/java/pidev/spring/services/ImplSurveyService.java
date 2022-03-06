@@ -1,10 +1,12 @@
 package pidev.spring.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.Review;
@@ -76,5 +78,19 @@ public class ImplSurveyService implements ISurveyServices {
 		return question;
 	}
 	
+	
+	@Scheduled(cron = "*/60 * * * * *")
+	public void deleteExpiredOffer() {
+		// dateExp< new Date()
+		// foreach(findAll())
+		Date d = new Date();
+		List<SurveyQuestion> survey = (List<SurveyQuestion>) SurveyRepo.findAll();
+		for(SurveyQuestion q : survey){ 
+			if(q.getDateExp().after(d)){
+				SurveyRepo.delete(q);
+				System.out.println("Survey supprimé");
+			}
+		}
+	}
 
 }

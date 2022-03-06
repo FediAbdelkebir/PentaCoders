@@ -1,7 +1,7 @@
 package pidev.spring.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -40,13 +42,16 @@ public class SurveyQuestion implements Serializable{
 	@Column
 	private String Content;
 	
+	@Column
+	@Temporal(TemporalType.DATE)
+	private Date dateExp;
+	
 	@ManyToOne
 	@JsonIgnore
 	private User user;
 	
 	
 	@OneToOne
-	
 	private SurveyAnswer surveyAnswer;
 	
 	

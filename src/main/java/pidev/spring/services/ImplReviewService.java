@@ -9,6 +9,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.CategoryReview;
+import pidev.spring.entities.Classification;
 import pidev.spring.entities.Review;
 import pidev.spring.entities.TypeReview;
 import pidev.spring.entities.User;
@@ -60,9 +61,21 @@ public class ImplReviewService implements IReviewServices {
 		User u = userRepo.findById(idUser).orElse(null);
 		r.setUser(u);
 		
-		String	w = WordFiltre.getCensoredText(r.getContentReview());
-		
+		//String	w = WordFiltre.getCensoredText(r.getContentReview());
+		//System.out.println(w);
+		if (WordFiltre.getCensoredText(r.getContentReview())=="Bad"){
+			//System.out.println(w);
+			r.setClassf(Classification.Bad);
+		}
+			else 
+			
+			{
+				//System.out.println("Good");
+				r.setClassf(Classification.Good);
+			
+			}
 		sendSimpleEmail(u.getEmailAddress().toString(), "Review", "you have new Reveiw");
+			
 		return ReviewRepo.save(r);
 	}
 	@Override
@@ -112,6 +125,19 @@ public class ImplReviewService implements IReviewServices {
             	//System.out.println(U.toString());
             }
             
+            if (WordFiltre.getCensoredText(R.getContentReview())=="Bad"){
+            	
+    			//System.out.println(w);
+    			R.setClassf(Classification.Bad);
+    		}
+    			else 
+    			
+    			{
+    				//System.out.println("Good");
+    				R.setClassf(Classification.Good);
+    			
+    			}
+            
         }
 		sendSimpleEmail(u.getEmailAddress().toString(), "Review", "you have new Reveiw");
         return R;
@@ -133,6 +159,18 @@ public class ImplReviewService implements IReviewServices {
             	//System.out.println(R.getContentReview());
             	//System.out.println(U.toString());
             }
+if (WordFiltre.getCensoredText(R.getContentReview())=="Bad"){
+            	
+    			//System.out.println(w);
+    			R.setClassf(Classification.Bad);
+    		}
+    			else 
+    			
+    			{
+    				//System.out.println("Good");
+    				R.setClassf(Classification.Good);
+    			
+    			}
             
         }
 		sendSimpleEmail(u.getEmailAddress().toString(), "Review", "you have new Reveiw ");
