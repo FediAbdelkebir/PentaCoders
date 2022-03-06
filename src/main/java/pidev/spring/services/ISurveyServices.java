@@ -24,5 +24,6 @@ public interface ISurveyServices {
 	Page<SurveyQuestion> findquestionwithPagination(int offset,int pagesize);
 	
 	List<SurveyQuestion> retrieveByDateExpAsc(); 
+	List<SurveyQuestion> retrieveByDateExpDesc();
 
 }

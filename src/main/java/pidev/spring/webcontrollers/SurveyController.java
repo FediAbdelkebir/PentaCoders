@@ -83,8 +83,14 @@ public class SurveyController {
 			//Tri date
 			@GetMapping("/retrieve-Surveybydateasc")
 		    @ResponseBody
-		 	public List<SurveyQuestion> retrieveByDateExp() {
+		 	public List<SurveyQuestion> retrieveByDateExpAsc() {
 			List<SurveyQuestion> survey = SurveyServ.retrieveByDateExpAsc();
+				 return survey;
+		    }   
+			@GetMapping("/retrieve-Surveybydatedesc")
+		    @ResponseBody
+		 	public List<SurveyQuestion> retrieveByDateExpDesc() {
+			List<SurveyQuestion> survey = SurveyServ.retrieveByDateExpDesc();
 				 return survey;
 		    }   
 	

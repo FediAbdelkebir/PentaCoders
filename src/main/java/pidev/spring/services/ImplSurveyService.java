@@ -96,5 +96,10 @@ public class ImplSurveyService implements ISurveyServices {
 	public List<SurveyQuestion> retrieveByDateExpAsc() {
 		return SurveyRepo.findByOrderByDateExpAsc();
 	} 
+	
+	@Override
+	public List<SurveyQuestion> retrieveByDateExpDesc() {
+		return SurveyRepo.findByOrderByDateExpDesc();
+	} 
 
 }
