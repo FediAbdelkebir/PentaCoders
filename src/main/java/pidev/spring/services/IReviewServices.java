@@ -3,6 +3,7 @@ package pidev.spring.services;
 import java.util.List;
 
 import pidev.spring.entities.CategoryReview;
+import pidev.spring.entities.Classification;
 import pidev.spring.entities.Review;
 import pidev.spring.entities.TypeReview;
 
@@ -36,5 +37,11 @@ public interface IReviewServices {
 	List<Review> searchReviewEm(String EmployeeName);
 	
 	List<Review> searchReviewSociete(String SocieteName);
+	
+	List<Review> retrieveByClassification(Classification classf); 
+
+	
+	//List<Review> retrievebyUser(Long idUser);
+
 
 }

@@ -22,5 +22,7 @@ public interface ISurveyServices {
 	void deleteSurvey(Integer id);
 	
 	Page<SurveyQuestion> findquestionwithPagination(int offset,int pagesize);
+	
+	//List<SurveyQuestion> retrieveByDateAsc(); 
 
 }

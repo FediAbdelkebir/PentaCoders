@@ -210,5 +210,14 @@ if (WordFiltre.getCensoredText(R.getContentReview())=="Bad"){
         simpleMailMessage.setText(message);
         emailSender.send(simpleMailMessage);
     }
+
+	//Classification
+		@Override
+		public List<Review> retrieveByClassification(Classification classf) {
+			
+			return ReviewRepo.findByClassf(classf);
+		} 
+	//Affiche by userId
+	
 	
 }

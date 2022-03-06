@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import pidev.spring.entities.CategoryReview;
+import pidev.spring.entities.Classification;
 import pidev.spring.entities.Review;
 import pidev.spring.entities.TypeReview;
 import pidev.spring.services.IReviewServices;
@@ -125,5 +126,12 @@ public class ReviewController {
 	    	public List<Review> getSearchSocieteName(@PathVariable("SocieteName") String SocieteName) {
 	    	return reveiwServ.searchReviewSociete(SocieteName);
 	}
+			// Classification Good or Bad 
+			
+						@GetMapping("/ReviewClass") 
+					     @ResponseBody 
+						 List<Review> retrieveByClassification(@RequestParam Classification classf){
+							 return reveiwServ.retrieveByClassification(classf);
+						}
 	
 }

@@ -80,6 +80,13 @@ public class SurveyController {
 				return SurveyServ.findquestionwithPagination(offset, pagesize);
 			} 
 			
+			//Tri date
+			/*@GetMapping("/retrieve-Surveybydateasc")
+		    @ResponseBody
+		 	public List<SurveyQuestion> retrieveByDateExp() {
+			List<SurveyQuestion> survey = SurveyServ.retrieveByDateAsc();
+				 return survey;
+		    }   */
 	
 	
 }

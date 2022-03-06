@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import pidev.spring.entities.CategoryReview;
+import pidev.spring.entities.Classification;
 import pidev.spring.entities.Review;
 import pidev.spring.entities.TypeReview;
 
@@ -17,6 +18,9 @@ public interface ReviewRepository  extends JpaRepository<Review, Integer>  {
 	List<Review> findByCategory(CategoryReview categorie);
 	
 	List<Review> findByReview(TypeReview review);
+	
+	List<Review> findByClassf(Classification classf);
+
 	
 	@Query("SELECT a FROM Review a WHERE a.EmployeeName LIKE CONCAT('%',:string,'%')")
 	public List<Review> searchReviewEmp(@Param("string") String EmployeeName);
