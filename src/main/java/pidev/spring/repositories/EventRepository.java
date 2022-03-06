@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import pidev.spring.entities.Event;
+import pidev.spring.entities.EventTags;
 import pidev.spring.entities.EventType;
 
 @Repository
@@ -69,6 +70,8 @@ public interface EventRepository extends JpaRepository<Event, Integer>  {
 
 	List<Event> findByDateStartAndDateEndAndTrouphyAndType(Date startDate, Date dateEnd, boolean trouphy,
 			EventType type);
+
+	List<Event> findAllByEventTags(EventTags tags);
 
 
 

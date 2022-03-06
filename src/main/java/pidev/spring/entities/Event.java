@@ -2,6 +2,7 @@ package pidev.spring.entities;
 import java.io.Serializable;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -53,12 +56,21 @@ public class Event implements Serializable{
 	@Column 
 	private int nbrplace;
 	@Column 
+	private int nbrlikes;
+	@Column 
 	private EventType type;
+	@Column
+	private EventTags eventTags;
 	@Column 
 	private boolean trouphy;
-	
+
 	@Column
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JsonIgnore
 	private Set<User> users;
+	
+	@Column
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JsonIgnore 
+	private Set<User> UsersLiked;
 }

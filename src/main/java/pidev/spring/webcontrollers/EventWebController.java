@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import pidev.spring.entities.Event;
+import pidev.spring.entities.EventTags;
 import pidev.spring.entities.EventType;
 import pidev.spring.entities.Event;
 import pidev.spring.entities.User;
@@ -194,6 +195,25 @@ List<Event> Events(){
 			Set<Event> UserJoinedEvents(@PathVariable("idUser") int idUser){
 				return ES.UserJoinedEvents(idUser);
 			}
+	//Recommendations 
+			@GetMapping("/RecomendedEvents/{Tags}")
+			@ResponseBody
+			List<Event> UserJoinedEvents(@PathVariable("Tags") EventTags Tags){
+				return ES.RecommendedEvents(Tags);
+			}
+	//LikeEvent 
+			@PostMapping("/LikeEvent/{idEvent}/{idUser}")
+			@ResponseBody
+			String  UserJoinedEvents(@PathVariable("idEvent") int idEvent,@PathVariable("idUser") int idUser){
+				return ES.LikeEvent(idEvent,idUser);
+			}
+	//DisLikeEvent 
+			@PostMapping("/DisLikeEvent/{idEvent}/{idUser}")
+			@ResponseBody
+			String  DislikeEvent(@PathVariable("idEvent") int idEvent,@PathVariable("idUser") int idUser){
+				return ES.DisLikeEvent(idEvent,idUser);
+			}
+
 	//SortEventsByIdDesc
 			@GetMapping("/SortEventsByIdDesc")
 			@ResponseBody

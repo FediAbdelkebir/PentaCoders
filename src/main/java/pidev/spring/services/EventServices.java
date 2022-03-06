@@ -3,6 +3,7 @@ package pidev.spring.services;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.Event;
+import pidev.spring.entities.EventTags;
 import pidev.spring.entities.EventType;
 import pidev.spring.entities.Event;
 import pidev.spring.entities.User;
@@ -68,17 +70,6 @@ public class EventServices {
 	public List<Event> FindEventByType(EventType EventType) {
 		return EventRepository.findByType(EventType);
 	}
-
-	/*
-	public void ajouterEtaffecterListeevent (List<Event> lb, Long idCentre) {
-		//ajouter à la fois la liste des events suivante
-		EventRepository.saveAll(lb);
-		
-		//l’affecter au centre commercial crée dans la question
-		CentreCommercial C=CR.findById(idCentre).orElse(null);
-		C.getEvents().addAll(lb);
-		CR.save(C);
-	}*/
 	
 	//Affecter User To Event
 		public String AffecterEventToUser (int idEvent, int userid) {
@@ -112,6 +103,79 @@ public class EventServices {
 						
 			}
 		}
+		//Like Event
+		public String LikeEvent (int idEvent, int userid) {
+			Event Event=EventRepository.findById(idEvent).orElse(null);
+			User User=UserRepository.findById(userid).orElse(null);
+				 
+			if(!Event.getUsersLiked().contains(User)) {
+				//Add to Liked List 
+				Event.getUsersLiked().add(User);
+				User.getLikedEvent().add(Event);
+				//Increase +1
+				Event.setNbrlikes(Event.getNbrlikes()+1);
+				UserRepository.save(User);
+				return "You Like This Event";	
+			}else {
+				return "You Already Liked This Event";
+				}
+		}
+		//DisLike Event
+		public String DisLikeEvent (int idEvent, int userid) {
+			Event Event=EventRepository.findById(idEvent).orElse(null);
+			User User=UserRepository.findById(userid).orElse(null);
+				 
+			if(Event.getUsersLiked().contains(User) && User.getLikedEvent().contains(Event)) {
+				//Add to Liked List 
+				Event.getUsersLiked().remove(User);
+				User.getLikedEvent().remove(Event);
+				//Increase +1
+				Event.setNbrlikes(Event.getNbrlikes()-1);
+				UserRepository.save(User);
+				return "You DisLike This Event";	
+			}else {
+				return "You Did Not Like This Event To Dislike";
+				}
+		}
+	//Reccomend Events To User
+		public List<Event> RecommendedEvents(EventTags Tags){
+			List<Event> RecomendedList = EventRepository.findAllByEventTags(Tags);
+			int size=3;
+			if(RecomendedList.size()<3) {
+				size=RecomendedList.size();
+			}
+			try {
+				//Randomize
+				List<Event> RandomList = getRandomElement(RecomendedList,size);
+				//Return
+				RecomendedList=RandomList;
+			}catch(Exception e) {
+				System.out.println("Error RecommendedEvents : "+e);
+			}
+			return RecomendedList;
+		}
+	//Random Fonction 
+		public List<Event> getRandomElement(List<Event> list, int totalItems)
+	    {
+	        Random rand = new Random();
+	 
+	        // create a temporary list for storing
+	        // selected element
+	        List<Event> newList = new ArrayList<>();
+	        for (int i = 0; i < totalItems; i++) {
+	 
+	            // take a random index between 0 to size
+	            // of given List
+	            int randomIndex = rand.nextInt(list.size());
+	 
+	            // add element in temporary list
+	            newList.add(list.get(randomIndex));
+	 
+	            // Remove selected element from original list
+	            list.remove(randomIndex);
+	        }
+	        return newList;
+	    }
 		//Find User Joined Events
 		public Set<Event> UserJoinedEvents (int userid) {
 			//l’affecter au centre commercial crée dans la question
