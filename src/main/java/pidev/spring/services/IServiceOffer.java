@@ -30,10 +30,12 @@ public interface IServiceOffer {
 	
 	List<Offer> retrieveFullOffer(Long idUser);
 	void getOfferAndCoupon(HttpServletResponse response, int idOffer, Long idUser) throws DocumentException, IOException ;
-	void deleteExpiredOffer();
+	//void deleteExpiredOffer(); //dynamique
+	List<Offer> retrieveOfferAndHisSimilar(int id, Long idUser);
 	
-	//kol user yaffichilou les offers li même point que li aandou
-	//kol user 9adeh aandou men offer
-	//nbr catégorie offer
+	List<Offer> retrieveOffersByUser(Long idUser);
+	
+	//stat
+	// nbr catégorie offer
 	
 }

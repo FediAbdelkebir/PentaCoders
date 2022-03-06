@@ -17,6 +17,8 @@ import pidev.spring.repositories.OfferRepo;
 import pidev.spring.repositories.UserRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DeadlockLoserDataAccessException;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.lowagie.text.Document;
@@ -197,9 +199,35 @@ public class ServiceOffer implements IServiceOffer {
 		return offerRepo.searchOffer(title);
 	}
 
-	@Override
+	//@Override
+	//@Scheduled(cron = "0 0 12 28 1/1  *")
+	@Scheduled(cron = "*/60 * * * * *")
 	public void deleteExpiredOffer() {
-	
+		// dateExp< new Date()
+		// foreach(findAll())
+		Date d = new Date();
+		List<Offer> offers = offerRepo.findAll();
+		System.out.println();
+		for(Offer o : offers){ 
+			if(o.getDateExp().after(d)){
+				offerRepo.delete(o);
+				System.out.println("Offre supprimé");
+			}
+		}
+	}
+
+	@Override
+	public List<Offer> retrieveOfferAndHisSimilar(int id, Long idUser) {
+		Offer o = offerRepo.findById(id).orElse(null);
+		User u = userRepo.findById(idUser).orElse(null);
+		retrieveOffer(id);
+		return offerRepo.findByCategoryOrPoint(o.getCategory(), u.getBadge().getPoint());
+	}
+
+	@Override
+	public List<Offer> retrieveOffersByUser(Long idUser) {
+		User u = userRepo.findById(idUser).orElse(null);
+		return offerRepo.findByUsers(u);
 	}
 
 }

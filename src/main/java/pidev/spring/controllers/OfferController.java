@@ -30,104 +30,116 @@ import pidev.spring.services.ServiceOffer;
 @Api(tags = "Offer Controller")
 public class OfferController {
 
-	//http://localhost:8089/WorkMood/swagger-ui/index.html
-	
+	// http://localhost:8089/WorkMood/swagger-ui/index.html
+
 	@Autowired
 	ServiceOffer offerService;
-	
+
 	@GetMapping("/ShowAllOffers")
 	@ResponseBody
-	@ApiOperation(value="Show all offers")
-	List<Offer> retrieveAllOffers(){
+	@ApiOperation(value = "Show all offers")
+	List<Offer> retrieveAllOffers() {
 		return offerService.retrieveAllOffers();
 	}
-	
+
 	@PostMapping("/AddOffer/{idUser}")
 	@ResponseBody
-	@ApiOperation(value="Add offer")
-	Offer addOffer(@RequestBody Offer o, @PathVariable Long idUser){
+	@ApiOperation(value = "Add offer")
+	Offer addOffer(@RequestBody Offer o, @PathVariable Long idUser) {
 		return offerService.addOffer(o, idUser);
 	}
-	
+
 	@PutMapping("/UpdateOffer")
 	@ResponseBody
-	@ApiOperation(value="Update offer")
-	Offer updateOffer(@RequestBody Offer o){
+	@ApiOperation(value = "Update offer")
+	Offer updateOffer(@RequestBody Offer o) {
 		return offerService.updateOffer(o);
 	}
-	
+
 	@GetMapping("/ShowOffer/{id}")
 	@ResponseBody
-	@ApiOperation(value="Show offer by id ")
-	Offer retrieveOffer(@PathVariable(name="id") int id){
+	@ApiOperation(value = "Show offer by id ")
+	Offer retrieveOffer(@PathVariable(name = "id") int id) {
 		return offerService.retrieveOffer(id);
 	}
-	
+
 	@DeleteMapping("/DeleteOffer/{id}")
-	@ApiOperation(value="Delete offer")
-	void deleteOffer(@PathVariable(name="id") int id){
+	@ApiOperation(value = "Delete offer")
+	void deleteOffer(@PathVariable(name = "id") int id) {
 		offerService.deleteOffer(id);
 	}
-	
+
 	@PostMapping("/AffectUserToOffer/{idUser}/{idOffer}")
 	@ResponseBody
-	@ApiOperation(value="Affect offer to user")
-	void affectUserToOffer(@PathVariable int idOffer, @PathVariable Long idUser){
+	@ApiOperation(value = "Affect offer to user")
+	void affectUserToOffer(@PathVariable int idOffer, @PathVariable Long idUser) {
 		offerService.affectUserToOffer(idOffer, idUser);
 	}
-	
+
 	@GetMapping("/FindOfferByCategory")
 	@ResponseBody
-	@ApiOperation(value="Find by category")
-	List<Offer> retrieveByCategory(@RequestParam CategoryOffer category){
+	@ApiOperation(value = "Find by category")
+	List<Offer> retrieveByCategory(@RequestParam CategoryOffer category) {
 		return offerService.retrieveByCategory(category);
 	}
-	
+
 	@GetMapping("/FindOfferByDateExpAsc")
 	@ResponseBody
-	@ApiOperation(value="Find by DateExp Asc")
-	List<Offer> retrieveByDateExpAsc(){
+	@ApiOperation(value = "Find by DateExp Asc")
+	List<Offer> retrieveByDateExpAsc() {
 		return offerService.retrieveByDateExpAsc();
 	}
-	
+
 	@GetMapping("/FindOfferByDateExpDesc")
 	@ResponseBody
-	@ApiOperation(value="Find by DateExp Desc")
-	List<Offer> retrieveByDateExpDesc(){
+	@ApiOperation(value = "Find by DateExp Desc")
+	List<Offer> retrieveByDateExpDesc() {
 		return offerService.retrieveByDateExpDesc();
 	}
-	
+
 	@GetMapping("/FindOfferByPointAsc")
 	@ResponseBody
-	@ApiOperation(value="Find by Point Asc")
-	List<Offer> retrieveByPointAsc(){
+	@ApiOperation(value = "Find by Point Asc")
+	List<Offer> retrieveByPointAsc() {
 		return offerService.retrieveByPointAsc();
 	}
-	
+
 	@GetMapping("/FindOfferByPointDesc")
 	@ResponseBody
-	@ApiOperation(value="Find by Point Desc")
-	List<Offer> retrieveByPointDesc(){
+	@ApiOperation(value = "Find by Point Desc")
+	List<Offer> retrieveByPointDesc() {
 		return offerService.retrieveByPointDesc();
 	}
-	
+
 	@GetMapping("/ShowFullOffers")
 	@ResponseBody
-	@ApiOperation(value="Show full offers")
-	List<Offer> retrieveFullOffer(Long idUser){
+	@ApiOperation(value = "Show full offers")
+	List<Offer> retrieveFullOffer(Long idUser) {
 		return offerService.retrieveFullOffer(idUser);
 	}
-	
+
 	@GetMapping("/GetOfferAndCoupon/{idUser}/{idOffer}")
-    public void getOfferAndCoupon(HttpServletResponse response, @PathVariable int idOffer, @PathVariable Long idUser) throws DocumentException, IOException {
-        offerService.getOfferAndCoupon(response, idOffer, idUser);
-    }
-	
+	public void getOfferAndCoupon(HttpServletResponse response, @PathVariable int idOffer, @PathVariable Long idUser)
+			throws DocumentException, IOException {
+		offerService.getOfferAndCoupon(response, idOffer, idUser);
+	}
+
 	@GetMapping("/SearchOffer/{title}")
 	@ResponseBody
 	public List<Offer> searchOffer(@PathVariable("title") String title) {
-	return offerService.searchOffer(title);
-}
+		return offerService.searchOffer(title);
+	}
 	
+	@GetMapping("/SearchOfferSimilar/{id}/{idUser}")
+	@ResponseBody
+	public List<Offer> retrieveOfferAndHisSimilar(@PathVariable int id, @PathVariable Long idUser) {
+		return offerService.retrieveOfferAndHisSimilar(id,idUser);
+	}
+	
+	@GetMapping("/FindOfferByUsers/{idUser}")
+	@ResponseBody
+	public List<Offer> retrieveOffersByUser(@PathVariable Long idUser) {
+		return offerService.retrieveOffersByUser(idUser);
+	}
 
 }
