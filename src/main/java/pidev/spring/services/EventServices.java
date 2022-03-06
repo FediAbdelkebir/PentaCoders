@@ -137,6 +137,18 @@ public class EventServices {
 				return "You Did Not Like This Event To Dislike";
 				}
 		}
+	//List Liked Events By User id
+		public Set<Event> LikedEventById (int userid) {
+			User User=UserRepository.findById(userid).orElse(null);
+			return User.getLikedEvent();
+			
+		}
+	//LikedUsersByEventId
+		public Set<User> LikedUsersByEventId(int eventid) {
+			Event Event=EventRepository.findById(eventid).orElse(null);
+			return Event.getUsersLiked();
+			
+		}
 	//Reccomend Events To User
 		public List<Event> RecommendedEvents(EventTags Tags){
 			List<Event> RecomendedList = EventRepository.findAllByEventTags(Tags);

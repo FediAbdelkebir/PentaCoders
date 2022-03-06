@@ -213,7 +213,18 @@ List<Event> Events(){
 			String  DislikeEvent(@PathVariable("idEvent") int idEvent,@PathVariable("idUser") int idUser){
 				return ES.DisLikeEvent(idEvent,idUser);
 			}
-
+	//LikedEventById 
+			@GetMapping("/LikedEventById/{idUser}")
+			@ResponseBody
+			Set<Event>  LikedEventById(@PathVariable("idUser") int idUser){
+				return ES.LikedEventById(idUser);
+			}
+	//LikedEventById 
+			@GetMapping("/LikedUsersByEventId/{idEvent}")
+			@ResponseBody
+			Set<User>  LikedUsersByEventId(@PathVariable("idEvent") int idEvent){
+				return ES.LikedUsersByEventId(idEvent);
+			}
 	//SortEventsByIdDesc
 			@GetMapping("/SortEventsByIdDesc")
 			@ResponseBody
