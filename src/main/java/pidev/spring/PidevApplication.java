@@ -16,8 +16,8 @@ import pidev.spring.entities.EmailSenderService;
 public class PidevApplication {
 	
 
-	 @Autowired
-	    private EmailSenderService senderService;
+	/* @Autowired
+	    private EmailSenderService senderService;*/
 	 
 	public static void main(String[] args) {
 		String url = "jdbc:mysql://localhost:3306/Woorkmood?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";

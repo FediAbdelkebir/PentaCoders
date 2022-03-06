@@ -49,6 +49,9 @@ public class Review implements Serializable{
 	@Enumerated(EnumType.STRING)
 	@Column
 	private TypeReview review;
+	@Enumerated(EnumType.STRING)
+	@Column
+	private Classification classf;
 	
 	
 	@ManyToOne

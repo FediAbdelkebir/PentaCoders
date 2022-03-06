@@ -11,7 +11,9 @@ import pidev.spring.entities.TypeReview;
 public interface IReviewServices {
 
 	
-List<Review> retrieveAllReview();
+	List<Review> retrieveAllReview();
+
+	List<Review> ClassifictionReview(Review r);
 	
 	Review addReviewCompany(Review r,Long idUser);
 	

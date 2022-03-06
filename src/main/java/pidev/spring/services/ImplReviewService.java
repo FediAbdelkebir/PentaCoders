@@ -33,12 +33,35 @@ public class ImplReviewService implements IReviewServices {
 		List<Review> review = (List<Review>) ReviewRepo.findAll();
 		return review;
 	}
+	
+	@Override
+	public List<Review> ClassifictionReview(Review r) {
+		/*	List<Review> review = (List<Review>) ReviewRepo.findAll();
+		String	w = WordFiltre.getCensoredText(r.getContentReview());
+		if (WordFiltre.getCensoredText(r.getContentReview()))
+		{
+			return r.setClassf()== "Bad";
+		}
+		else
+		{
+			
+				commentRepository.save(comment);
+				
+				return r.setClassf('Good');
+		}	*/
+		
+		return null ;
+	}
+	
 
 	@Override
 	public Review addReviewCompany(Review r , Long idUser ) {
 		r.setEmployeeName(null);
 		User u = userRepo.findById(idUser).orElse(null);
 		r.setUser(u);
+		
+		String	w = WordFiltre.getCensoredText(r.getContentReview());
+		
 		sendSimpleEmail(u.getEmailAddress().toString(), "Review", "you have new Reveiw");
 		return ReviewRepo.save(r);
 	}
