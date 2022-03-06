@@ -23,6 +23,7 @@ public interface IServiceReclamation {
 	List<Reclamation> retrieveAllReclamationsByKeyword(String keyword, Long idUser);
 	
 	void treatReclamation(int idReclamation, Long idUser);
+	List<Reclamation> retrieveReclamationsByUser(Long idUser);
 	
 	int nbrReclamationByUser(Long idUser);
 	int nbrReclamationTypeWaiting(Long idUser);

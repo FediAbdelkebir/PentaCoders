@@ -144,6 +144,12 @@ public class ServiceReclamation implements IServiceReclamation{
 	public int nbrReclamationTypeInprogress(Long idUser) {
 		return reclamationRepo.findAllByStatus(StatusReclamation.INPROGRESS).size();
 	}
+
+	@Override
+	public List<Reclamation> retrieveReclamationsByUser(Long idUser) {
+		User u = userRepo.findById(idUser).orElse(null);
+		return reclamationRepo.findByUser(u);
+	}
 	
 	
 }

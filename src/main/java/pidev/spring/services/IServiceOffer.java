@@ -27,15 +27,19 @@ public interface IServiceOffer {
 	List<Offer> retrieveByPointDesc();
 	
 	List<Offer> searchOffer(String title);
-	
 	List<Offer> retrieveFullOffer(Long idUser);
 	void getOfferAndCoupon(HttpServletResponse response, int idOffer, Long idUser) throws DocumentException, IOException ;
 	//void deleteExpiredOffer(); //dynamique
 	List<Offer> retrieveOfferAndHisSimilar(int id, Long idUser);
-	
 	List<Offer> retrieveOffersByUser(Long idUser);
 	
-	//stat
-	// nbr catégorie offer
+	int nbrOfferByUser(Long idUser);
+	int nbrOfferCategoryServices(Long idUser);
+	int nbrOfferCategoryShopping(Long idUser);
+	int nbrOfferCategoryHobbies(Long idUser);
+	int nbrOfferCategoryTraining(Long idUser);
+	int nbrOfferCategoryFood(Long idUser);
+	int nbrOfferCategoryHome(Long idUser);
+	int nbrOfferCategoryOther(Long idUser);
 	
 }

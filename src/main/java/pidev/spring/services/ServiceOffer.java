@@ -191,7 +191,6 @@ public class ServiceOffer implements IServiceOffer {
 		document.add(p4);
 
 		document.close();
-
 	}
 
 	@Override
@@ -200,8 +199,8 @@ public class ServiceOffer implements IServiceOffer {
 	}
 
 	//@Override
-	//@Scheduled(cron = "0 0 12 28 1/1  *")
-	@Scheduled(cron = "*/60 * * * * *")
+	@Scheduled(cron = "0 0 12 28 1/1  *")
+	//@Scheduled(cron = "*/60 * * * * *")
 	public void deleteExpiredOffer() {
 		// dateExp< new Date()
 		// foreach(findAll())
@@ -228,6 +227,47 @@ public class ServiceOffer implements IServiceOffer {
 	public List<Offer> retrieveOffersByUser(Long idUser) {
 		User u = userRepo.findById(idUser).orElse(null);
 		return offerRepo.findByUsers(u);
+	}
+
+	@Override
+	public int nbrOfferByUser(Long idUser) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int nbrOfferCategoryServices(Long idUser) {
+		return offerRepo.findAllByCategory(CategoryOffer.SERVICES).size();
+	}
+
+	@Override
+	public int nbrOfferCategoryShopping(Long idUser) {
+		return offerRepo.findAllByCategory(CategoryOffer.SHOPPING).size();
+	}
+
+	@Override
+	public int nbrOfferCategoryHobbies(Long idUser) {
+		return offerRepo.findAllByCategory(CategoryOffer.HOBBIES).size();
+	}
+
+	@Override
+	public int nbrOfferCategoryTraining(Long idUser) {
+		return offerRepo.findAllByCategory(CategoryOffer.TRAINING).size();
+	}
+
+	@Override
+	public int nbrOfferCategoryFood(Long idUser) {
+		return offerRepo.findAllByCategory(CategoryOffer.FOOD).size();
+	}
+
+	@Override
+	public int nbrOfferCategoryHome(Long idUser) {
+		return offerRepo.findAllByCategory(CategoryOffer.HOME).size();
+	}
+
+	@Override
+	public int nbrOfferCategoryOther(Long idUser) {
+		return offerRepo.findAllByCategory(CategoryOffer.OTHER).size();
 	}
 
 }

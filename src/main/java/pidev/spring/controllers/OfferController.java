@@ -119,26 +119,26 @@ public class OfferController {
 	}
 
 	@GetMapping("/GetOfferAndCoupon/{idUser}/{idOffer}")
-	public void getOfferAndCoupon(HttpServletResponse response, @PathVariable int idOffer, @PathVariable Long idUser)
+	void getOfferAndCoupon(HttpServletResponse response, @PathVariable int idOffer, @PathVariable Long idUser)
 			throws DocumentException, IOException {
 		offerService.getOfferAndCoupon(response, idOffer, idUser);
 	}
 
 	@GetMapping("/SearchOffer/{title}")
 	@ResponseBody
-	public List<Offer> searchOffer(@PathVariable("title") String title) {
+	List<Offer> searchOffer(@PathVariable("title") String title) {
 		return offerService.searchOffer(title);
 	}
 	
 	@GetMapping("/SearchOfferSimilar/{id}/{idUser}")
 	@ResponseBody
-	public List<Offer> retrieveOfferAndHisSimilar(@PathVariable int id, @PathVariable Long idUser) {
+	List<Offer> retrieveOfferAndHisSimilar(@PathVariable int id, @PathVariable Long idUser) {
 		return offerService.retrieveOfferAndHisSimilar(id,idUser);
 	}
 	
 	@GetMapping("/FindOfferByUsers/{idUser}")
 	@ResponseBody
-	public List<Offer> retrieveOffersByUser(@PathVariable Long idUser) {
+	List<Offer> retrieveOffersByUser(@PathVariable Long idUser) {
 		return offerService.retrieveOffersByUser(idUser);
 	}
 

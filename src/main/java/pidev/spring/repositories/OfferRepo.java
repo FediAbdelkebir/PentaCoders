@@ -19,6 +19,7 @@ public interface OfferRepo extends JpaRepository<Offer, Integer>{
 	List<Offer> findByOrderByDateExpDesc();
 	List<Offer> findByOrderByPointAsc();
 	List<Offer> findByOrderByPointDesc();
+	
 	List<Offer> findByCategoryOrPoint(CategoryOffer category, int point);
 	
 	//List<Offer> findByUsersBadgePoint(int point);
