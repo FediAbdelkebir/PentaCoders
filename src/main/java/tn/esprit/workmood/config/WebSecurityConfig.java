@@ -3,20 +3,26 @@ package tn.esprit.workmood.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import lombok.RequiredArgsConstructor;
 import tn.esprit.workmood.validator.AuthenticationFilter;
+import tn.esprit.workmood.validator.AuthorizationFilter;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true)
+@RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
  
 	@Autowired
@@ -29,24 +35,33 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+    AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationManagerBean()) ;
+    authenticationFilter.setFilterProcessesUrl("/login");
+   
+    
+	http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+	
+	http.authorizeRequests().antMatchers(HttpMethod.POST ,"/login/**").permitAll();
+	http.authorizeRequests().antMatchers(HttpMethod.POST ,"/add-user/**").permitAll();
+	
+	http.authorizeRequests().antMatchers(HttpMethod.GET,"/get-all-users/**").hasAnyAuthority("ADMIN","EMPLOYEE");
+	http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/remove-user/**").hasAnyAuthority("MANAGER","ADMIN");
+	
+	
+	 http.authorizeRequests().anyRequest().authenticated();
+	//http.authorizeRequests().anyRequest().permitAll();
+	
+	http.addFilter(authenticationFilter);
+	http.addFilterBefore(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 	http.csrf().disable();
-	http.sessionManagement().sessionCreationPolicy(null);
-	http.authorizeRequests().anyRequest().permitAll();
-	http.addFilter(new AuthenticationFilter(authenticationManagerBean()));
+	
 	}
 	@Bean
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception{
 		return super.authenticationManagerBean();}
 		
-	/*.authorizeRequests() .antMatchers("/registration").permitAll()
-	.antMatchers("/remove-user/{user-id}").permitAll()
-	.antMatchers("/get**}").permitAll()
-	.antMatchers("/get-all-users").permitAll()
-	.anyRequest()
-	.authenticated()
-	.and()
-	.and().csrf().disable();*/
+	
 
 	
 	}

@@ -1,6 +1,5 @@
 package tn.esprit.workmood.services;
 
-import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,10 +74,11 @@ public class UserServiceImpl implements UserServiceInt{
 		
 		return userRepository.findAll();
 	}
+	
 	@Override
-	public User retriveUser(String username) {
+	public User retriveUser(Long idUser) {
 		
-		return userRepository.findByUsername(username);
+		return userRepository.findById(idUser).orElse(null);
 	}
 
 }

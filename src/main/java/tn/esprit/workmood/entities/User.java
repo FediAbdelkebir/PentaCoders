@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -46,7 +48,11 @@ public class User implements Serializable {
 	@JsonIgnore
 	private Set<Role> roles;
 	
+		
+		
+	}
+	
 	
 	
 
-}
+

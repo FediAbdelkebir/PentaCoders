@@ -17,6 +17,6 @@ public interface UserServiceInt {
 	void deleteUser(Long id);
 	
 	List<User> retrieveUsers();
-	User retriveUser(String username);
+	User retriveUser(Long idUser);
 
 }

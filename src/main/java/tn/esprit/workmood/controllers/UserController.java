@@ -2,6 +2,8 @@ package tn.esprit.workmood.controllers;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,12 +20,19 @@ import tn.esprit.workmood.services.UserServiceInt;
 import tn.esprit.workmood.validator.UserValidator;
 
 @RestController
+
 public class UserController {
 	@Autowired
     private UserServiceInt us;
+	
 
     @Autowired
     private UserValidator userValidator;
+    
+    
+    
+    
+
 	
 	@PostMapping(value = "/add-user/{idRole}")
 	@ResponseBody
@@ -60,11 +69,11 @@ public class UserController {
 		
 		return us.retrieveUsers();
 	}
-	@PutMapping(value="/get-user")
+	@PutMapping(value="/get-user/{idUser}")
 	@ResponseBody
-	User retrieveUser(String username){
+	User retrieveUser(@PathParam("idUser") Long idUser ){
 		
-		return us.retriveUser(username);
+		return us.retriveUser(idUser);
 	}
 	
 
