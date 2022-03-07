@@ -78,9 +78,15 @@ public class BadgeController {
 //AffecterBadgeToUser
 		@PostMapping("/AffecterBadgeToUser/{badge}/{userid}")
 		@ResponseBody
-		User FindBadgeById(@PathVariable("badge") int badge,@PathVariable("userid") int userid){
+		String FindBadgeById(@PathVariable("badge") int badge,@PathVariable("userid") int userid){
 			return BS.AffecterBadgeToUser(badge, userid);
 		}
+//AffecterBadgeToUser
+				@GetMapping("/DeleteBadgeFromUser/{badge}/{userid}")
+				@ResponseBody
+				String DeleteBadgeFromUser(@PathVariable("badge") int badge,@PathVariable("userid") int userid){
+					return BS.RemoveBadgeFromUser(badge, userid);
+				}
 //SortBadgesByIdDesc
 		@GetMapping("/SortBadgesByIdDesc")
 		@ResponseBody

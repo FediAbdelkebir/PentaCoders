@@ -27,8 +27,16 @@ public class EventServices {
 	UserRepository UserRepository;
 
 	//Ajout
-	public Event addEvent(Event c) {
-		return EventRepository.save(c);
+	public String addEvent(Event c) {
+		if(c.getDateStart().after(c.getDateEnd())) {
+			System.out.println( "Invalid Date Interval. Please Check That The Starting Date Is Before The Ending Date");
+			return "Invalid Date Interval. Please Check That The Starting Date Is Before The Ending Date";
+		}else {
+			 EventRepository.save(c);
+			 System.out.println( "Event Succefully Added.");
+			return "Event Succefully Added.";
+		}
+		
 	}
 	//Delete
 	public void deleteEvent(int id) {
@@ -44,7 +52,8 @@ public class EventServices {
 		event.setDateEnd(c.getDateEnd());
 		event.setDateStart(c.getDateStart());
 		event.setDescription(c.getDescription());
-		event.setNbrplace(c.getNbrplace());
+		event.setNpDisponible(c.getNpDisponible());
+		event.setNpMax(c.getNpMax());
 		event.setTitle(c.getTitle());
 		event.setTrouphy(c.isTrouphy());
 		event.setType(c.getType());
@@ -74,16 +83,34 @@ public class EventServices {
 	//Affecter User To Event
 		public String AffecterEventToUser (int idEvent, int userid) {
 			//l’affecter au centre commercial crée dans la question
-			
+			boolean check=true;
+			boolean placecheck=true;
 			Event Event=EventRepository.findById(idEvent).orElse(null);
 			User User=UserRepository.findById(userid).orElse(null);
 			if(Event.getUsers().contains(User)) {
 				System.out.println("User Already Joined This Event");
 				return "User Already Joined This Event";
 			}else {
-				Event.getUsers().add(User);
-				UserRepository.save(User);
-				return "Affecting User..";
+				for (Event E : User.getEvents()) {
+		            if(E.getDateStart().equals(Event.getDateStart())) {
+		            	check=false;
+		            	return "You Cant Join More Two Events With The Same Starting Date";
+		            }
+		        }
+				if(check==false) {
+	            	return "You Cant Join More Two Events With The Same Starting Date ";
+				}else { 
+					if(Event.getNpDisponible()<Event.getNpMax()) {
+						Event.setNpDisponible(Event.getNpDisponible()+1);
+						Event.getUsers().add(User);
+						UserRepository.save(User);
+						return "Affecting User..";
+				}else {
+					return "You Can't Join This Event Its Full.";
+				}
+					
+				}
+				
 						
 			}
 		}
@@ -97,6 +124,7 @@ public class EventServices {
 				System.out.println("User Already Not Part Of This Event");
 				return "User Already Not Part Of This Event";
 			}else {
+				Event.setNpDisponible(Event.getNpDisponible()-1);
 				Event.getUsers().remove(User);
 				UserRepository.save(User);
 				return "Removing User..";
@@ -228,12 +256,12 @@ public class EventServices {
 			return EventRepository.findAllByOrderByDateEndDesc();
 		}
 		//SortEventBy NbrPlace Asc
-		public List<Event> SortEventsByNbrplaceAsc(){
-			return EventRepository.findAllByOrderByNbrplaceAsc();
+		public List<Event> SortEventsByNbrplaceAsc(){ 
+			return EventRepository.findAllByOrderByNpDisponibleAsc();
 		}
 		//SortEventBy Nbrplace Desc
 		public List<Event> SortEventsByNbrplaceDesc(){
-			return EventRepository.findAllByOrderByNbrplaceDesc();
+			return EventRepository.findAllByOrderByNpDisponibleDesc();
 		}
 		//SortEventBy Type Asc
 		public List<Event> SortEventsByTypeAsc(){

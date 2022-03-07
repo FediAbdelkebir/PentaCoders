@@ -27,6 +27,7 @@ import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfWriter;
 
 import pidev.spring.entities.Badge;
+import pidev.spring.entities.Event;
 import pidev.spring.entities.User;
 import pidev.spring.repositories.BadgeRepository;
 
@@ -59,15 +60,46 @@ public class BadgeServices {
 	public List<Badge> listedesBadges() {
 		return BadgeRepository.findAll();
 	}
-	//Affecter Badge To User
-	public User AffecterBadgeToUser (int badge, int userid) {
+	//Affecter BADGE To USER
+	public String AffecterBadgeToUser (int idBadge, int userid) {
 		//l’affecter au centre commercial crée dans la question
-		Badge Badge=BadgeRepository.findById(badge).orElse(null);
+		String check="";
+		Badge Badge=BadgeRepository.findById(idBadge).orElse(null);
 		User User=UserRepository.findById(userid).orElse(null);
-		//User.setBadge(Badge);
-		//sendSimpleEmail(User.getEmailAddress().toString(), "objet", "UserAffected");
-		return UserRepository.save(User);
+		if(User.getAcquiredBadges().contains(Badge)) {
+			System.out.println("User Already Joined Have This Badge");
+			check="User Already Joined Have This Badge";
+			return check;
+		}else {
+			if(User.getPoints()<Badge.getCost()) {
+				System.out.println("You Cant Afford This Badge, Consider Joining Events To Win Enough Points.");
+				check="You Cant Afford This Badge, Consider Joining Events To Win Enough Points.";
+				return check;
+	
+			}else {
+				User.setPoints(User.getPoints()-Badge.getCost());
+				User.getAcquiredBadges().add(Badge);
+				UserRepository.save(User);
+				check="User Now Has The Badge";
+				return check;
+			}		
+		}
+	}
+	//Remove BADGE From USER
+	public String RemoveBadgeFromUser (int idBadge, int userid) {
+		//l’affecter au centre commercial crée dans la question
 		
+		Badge Badge=BadgeRepository.findById(idBadge).orElse(null);
+		User User=UserRepository.findById(userid).orElse(null);
+		if(!User.getAcquiredBadges().contains(Badge)) {
+			System.out.println("User Already Does Not Have This Badge");
+			return "User Already Does Not Have This Badge";
+		}else {
+			User.getAcquiredBadges().remove(Badge);
+			UserRepository.save(User);
+			return "Removed Badge";
+					
+		}
 	}
 	//SortBadgeBy Id Asc
 	public List<Badge> SortBadgesByIdAsc(){

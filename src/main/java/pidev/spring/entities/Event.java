@@ -54,9 +54,13 @@ public class Event implements Serializable{
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateEnd;
 	@Column 
-	private int nbrplace;
+	@ApiModelProperty(hidden = true)
+	private int npDisponible;
 	@Column 
-	private int nbrlikes;
+	private int npMax;
+	@ApiModelProperty(hidden = true)
+	@Column 
+	private int nbrlikes=0;
 	@Column 
 	private EventType type;
 	@Column
@@ -64,13 +68,13 @@ public class Event implements Serializable{
 	@Column 
 	private boolean trouphy;
 
-	@Column
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JsonIgnore
+	@ApiModelProperty(hidden = true)
 	private Set<User> users;
 	
-	@Column
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JsonIgnore 
+	@ApiModelProperty(hidden = true)
 	private Set<User> UsersLiked;
 }

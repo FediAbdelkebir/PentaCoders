@@ -45,14 +45,14 @@ void MailTest() {
 	//Add
 	@PostMapping("/AddEvent")
 	@ResponseBody //trajaa retour
-void AddEvent(@RequestBody Event event) {
+	String AddEvent(@RequestBody Event event) {
 		try {
 			ES.addEvent(event);
 			
 		}catch(Exception e){
 			System.out.println("An Error Occured While Adding an Event ");
 		}
-		
+		return "Event Succefully Added.";
 	}
 	
 	//Update

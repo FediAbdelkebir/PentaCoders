@@ -36,9 +36,9 @@ public interface EventRepository extends JpaRepository<Event, Integer>  {
 
 	List<Event> findAllByOrderByDateEndDesc();
 
-	List<Event> findAllByOrderByNbrplaceAsc();
+	List<Event> findAllByOrderByNpDisponibleAsc();
 
-	List<Event> findAllByOrderByNbrplaceDesc();
+	List<Event> findAllByOrderByNpDisponibleDesc();
 
 	List<Event> findAllByOrderByTypeAsc();
 

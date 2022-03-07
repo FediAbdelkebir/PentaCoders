@@ -47,15 +47,21 @@ public class User implements Serializable{
 	private String address;
 	@Column
 	private int PhoneNumber;
+	@Column
+	private int Points;
 
-	@Column 
+
 	@ManyToMany(mappedBy = "users" , cascade=CascadeType.ALL)
 	@JsonIgnore
 	private Set<Event> events;
 	
-	@Column
+
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JsonIgnore  
 	private Set<Event> LikedEvent;
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JsonIgnore  
+	private Set<Badge> AcquiredBadges;
 	
 }

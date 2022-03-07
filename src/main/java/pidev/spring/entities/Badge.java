@@ -32,4 +32,6 @@ public class Badge implements Serializable{
 	private String title;
 	@Column
 	private String description;
+	@Column
+	private int cost;
 }
