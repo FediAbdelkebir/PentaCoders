@@ -17,7 +17,6 @@ import pidev.spring.repositories.OfferRepo;
 import pidev.spring.repositories.UserRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DeadlockLoserDataAccessException;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -49,15 +48,7 @@ public class ServiceOffer implements IServiceOffer {
 		u.getOffers().add(o);
 		return offerRepo.save(o);
 	}
-
-	@Override
-	public void affectUserToOffer(int idOffer, Long idUser) {
-		Offer o = offerRepo.findById(idOffer).orElse(null);
-		User u = userRepo.findById(idUser).orElse(null);
-		o.getUsers().add(u);
-		offerRepo.save(o);
-	}
-
+	
 	@Override
 	public Offer updateOffer(Offer o) {
 		Offer offer = offerRepo.findById(o.getIdOffer()).orElse(null);
@@ -80,6 +71,14 @@ public class ServiceOffer implements IServiceOffer {
 	@Override
 	public void deleteOffer(int id) {
 		offerRepo.deleteById(id);
+	}
+
+	@Override
+	public void affectUserToOffer(int idOffer, Long idUser) {
+		Offer o = offerRepo.findById(idOffer).orElse(null);
+		User u = userRepo.findById(idUser).orElse(null);
+		o.getUsers().add(u);
+		offerRepo.save(o);
 	}
 
 	@Override
@@ -106,9 +105,14 @@ public class ServiceOffer implements IServiceOffer {
 	public List<Offer> retrieveByPointDesc() {
 		return offerRepo.findByOrderByPointDesc();
 	}
+	
+	@Override
+	public List<Offer> searchOffer(String title) {
+		return offerRepo.searchOffer(title);
+	}
 
 	@Override
-	public List<Offer> retrieveFullOffer(Long idUser) {
+	public List<Offer> retrieveFullOffer() {
 		List<Offer> full = new ArrayList<>();
 		List<Offer> offers = offerRepo.findAll();
 		for (Offer o : offers) {
@@ -127,7 +131,7 @@ public class ServiceOffer implements IServiceOffer {
 		
 		//tester si l'offre est encore valable
 		if (o.getPersonsNumber() < o.getLimitedNumber()) { 
-			// Comparer les points d'user et les points de l'offre
+			// comparer les points d'user et les points de l'offre
 			if (u.getBadge().getPoint() >= o.getPoint()) {
 				// création coupon PDF
 				response.setContentType("application/pdf");
@@ -193,20 +197,12 @@ public class ServiceOffer implements IServiceOffer {
 		document.close();
 	}
 
-	@Override
-	public List<Offer> searchOffer(String title) {
-		return offerRepo.searchOffer(title);
-	}
-
 	//@Override
 	@Scheduled(cron = "0 0 12 28 1/1  *")
 	//@Scheduled(cron = "*/60 * * * * *")
 	public void deleteExpiredOffer() {
-		// dateExp< new Date()
-		// foreach(findAll())
 		Date d = new Date();
 		List<Offer> offers = offerRepo.findAll();
-		System.out.println();
 		for(Offer o : offers){ 
 			if(o.getDateExp().after(d)){
 				offerRepo.delete(o);
@@ -231,42 +227,42 @@ public class ServiceOffer implements IServiceOffer {
 
 	@Override
 	public int nbrOfferByUser(Long idUser) {
-		// TODO Auto-generated method stub
-		return 0;
+		User u = userRepo.findById(idUser).orElse(null);
+		return offerRepo.findByUsers(u).size();
 	}
 
 	@Override
-	public int nbrOfferCategoryServices(Long idUser) {
+	public int nbrOfferCategoryServices() {
 		return offerRepo.findAllByCategory(CategoryOffer.SERVICES).size();
 	}
 
 	@Override
-	public int nbrOfferCategoryShopping(Long idUser) {
+	public int nbrOfferCategoryShopping() {
 		return offerRepo.findAllByCategory(CategoryOffer.SHOPPING).size();
 	}
 
 	@Override
-	public int nbrOfferCategoryHobbies(Long idUser) {
+	public int nbrOfferCategoryHobbies() {
 		return offerRepo.findAllByCategory(CategoryOffer.HOBBIES).size();
 	}
 
 	@Override
-	public int nbrOfferCategoryTraining(Long idUser) {
+	public int nbrOfferCategoryTraining() {
 		return offerRepo.findAllByCategory(CategoryOffer.TRAINING).size();
 	}
 
 	@Override
-	public int nbrOfferCategoryFood(Long idUser) {
+	public int nbrOfferCategoryFood() {
 		return offerRepo.findAllByCategory(CategoryOffer.FOOD).size();
 	}
 
 	@Override
-	public int nbrOfferCategoryHome(Long idUser) {
+	public int nbrOfferCategoryHome() {
 		return offerRepo.findAllByCategory(CategoryOffer.HOME).size();
 	}
 
 	@Override
-	public int nbrOfferCategoryOther(Long idUser) {
+	public int nbrOfferCategoryOther() {
 		return offerRepo.findAllByCategory(CategoryOffer.OTHER).size();
 	}
 

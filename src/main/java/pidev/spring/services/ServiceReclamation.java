@@ -8,9 +8,11 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import pidev.spring.entities.Offer;
 import pidev.spring.entities.Reclamation;
 import pidev.spring.entities.StatusReclamation;
 import pidev.spring.entities.User;
+import pidev.spring.repositories.OfferRepo;
 import pidev.spring.repositories.ReclamationRepo;
 import pidev.spring.repositories.UserRepo;
 
@@ -21,6 +23,8 @@ public class ServiceReclamation implements IServiceReclamation{
 	ReclamationRepo reclamationRepo;
 	@Autowired
 	UserRepo userRepo;
+	@Autowired
+	OfferRepo offerRepo;
 	@Autowired
 	JavaMailSender emailSender;
 	
@@ -125,31 +129,43 @@ public class ServiceReclamation implements IServiceReclamation{
 	}
 
 	@Override
-	public int nbrReclamationByUser(Long idUser){
-		return reclamationRepo.findByUserIdUser(idUser).size();
-		
-	}
-
-	@Override
-	public int nbrReclamationTypeWaiting(Long idUser) {
-		return reclamationRepo.findAllByStatus(StatusReclamation.WAITING).size();
-	}
-
-	@Override
-	public int nbrReclamationTypeProcessed(Long idUser) {
-		return reclamationRepo.findAllByStatus(StatusReclamation.PROCESSED).size();
-	}
-
-	@Override
-	public int nbrReclamationTypeInprogress(Long idUser) {
-		return reclamationRepo.findAllByStatus(StatusReclamation.INPROGRESS).size();
-	}
-
-	@Override
 	public List<Reclamation> retrieveReclamationsByUser(Long idUser) {
 		User u = userRepo.findById(idUser).orElse(null);
 		return reclamationRepo.findByUser(u);
 	}
 	
-	
+	@Override
+	public int nbrReclamationByUser(Long idUser){
+		return reclamationRepo.findByUserIdUser(idUser).size();
+	}
+
+	@Override
+	public int nbrReclamationTypeWaiting() {
+		return reclamationRepo.findAllByStatus(StatusReclamation.WAITING).size();
+	}
+
+	@Override
+	public int nbrReclamationTypeProcessed() {
+		return reclamationRepo.findAllByStatus(StatusReclamation.PROCESSED).size();
+	}
+
+	@Override
+	public int nbrReclamationTypeInprogress() {
+		return reclamationRepo.findAllByStatus(StatusReclamation.INPROGRESS).size();
+	}
+
+	@Override
+	public void verifReclamationOffer(Reclamation r, int idOffer, Long idUser) {
+		Offer o = offerRepo.findById(idOffer).orElse(null);
+		User u = userRepo.findById(idUser).orElse(null);
+		List<Offer> offers = offerRepo.findByUsers(u);
+		for(Offer offer : offers){
+			if(offer.equals(o)){
+				addReclamation(r, idUser);
+				System.out.println("L'user a utilsé cette offre, donc il peut ajouter une réclamation !");
+			}
+		}
+		
+	}
+
 }

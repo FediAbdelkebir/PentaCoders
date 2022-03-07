@@ -28,5 +28,4 @@ public interface ReclamationRepo extends CrudRepository<Reclamation, Integer>{
 	
 	List<Reclamation> findByUser(User u);
 	
-	
 }

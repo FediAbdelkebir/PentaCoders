@@ -26,8 +26,10 @@ public interface IServiceReclamation {
 	List<Reclamation> retrieveReclamationsByUser(Long idUser);
 	
 	int nbrReclamationByUser(Long idUser);
-	int nbrReclamationTypeWaiting(Long idUser);
-	int nbrReclamationTypeProcessed(Long idUser);
-	int nbrReclamationTypeInprogress(Long idUser);
+	int nbrReclamationTypeWaiting();
+	int nbrReclamationTypeProcessed();
+	int nbrReclamationTypeInprogress();
+	
+	void verifReclamationOffer(Reclamation r, int idOffer, Long idUser);
 	
 }

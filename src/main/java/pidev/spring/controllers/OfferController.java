@@ -111,11 +111,17 @@ public class OfferController {
 		return offerService.retrieveByPointDesc();
 	}
 
+	@GetMapping("/SearchOffer/{title}")
+	@ResponseBody
+	List<Offer> searchOffer(@PathVariable("title") String title) {
+		return offerService.searchOffer(title);
+	}
+	
 	@GetMapping("/ShowFullOffers")
 	@ResponseBody
 	@ApiOperation(value = "Show full offers")
-	List<Offer> retrieveFullOffer(Long idUser) {
-		return offerService.retrieveFullOffer(idUser);
+	List<Offer> retrieveFullOffer() {
+		return offerService.retrieveFullOffer();
 	}
 
 	@GetMapping("/GetOfferAndCoupon/{idUser}/{idOffer}")
@@ -124,13 +130,7 @@ public class OfferController {
 		offerService.getOfferAndCoupon(response, idOffer, idUser);
 	}
 
-	@GetMapping("/SearchOffer/{title}")
-	@ResponseBody
-	List<Offer> searchOffer(@PathVariable("title") String title) {
-		return offerService.searchOffer(title);
-	}
-	
-	@GetMapping("/SearchOfferSimilar/{id}/{idUser}")
+	@GetMapping("/SearchOffersSimilar/{id}/{idUser}")
 	@ResponseBody
 	List<Offer> retrieveOfferAndHisSimilar(@PathVariable int id, @PathVariable Long idUser) {
 		return offerService.retrieveOfferAndHisSimilar(id,idUser);
@@ -141,5 +141,54 @@ public class OfferController {
 	List<Offer> retrieveOffersByUser(@PathVariable Long idUser) {
 		return offerService.retrieveOffersByUser(idUser);
 	}
+	
+	@GetMapping("/NbrOfferByUser")
+	@ResponseBody
+	int nbrOfferByUser(@PathVariable Long idUser){
+		return offerService.nbrOfferByUser(idUser);
+	}
+	
+	@GetMapping("/NbrOfferCategoryServices")
+	@ResponseBody
+	int nbrOfferCategoryServices(){
+		return offerService.nbrOfferCategoryServices();
+	}
+	
+	@GetMapping("/NbrOfferCategoryShopping")
+	@ResponseBody
+	int nbrOfferCategoryShopping(){
+		return offerService.nbrOfferCategoryShopping();
+	}
+	
+	@GetMapping("/NbrOfferCategoryHobbies")
+	@ResponseBody
+	int nbrOfferCategoryHobbies(){
+		return offerService.nbrOfferCategoryHobbies();
+	}
+	
+	@GetMapping("/NbrOfferCategoryTraining")
+	@ResponseBody
+	int nbrOfferCategoryTraining(){
+		return offerService.nbrOfferCategoryTraining();
+	}
+	
+	@GetMapping("/NbrOfferCategoryFood")
+	@ResponseBody
+	int nbrOfferCategoryFood(){
+		return offerService.nbrOfferCategoryFood();
+	}
+	
+	@GetMapping("/NbrOfferCategoryHome")
+	@ResponseBody
+	int nbrOfferCategoryHome(){
+		return offerService.nbrOfferCategoryHome();
+	}
+	
+	@GetMapping("/NbrOfferCategoryOther")
+	@ResponseBody
+	int nbrOfferCategoryOther(){
+		return offerService.nbrOfferCategoryOther();
+	}
+	
 
 }
