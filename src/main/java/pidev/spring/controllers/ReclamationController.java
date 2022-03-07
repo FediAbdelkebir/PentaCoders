@@ -125,34 +125,6 @@ public class ReclamationController {
 		return reclamationService.retrieveReclamationsByUser(idUser);
 	}
 
-	@GetMapping("/CountReclamationByUser/{idUser}")
-	@ResponseBody
-	@ApiOperation(value="Count Reclamations")
-	int nbrReclamationByUser(@PathVariable Long idUser){
-		return reclamationService.nbrReclamationByUser(idUser);
-	}
-	
-	@GetMapping("/CountReclamationByTypeWaiting")
-	@ResponseBody
-	@ApiOperation(value="Count Reclamations : Waiting")
-	int nbrReclamationTypeWaiting(){
-		return reclamationService.nbrReclamationTypeWaiting();
-	}
-	
-	@GetMapping("/CountReclamationByTypeProcessed")
-	@ResponseBody
-	@ApiOperation(value="Count Reclamations : Processed")
-	int nbrReclamationTypeProcessed(){
-		return reclamationService.nbrReclamationTypeProcessed();
-	}
-	
-	@GetMapping("/CountReclamationByTypeInProgress")
-	@ResponseBody
-	@ApiOperation(value="Count Reclamations : Inprogress")
-	int nbrReclamationTypeInprogress(){
-		return reclamationService.nbrReclamationTypeInprogress();
-	}
-	
 	@PostMapping("/VerifReclamationOffer/{idOffer}/{idUser}")
 	@ResponseBody
 	void verifReclamationOffer(@RequestBody Reclamation r, @PathVariable int idOffer, @PathVariable Long idUser){
