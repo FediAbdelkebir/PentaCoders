@@ -42,13 +42,13 @@ public class ImpCommentService implements IcommentService {
 		c.setUser(u); 
 		c.setPost(p); 
 		BadWordFilter.getCensoredText(c.getDescription()); 
-		// char[] charsStars = new char[kelma.length()];
-	      //Arrays.fill(charsStars, '*');
-	      //final String stars = new String(charsStars);
-		 //System.out.println(c.getDescription());  
-	      //String test=kelma.replaceAll("(?i)" +c.getDescription(), stars); 
-	      //c.setDescription(test);
-	      //System.out.println(test); 
+		 char[] charsStars = new char[c.getDescription().length()];
+	      Arrays.fill(charsStars, '*');
+	      final String stars = new String(charsStars);
+		 System.out.println(c.getDescription());  
+	      String test=c.getDescription().replaceAll("(?i)" +c.getDescription(), stars); 
+	      c.setDescription(test);
+	      System.out.println(test); 
 		return commentrepo.save(c);  
 	} 
 	
