@@ -1,5 +1,6 @@
 package pidev.spring.services;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -112,6 +113,26 @@ public class EventServices {
 				}
 				
 						
+			}
+		}
+		//Event Winners
+		public void EventWinners () {
+		    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
+		    Date date = new Date(); 
+			List<Event> Event=EventRepository.findAll();
+			for(Event e:Event) {
+				if(date.after(e.getDateEnd())) {
+					System.out.println("Oui");
+					Set<User> Users = e.getUsers();
+					for(User u:Users) {
+						u.setPoints(u.getPoints()+e.getEventpoints());
+						u.setTrouphies(u.getTrouphies()+1);
+						UserRepository.save(u);
+						//Kick User when event ends
+						RemoveUserFromEvent(e.getId(),u.getId());
+						
+					}
+				}
 			}
 		}
 	//Remove User From Event

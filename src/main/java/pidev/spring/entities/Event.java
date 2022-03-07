@@ -67,7 +67,9 @@ public class Event implements Serializable{
 	private EventTags eventTags;
 	@Column 
 	private boolean trouphy;
-
+	@Column 
+	private int eventpoints;
+	
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JsonIgnore
 	@ApiModelProperty(hidden = true)

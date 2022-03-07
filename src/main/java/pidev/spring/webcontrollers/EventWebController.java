@@ -85,6 +85,14 @@ List<Event> Events(){
 		System.out.println(ES.listedesEvents());
 		return ES.listedesEvents();
 		}
+//Rewards
+	@PostMapping("/SendRewards")
+	@ResponseBody
+	public String SendRewards(){
+
+		ES.EventWinners();
+		return "Rewards sent";
+		}
 	
 	//FindById
 	@GetMapping("/FindEvent/{idEvent}")
