@@ -22,6 +22,7 @@ public interface ReviewRepository  extends JpaRepository<Review, Integer>  {
 	
 	List<Review> findByClassf(Classification classf);
 	
+	List<Review> findByUserIdUser(Long idUser);
 	List<Review> findByUser(User u); 
 
 	
@@ -31,5 +32,7 @@ public interface ReviewRepository  extends JpaRepository<Review, Integer>  {
 	
 	@Query("SELECT a FROM Review a WHERE a.SocieteName LIKE CONCAT('%',:string,'%')")
 	public List<Review> searchReviewSociete(@Param("string") String SocieteName);
+	
+	
 
 }

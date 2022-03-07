@@ -224,7 +224,9 @@ if (WordFiltre.getCensoredText(R.getContentReview())=="Bad"){
 		User u = userRepo.findById(idUser).orElse(null);		
 		return ReviewRepo.findByUser(u);
 	}
-		
+						/*Stattttttt*/
+	
+	
 	
 	
 }

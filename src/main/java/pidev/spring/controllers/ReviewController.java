@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.ApiOperation;
 import pidev.spring.entities.CategoryReview;
 import pidev.spring.entities.Classification;
 import pidev.spring.entities.Review;
@@ -141,5 +142,9 @@ public class ReviewController {
 						 List<Review> retrieveReviewByUser(@PathVariable Long idUser){
 							 return reveiwServ.retrieveReviewbyUser(idUser);
 						}
-	
+						
+										/* Statistique*/		
+						
+								
+						
 }
