@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -100,6 +101,11 @@ public class BadgeServices {
 			return "Removed Badge";
 					
 		}
+	}
+	//USER List BADGES
+	public Set<Badge> UserBadges (int userid) {
+		User User=UserRepository.findById(userid).orElse(null);
+		return User.getAcquiredBadges();
 	}
 	//SortBadgeBy Id Asc
 	public List<Badge> SortBadgesByIdAsc(){

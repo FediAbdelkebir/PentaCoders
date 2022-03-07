@@ -2,6 +2,7 @@ package pidev.spring.webcontrollers;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -86,6 +87,12 @@ public class BadgeController {
 				@ResponseBody
 				String DeleteBadgeFromUser(@PathVariable("badge") int badge,@PathVariable("userid") int userid){
 					return BS.RemoveBadgeFromUser(badge, userid);
+				}
+//ListBadgeUserid
+				@GetMapping("/UserBadges/{userid}")
+				@ResponseBody
+				Set<Badge> UserBadges(@PathVariable("userid") int userid){
+					return BS.UserBadges(userid);
 				}
 //SortBadgesByIdDesc
 		@GetMapping("/SortBadgesByIdDesc")
