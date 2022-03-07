@@ -43,7 +43,8 @@ public class Article  {
 	private Date dateCreation;  
 	private String Image;  
 	@Enumerated(EnumType.STRING) 
-	private ArticleCategory category;
+	private ArticleCategory category; 
+	private int nbLike;
 	
        @OneToMany(cascade = CascadeType.ALL, mappedBy="article") 
        @JsonIgnore
@@ -51,7 +52,10 @@ public class Article  {
        
        @ManyToOne(cascade = CascadeType.ALL) 
        @JsonIgnore
-       User user;   
+       User user; 
+       
+       @OneToMany(cascade = CascadeType.ALL, mappedBy="article")
+       private Set<LikeArticle> LikeArticles;
        
        //@OneToMany(cascade = CascadeType.ALL, mappedBy="article") 
    	  // @JsonIgnore
