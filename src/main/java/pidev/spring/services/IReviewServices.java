@@ -43,7 +43,7 @@ public interface IReviewServices {
 	
 	List<Review> retrieveReviewbyUser(Long idUser);
 	
-						/*Statttt*/
+						
 	
 
 

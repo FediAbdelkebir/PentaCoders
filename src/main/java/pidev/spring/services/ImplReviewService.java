@@ -83,9 +83,23 @@ public class ImplReviewService implements IReviewServices {
 		r.setSocieteName(null);
 		User u = userRepo.findById(idUser).orElse(null);
 		r.setUser(u);
-		sendSimpleEmail(u.getEmailAddress().toString(), "Review", "you have new Reveiw");
-		return ReviewRepo.save(r);
-	}
+		//String	w = WordFiltre.getCensoredText(r.getContentReview());
+				//System.out.println(w);
+				if (WordFiltre.getCensoredText(r.getContentReview())=="Bad"){
+					//System.out.println(w);
+					r.setClassf(Classification.Bad);
+				}
+					else 
+					
+					{
+						//System.out.println("Good");
+						r.setClassf(Classification.Good);
+					
+					}
+				sendSimpleEmail(u.getEmailAddress().toString(), "Review", "you have new Reveiw");
+					
+				return ReviewRepo.save(r);
+			}
 
 	@Override
 	public Review updateReviewEmployee(Review r, Long idUser) {
@@ -113,14 +127,15 @@ public class ImplReviewService implements IReviewServices {
 	public Review addReviewEmployeEtAffecter(Review R, Long idUser) {
 		R.setSocieteName(null);
 		User u = userRepo.findById(idUser).orElse(null);
-		R.setUser(u);
-		ReviewRepo.save(R);
+		
         List<Review> Review = new ArrayList<>();
         List<User> users = userRepo.findAll();
         
         for(User U : users){
         	System.out.println(U.getEmailAddress());
             if(R.getEmployeeName() .equals( U.getEmailAddress())){
+            	R.setUser(U);
+        		
             	//System.out.println(R.getContentReview());
             	//System.out.println(U.toString());
             }
@@ -140,6 +155,7 @@ public class ImplReviewService implements IReviewServices {
             
         }
 		sendSimpleEmail(u.getEmailAddress().toString(), "Review", "you have new Reveiw");
+		ReviewRepo.save(R);
         return R;
     }
 	
@@ -148,14 +164,15 @@ public class ImplReviewService implements IReviewServices {
 	public Review addReviewCompanyEtAffecter(Review R, Long idUser) {
 		R.setEmployeeName(null);
 		User u = userRepo.findById(idUser).orElse(null);
-		R.setUser(u);
-		ReviewRepo.save(R);
+		
         List<Review> Review = new ArrayList<>();
         List<User> users = userRepo.findAll();
         
         for(User U : users){
         	System.out.println(U.getEmailAddress());
             if(R.getSocieteName() .equals( U.getEmailAddress())){
+            	R.setUser(U);
+        		
             	//System.out.println(R.getContentReview());
             	//System.out.println(U.toString());
             }
@@ -174,6 +191,7 @@ if (WordFiltre.getCensoredText(R.getContentReview())=="Bad"){
             
         }
 		sendSimpleEmail(u.getEmailAddress().toString(), "Review", "you have new Reveiw ");
+		ReviewRepo.save(R);
         return R;
     }
 	
