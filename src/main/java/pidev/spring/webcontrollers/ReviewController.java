@@ -133,5 +133,13 @@ public class ReviewController {
 						 List<Review> retrieveByClassification(@RequestParam Classification classf){
 							 return reveiwServ.retrieveByClassification(classf);
 						}
+						
+			//afiiche Review by user 
+						
+						@GetMapping("/FindReviewByUsers/{idUser}") 
+					     @ResponseBody 
+						 List<Review> retrieveReviewByUser(@PathVariable Long idUser){
+							 return reveiwServ.retrieveReviewbyUser(idUser);
+						}
 	
 }

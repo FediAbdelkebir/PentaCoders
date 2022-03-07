@@ -11,6 +11,7 @@ import pidev.spring.entities.CategoryReview;
 import pidev.spring.entities.Classification;
 import pidev.spring.entities.Review;
 import pidev.spring.entities.TypeReview;
+import pidev.spring.entities.User;
 
 @Repository
 public interface ReviewRepository  extends JpaRepository<Review, Integer>  {
@@ -20,6 +21,8 @@ public interface ReviewRepository  extends JpaRepository<Review, Integer>  {
 	List<Review> findByReview(TypeReview review);
 	
 	List<Review> findByClassf(Classification classf);
+	
+	List<Review> findByUser(User u); 
 
 	
 	@Query("SELECT a FROM Review a WHERE a.EmployeeName LIKE CONCAT('%',:string,'%')")

@@ -41,7 +41,7 @@ public interface IReviewServices {
 	List<Review> retrieveByClassification(Classification classf); 
 
 	
-	//List<Review> retrievebyUser(Long idUser);
+	List<Review> retrieveReviewbyUser(Long idUser);
 
 
 }

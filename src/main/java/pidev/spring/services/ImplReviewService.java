@@ -218,6 +218,13 @@ if (WordFiltre.getCensoredText(R.getContentReview())=="Bad"){
 			return ReviewRepo.findByClassf(classf);
 		} 
 	//Affiche by userId
+
+	@Override
+	public List<Review> retrieveReviewbyUser(Long idUser) {
+		User u = userRepo.findById(idUser).orElse(null);		
+		return ReviewRepo.findByUser(u);
+	}
+		
 	
 	
 }
