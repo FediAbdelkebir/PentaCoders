@@ -1,4 +1,4 @@
-package pidev.spring.webcontrollers;
+package pidev.spring.controllers;
 
 import java.util.List;
 
