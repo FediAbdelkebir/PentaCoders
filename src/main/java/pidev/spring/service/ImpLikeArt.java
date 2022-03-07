@@ -76,18 +76,22 @@ public class ImpLikeArt implements ILikeArticle {
 			
 		}
 		if(x==1)
-			{ return "déjà";}
+			{ return "user a déja aimé cette pub";}
 		else { 
 			//System.out.println("test article : " + la.getArticle().getIdArticle()+", idAticle : "+idArticle);
 			//System.out.println("test user : "+ la.getUser().getIdUser() + ", idUser "+ idUser+ " .."+ la.getUser().getIdUser().equals(idUser));
+			
+			
 			l.setUser(u);
-			l.setArticle(a);
-			likeartrepo.save(l);
-			return "*************         "+x+"       *************"; 
+			l.setArticle(a); 
+			likeartrepo.save(l); 
+			a.setNbLike(a.getNbLike()+1); 
+			articlerepo.save(a);
+			return "User add a like";
 
 		}
 		
-			}
+			} 
 		
 }
 	
