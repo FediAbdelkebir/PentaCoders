@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,9 +41,15 @@ public class ImpCommentService implements IcommentService {
 		Post p=postrepo.findById(idPost).orElse(null); 
 		c.setUser(u); 
 		c.setPost(p); 
-		BadWordFilter.getCensoredText(c.getDescription());
+		BadWordFilter.getCensoredText(c.getDescription()); 
+		// char[] charsStars = new char[kelma.length()];
+	      //Arrays.fill(charsStars, '*');
+	      //final String stars = new String(charsStars);
 		 //System.out.println(c.getDescription());  
-		return commentrepo.save(c); 
+	      //String test=kelma.replaceAll("(?i)" +c.getDescription(), stars); 
+	      //c.setDescription(test);
+	      //System.out.println(test); 
+		return commentrepo.save(c);  
 	} 
 	
 	@Override
@@ -87,7 +94,7 @@ public class ImpCommentService implements IcommentService {
 	@Override
 	public Comment retrieveComm(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return commentrepo.findById(id).orElse(null);
 	}
 
 	@Override

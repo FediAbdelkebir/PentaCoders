@@ -1,6 +1,7 @@
 package pidev.spring.entities;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -43,11 +44,19 @@ public class Article  {
 	private String Image;  
 	@Enumerated(EnumType.STRING) 
 	private ArticleCategory category;
+	
        @OneToMany(cascade = CascadeType.ALL, mappedBy="article") 
        @JsonIgnore
        private Set<Comment> Comments; 
+       
        @ManyToOne(cascade = CascadeType.ALL) 
        @JsonIgnore
-       User user;     	
+       User user;   
+       
+       //@OneToMany(cascade = CascadeType.ALL, mappedBy="article") 
+   	  // @JsonIgnore
+   	  // private List<LikeArticle> likeArticles; 
+       
+      
 
 }

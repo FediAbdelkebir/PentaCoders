@@ -2,6 +2,7 @@ package pidev.spring.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -68,7 +69,9 @@ public class User implements Serializable {
 	private Set<Messagerie> messageries;
 	
 	@OneToOne
-	private Badge badge;
+	private Badge badge; 
+	
+	
 	
 	@ManyToMany(mappedBy = "users" , cascade=CascadeType.ALL)
 	@JsonIgnore
@@ -80,7 +83,12 @@ public class User implements Serializable {
 	
 	@OneToMany(mappedBy="user",cascade = CascadeType.ALL) 
 	@JsonIgnore
-	private Set<Comment> Comments;
+	private Set<Comment> Comments; 
+	
+	
+	//@OneToMany(cascade = CascadeType.ALL, mappedBy="user") 
+	//@JsonIgnore
+	//private List<LikeArticle> likeArticles; 
 	
 	
 

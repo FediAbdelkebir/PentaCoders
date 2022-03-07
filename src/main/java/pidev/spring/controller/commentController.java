@@ -53,7 +53,7 @@ public class commentController {
  	    return comment;
  	 } 
  	// add comment in article
- 	@PostMapping("/add-comment-inarticle/{idUser}")
+ 	@PostMapping("/add-comment-inarticle/{idUser}/{idArticle}")
  	@ResponseBody
  	Comment addcommentarticle(@RequestBody Comment c,@PathVariable Long idUser,@PathVariable Long idArticle)
  	{
@@ -62,7 +62,7 @@ public class commentController {
  	 }
 
    //http://localhost:8087/SpringMVC/centre/modify-article
-    @PutMapping("/modify-comment-inarticle/{idUser}")
+    @PutMapping("/modify-comment-inarticle/{idUser}/{idArticle}")
     @ResponseBody
      public Comment modifycommentInArticle(@RequestBody Comment c,@PathVariable Long idUser,@PathVariable Long idArticle) {
      return commentservice.UpdateCommInArticle(c, idUser,idArticle);
