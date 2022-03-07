@@ -85,6 +85,10 @@ public class User implements Serializable {
 	@JsonIgnore
 	private Set<Comment> Comments; 
 	
+	@OneToMany(mappedBy="user",cascade = CascadeType.ALL) 
+	@JsonIgnore
+	private Set<LikeArticle> likeArticle; 
+	
 	
 	//@OneToMany(cascade = CascadeType.ALL, mappedBy="user") 
 	//@JsonIgnore

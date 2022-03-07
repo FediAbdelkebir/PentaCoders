@@ -54,7 +54,8 @@ public class Article  {
        @JsonIgnore
        User user; 
        
-       @OneToMany(cascade = CascadeType.ALL, mappedBy="article")
+       @OneToMany(cascade = CascadeType.ALL, mappedBy="article") 
+       @JsonIgnore
        private Set<LikeArticle> LikeArticles;
        
        //@OneToMany(cascade = CascadeType.ALL, mappedBy="article") 

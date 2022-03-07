@@ -1,5 +1,7 @@
 package pidev.spring.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,11 +32,11 @@ public class LikeArticleController {
 	Articlerepo articlerepo ;
 
 
-	@PostMapping("/articlelike")
+	@PostMapping("/articlelike/{idArticle}/{idUser}")
 	@ResponseBody
 	public String addLike(@RequestBody LikeArticle l,@PathVariable Long idArticle,@PathVariable Long idUser) 
 	{
-	return likeservice.addLike(l, idArticle, idUser);
+	     return likeservice.addLike(l, idArticle, idUser);
 	} 
 	
 	/*
