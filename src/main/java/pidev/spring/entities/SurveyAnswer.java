@@ -1,6 +1,7 @@
 package pidev.spring.entities;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,17 +23,15 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class Badge implements Serializable{
+public class SurveyAnswer implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	//answer Ennum fiha faible moyenne bien TresBien Excellent
 	@Column
-	private String title;
-	@Column
-	private String description;
-	@Column 
-	private int cost;
-	/*@Column 
-	private int point;*/
+	private String answer;
+	
+	// cle mtaa  idquestion hnee
 	
 }

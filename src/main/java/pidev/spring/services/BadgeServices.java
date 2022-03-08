@@ -62,7 +62,7 @@ public class BadgeServices {
 		return BadgeRepository.findAll();
 	}
 	//Affecter BADGE To USER
-	public String AffecterBadgeToUser (int idBadge, int userid) {
+	public String AffecterBadgeToUser (int idBadge, Long userid) {
 		//l’affecter au centre commercial crée dans la question
 		String check="";
 		Badge Badge=BadgeRepository.findById(idBadge).orElse(null);
@@ -87,7 +87,7 @@ public class BadgeServices {
 		}
 	}
 	//Remove BADGE From USER
-	public String RemoveBadgeFromUser (int idBadge, int userid) {
+	public String RemoveBadgeFromUser (int idBadge, Long userid) {
 		//l’affecter au centre commercial crée dans la question
 		
 		Badge Badge=BadgeRepository.findById(idBadge).orElse(null);
@@ -103,7 +103,7 @@ public class BadgeServices {
 		}
 	}
 	//USER List BADGES
-	public Set<Badge> UserBadges (int userid) {
+	public Set<Badge> UserBadges (Long userid) {
 		User User=UserRepository.findById(userid).orElse(null);
 		return User.getAcquiredBadges();
 	}
@@ -139,7 +139,7 @@ public class BadgeServices {
 	public List<Badge> SortBadgesTop10ByOrderByTitleDesc(){
 			return BadgeRepository.findTop10ByOrderByTitleDesc();
 	}
-	public void PDFBadge(HttpServletResponse response, int idOffer, int idUser) throws DocumentException, IOException {
+	public void PDFBadge(HttpServletResponse response, int idOffer, Long idUser) throws DocumentException, IOException {
 		Badge o = BadgeRepository.findById(idOffer).orElse(null);
 		User u = UserRepository.findById(idUser).orElse(null);
 		

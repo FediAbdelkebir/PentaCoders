@@ -79,19 +79,19 @@ public class BadgeController {
 //AffecterBadgeToUser
 		@PostMapping("/AffecterBadgeToUser/{badge}/{userid}")
 		@ResponseBody
-		String FindBadgeById(@PathVariable("badge") int badge,@PathVariable("userid") int userid){
+		String FindBadgeById(@PathVariable("badge") int badge,@PathVariable("userid") Long userid){
 			return BS.AffecterBadgeToUser(badge, userid);
 		}
 //AffecterBadgeToUser
 				@GetMapping("/DeleteBadgeFromUser/{badge}/{userid}")
 				@ResponseBody
-				String DeleteBadgeFromUser(@PathVariable("badge") int badge,@PathVariable("userid") int userid){
+				String DeleteBadgeFromUser(@PathVariable("badge") int badge,@PathVariable("userid") Long userid){
 					return BS.RemoveBadgeFromUser(badge, userid);
 				}
 //ListBadgeUserid
 				@GetMapping("/UserBadges/{userid}")
 				@ResponseBody
-				Set<Badge> UserBadges(@PathVariable("userid") int userid){
+				Set<Badge> UserBadges(@PathVariable("userid") Long userid){
 					return BS.UserBadges(userid);
 				}
 //SortBadgesByIdDesc
@@ -144,7 +144,7 @@ public class BadgeController {
 		}
 		@GetMapping("/GetCoupon/{idUser}/{idBadge}")
 		@ResponseBody
-	    public void exportToPDF(HttpServletResponse response, @PathVariable int idBadge, @PathVariable int idUser) throws DocumentException, IOException {
+	    public void exportToPDF(HttpServletResponse response, @PathVariable int idBadge, @PathVariable Long idUser) throws DocumentException, IOException {
 	        BS.PDFBadge(response, idBadge, idUser);
 	    }
 }

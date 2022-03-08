@@ -82,7 +82,7 @@ public class EventServices {
 	}
 	
 	//Affecter User To Event
-		public String AffecterEventToUser (int idEvent, int userid) {
+		public String AffecterEventToUser (int idEvent, Long userid) {
 			//l’affecter au centre commercial crée dans la question
 			boolean check=true;
 			boolean placecheck=true;
@@ -131,14 +131,14 @@ public class EventServices {
 						}			
 						UserRepository.save(u);
 						//Kick User when event ends
-						RemoveUserFromEvent(e.getId(),u.getId());
+						RemoveUserFromEvent(e.getId(),u.getIdUser());
 						
 					}
 				}
 			}
 		}
 	//Remove User From Event
-		public String RemoveUserFromEvent (int idEvent, int userid) {
+		public String RemoveUserFromEvent (int idEvent, Long userid) {
 			//l’affecter au centre commercial crée dans la question
 			
 			Event Event=EventRepository.findById(idEvent).orElse(null);
@@ -155,7 +155,7 @@ public class EventServices {
 			}
 		}
 		//Like Event
-		public String LikeEvent (int idEvent, int userid) {
+		public String LikeEvent (int idEvent, Long userid) {
 			Event Event=EventRepository.findById(idEvent).orElse(null);
 			User User=UserRepository.findById(userid).orElse(null);
 				 
@@ -172,7 +172,7 @@ public class EventServices {
 				}
 		}
 		//DisLike Event
-		public String DisLikeEvent (int idEvent, int userid) {
+		public String DisLikeEvent (int idEvent, Long userid) {
 			Event Event=EventRepository.findById(idEvent).orElse(null);
 			User User=UserRepository.findById(userid).orElse(null);
 				 
@@ -189,7 +189,7 @@ public class EventServices {
 				}
 		}
 	//List Liked Events By User id
-		public Set<Event> LikedEventById (int userid) {
+		public Set<Event> LikedEventById (Long userid) {
 			User User=UserRepository.findById(userid).orElse(null);
 			return User.getLikedEvent();
 			
@@ -240,7 +240,7 @@ public class EventServices {
 	        return newList;
 	    }
 		//Find User Joined Events
-		public Set<Event> UserJoinedEvents (int userid) {
+		public Set<Event> UserJoinedEvents (Long userid) {
 			//l’affecter au centre commercial crée dans la question
 			User User=UserRepository.findById(userid).orElse(null);
 			return User.getEvents();

@@ -188,19 +188,19 @@ List<Event> Events(){
 	//AffecterEventToUser
 			@PostMapping("/AffecterEventToUser/{Event}/{userid}")
 			@ResponseBody
-			String FindEventById(@PathVariable("Event") int Event,@PathVariable("userid") int userid){
+			String FindEventById(@PathVariable("Event") int Event,@PathVariable("userid") Long userid){
 				return ES.AffecterEventToUser(Event, userid);
 			}
 	//RemoveUserFromEvent
 			@GetMapping("/RemoveUserFromEvent/{idEvent}/{idUser}")
 			@ResponseBody
-			String RemoveUserFromEvent(@PathVariable("idEvent") int idEvent,@PathVariable("idUser") int idUser){
+			String RemoveUserFromEvent(@PathVariable("idEvent") int idEvent,@PathVariable("idUser") Long idUser){
 				return ES.RemoveUserFromEvent(idEvent, idUser);
 			}
 	//RemoveUserFromEvent
 			@GetMapping("/UserJoinedEvents/{idUser}")
 			@ResponseBody
-			Set<Event> UserJoinedEvents(@PathVariable("idUser") int idUser){
+			Set<Event> UserJoinedEvents(@PathVariable("idUser") Long idUser){
 				return ES.UserJoinedEvents(idUser);
 			}
 	//Recommendations 
@@ -212,19 +212,19 @@ List<Event> Events(){
 	//LikeEvent 
 			@PostMapping("/LikeEvent/{idEvent}/{idUser}")
 			@ResponseBody
-			String  UserJoinedEvents(@PathVariable("idEvent") int idEvent,@PathVariable("idUser") int idUser){
+			String  UserJoinedEvents(@PathVariable("idEvent") int idEvent,@PathVariable("idUser") Long idUser){
 				return ES.LikeEvent(idEvent,idUser);
 			}
 	//DisLikeEvent 
 			@PostMapping("/DisLikeEvent/{idEvent}/{idUser}")
 			@ResponseBody
-			String  DislikeEvent(@PathVariable("idEvent") int idEvent,@PathVariable("idUser") int idUser){
+			String  DislikeEvent(@PathVariable("idEvent") int idEvent,@PathVariable("idUser") Long idUser){
 				return ES.DisLikeEvent(idEvent,idUser);
 			}
 	//LikedEventById 
 			@GetMapping("/LikedEventById/{idUser}")
 			@ResponseBody
-			Set<Event>  LikedEventById(@PathVariable("idUser") int idUser){
+			Set<Event>  LikedEventById(@PathVariable("idUser") Long idUser){
 				return ES.LikedEventById(idUser);
 			}
 	//LikedEventById 

@@ -1,17 +1,13 @@
 package pidev.spring.entities;
 
-import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -29,21 +25,19 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class Article implements Serializable{
+public class Comments {
 	@Id 
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id; 
-	@Column
-    private String Title; 
-	@Column
-    private String Description; 
-	@Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String description ;
+    private String likes ;
     @Temporal(TemporalType.DATE)
-    private Date date_creation; 
-	@Column
-    private String Image;  
-	
-	@ManyToOne(cascade=CascadeType.ALL)
-	private User user;
+    private Date DateComment ;
+
+    @ManyToOne(cascade=CascadeType.ALL)
+    private Article article; 
+    @ManyToOne(cascade=CascadeType.ALL)
+    private Post post;
+
 	
 }
