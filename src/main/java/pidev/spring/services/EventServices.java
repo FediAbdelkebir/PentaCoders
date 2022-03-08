@@ -126,7 +126,9 @@ public class EventServices {
 					Set<User> Users = e.getUsers();
 					for(User u:Users) {
 						u.setPoints(u.getPoints()+e.getEventpoints());
-						u.setTrouphies(u.getTrouphies()+1);
+						if(e.isTrouphy()) {
+							u.setTrouphies(u.getTrouphies()+1);	
+						}			
 						UserRepository.save(u);
 						//Kick User when event ends
 						RemoveUserFromEvent(e.getId(),u.getId());
