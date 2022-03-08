@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import pidev.spring.entities.Article;
 import pidev.spring.entities.Post;
 import pidev.spring.service.IpostService; 
 
@@ -67,6 +67,19 @@ public class PostController {
 		postservice.deletePost(id);
 	}
 	
+	@GetMapping("/retrieve-postbydateasc")
+    @ResponseBody
+ 	public List<Post> retrieveByDateasc() {
+	List<Post> listposts = postservice.retrieveByDateAsc();
+		 return listposts;
+    }    
+	
+	@GetMapping("/retrieve-postbydatedesc")
+    @ResponseBody
+ 	public List<Post> retrieveByDatedesc() {
+	List<Post> listpostss = postservice.retrieveByDateDesc();
+		 return listpostss;
+    }   
 	
 
 	

@@ -37,9 +37,9 @@ public class Post  {
 	private int idPost;      
 	private String contenu; 
 	@Temporal(TemporalType.DATE)
-	private Date creation_time; 
+	private Date timeCreation; 
 	private String Images; 
-	private int Likes; 
+	
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="post")  
 	@JsonIgnore

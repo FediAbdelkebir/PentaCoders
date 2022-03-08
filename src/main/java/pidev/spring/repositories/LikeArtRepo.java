@@ -17,7 +17,10 @@ public interface LikeArtRepo extends JpaRepository<LikeArticle, Long> {
 	<Optional> LikeArticle findAllById(Long id);
 	List<LikeArticle> findByUser(User u); 
 	
-	 List<LikeArticle> findByUserIdUser(Long idUser);
+	List<LikeArticle> findByUserIdUser(Long idUser); 
+	
+	//@Query("select l  from LikeArticle l  where ( l.user.idUser=:username and l.Article.idArticle=:username1)")
+	//public LikeArticle likeexist(@Param("username") Long username,@Param("username1") Long username1);
 	
 	//@Query("select l  from likeArticle l  where ( l.User.idUser=:firstname and l.Article.idArticle=:firstname1)")
 	//public LikeArticle likeexist(@Param("firstname") Long firstname,@Param("firstname1") Long firstname1); 

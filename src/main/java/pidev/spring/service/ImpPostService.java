@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import pidev.spring.entities.Article;
 import pidev.spring.entities.Post;
 import pidev.spring.entities.User;
 import pidev.spring.repositories.Postrepo;
@@ -54,6 +54,18 @@ public class ImpPostService implements IpostService {
 		// TODO Auto-generated method stub 
 		postrepo.deleteById(id);
 		
+	}
+
+	@Override
+	public List<Post> retrieveByDateAsc() {
+		// TODO Auto-generated method stub
+		return postrepo.findByOrderByTimeCreationAsc() ;
+	}
+
+	@Override
+	public List<Post> retrieveByDateDesc() {
+		// TODO Auto-generated method stub
+		return postrepo.findByOrderByTimeCreationDesc();
 	}
 
 	

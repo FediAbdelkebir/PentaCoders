@@ -91,7 +91,39 @@ public class ImpLikeArt implements ILikeArticle {
 
 		}
 		
-			} 
+			}
+
+	@Override
+	public List<LikeArticle> retrieveAllLike() {
+		// TODO Auto-generated method stub 
+		List<LikeArticle> likees = (List<LikeArticle>) likeartrepo.findAll();
+		return likees;
+	}
+
+	@Override
+	public String updateLike(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int nbLike(Long id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void deletePubLike(Long id) {
+		// TODO Auto-generated method stub
+		likeartrepo.deleteById(id);
+	}
+
+	@Override
+	public String deleteLike(Long iduser, Long idArticle) {
+		// TODO Auto-generated method stub
+		return null;
+	}  
+	
 		
 }
 	
