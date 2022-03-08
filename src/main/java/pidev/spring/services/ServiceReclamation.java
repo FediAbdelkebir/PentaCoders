@@ -133,26 +133,6 @@ public class ServiceReclamation implements IServiceReclamation{
 		User u = userRepo.findById(idUser).orElse(null);
 		return reclamationRepo.findByUser(u);
 	}
-	
-	@Override
-	public int nbrReclamationByUser(Long idUser){
-		return reclamationRepo.findByUserIdUser(idUser).size();
-	}
-
-	@Override
-	public int nbrReclamationTypeWaiting() {
-		return reclamationRepo.findAllByStatus(StatusReclamation.WAITING).size();
-	}
-
-	@Override
-	public int nbrReclamationTypeProcessed() {
-		return reclamationRepo.findAllByStatus(StatusReclamation.PROCESSED).size();
-	}
-
-	@Override
-	public int nbrReclamationTypeInprogress() {
-		return reclamationRepo.findAllByStatus(StatusReclamation.INPROGRESS).size();
-	}
 
 	@Override
 	public void verifReclamationOffer(Reclamation r, int idOffer, Long idUser) {
@@ -162,7 +142,10 @@ public class ServiceReclamation implements IServiceReclamation{
 		for(Offer offer : offers){
 			if(offer.equals(o)){
 				addReclamation(r, idUser);
-				System.out.println("L'user a utilsé cette offre, donc il peut ajouter une réclamation !");
+				System.out.println("L'user a utilisé cette offre, donc il peut ajouter une réclamation !");
+			}
+			else{
+				System.out.println("L'user n'a pas utilisé cette offre !");
 			}
 		}
 		

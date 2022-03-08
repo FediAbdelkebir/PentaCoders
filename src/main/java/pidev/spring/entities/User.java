@@ -46,6 +46,8 @@ public class User implements Serializable {
 	private String address;
 	@Column
 	private int phone;
+	@Column
+	private int Points;
 	
 	@ManyToMany(mappedBy = "users" , cascade=CascadeType.ALL)
     @JsonIgnore

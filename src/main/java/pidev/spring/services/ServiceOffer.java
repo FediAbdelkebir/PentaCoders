@@ -132,7 +132,7 @@ public class ServiceOffer implements IServiceOffer {
 		//tester si l'offre est encore valable
 		if (o.getPersonsNumber() < o.getLimitedNumber()) { 
 			// comparer les points d'user et les points de l'offre
-			if (u.getBadge().getPoint() >= o.getPoint()) {
+			if (u.getPoints() >= o.getPoint()) {
 				// création coupon PDF
 				response.setContentType("application/pdf");
 				DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
@@ -148,8 +148,8 @@ public class ServiceOffer implements IServiceOffer {
 				o.setPersonsNumber(o.getPersonsNumber() + 1);
 
 				// mise à jour les points du user
-				int up = u.getBadge().getPoint() - o.getPoint();
-				u.getBadge().setPoint(up);
+				int up = u.getPoints() - o.getPoint();
+				u.setPoints(up);
 				
 				// affecter user à l'offer
 				u.getOffers().add(o);
@@ -216,54 +216,13 @@ public class ServiceOffer implements IServiceOffer {
 		Offer o = offerRepo.findById(id).orElse(null);
 		User u = userRepo.findById(idUser).orElse(null);
 		retrieveOffer(id);
-		return offerRepo.findByCategoryOrPoint(o.getCategory(), u.getBadge().getPoint());
+		return offerRepo.findByCategoryOrPoint(o.getCategory(), u.getPoints());
 	}
 
 	@Override
 	public List<Offer> retrieveOffersByUser(Long idUser) {
 		User u = userRepo.findById(idUser).orElse(null);
 		return offerRepo.findByUsers(u);
-	}
-
-	@Override
-	public int nbrOfferByUser(Long idUser) {
-		User u = userRepo.findById(idUser).orElse(null);
-		return offerRepo.findByUsers(u).size();
-	}
-
-	@Override
-	public int nbrOfferCategoryServices() {
-		return offerRepo.findAllByCategory(CategoryOffer.SERVICES).size();
-	}
-
-	@Override
-	public int nbrOfferCategoryShopping() {
-		return offerRepo.findAllByCategory(CategoryOffer.SHOPPING).size();
-	}
-
-	@Override
-	public int nbrOfferCategoryHobbies() {
-		return offerRepo.findAllByCategory(CategoryOffer.HOBBIES).size();
-	}
-
-	@Override
-	public int nbrOfferCategoryTraining() {
-		return offerRepo.findAllByCategory(CategoryOffer.TRAINING).size();
-	}
-
-	@Override
-	public int nbrOfferCategoryFood() {
-		return offerRepo.findAllByCategory(CategoryOffer.FOOD).size();
-	}
-
-	@Override
-	public int nbrOfferCategoryHome() {
-		return offerRepo.findAllByCategory(CategoryOffer.HOME).size();
-	}
-
-	@Override
-	public int nbrOfferCategoryOther() {
-		return offerRepo.findAllByCategory(CategoryOffer.OTHER).size();
 	}
 
 }

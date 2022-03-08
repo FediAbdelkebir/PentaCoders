@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import pidev.spring.services.ServiceReclamation;
+import pidev.spring.services.Stat;
 
 @RestController
 @RequestMapping("/Stat")
@@ -17,35 +17,87 @@ import pidev.spring.services.ServiceReclamation;
 public class StatController {
 	
 	@Autowired
-	ServiceReclamation reclamationService;
+	Stat service;
 	
-
 	@GetMapping("/CountReclamationByUser/{idUser}")
 	@ResponseBody
 	@ApiOperation(value="Count Reclamations")
 	int nbrReclamationByUser(@PathVariable Long idUser){
-		return reclamationService.nbrReclamationByUser(idUser);
+		return service.nbrReclamationByUser(idUser);
 	}
 	
 	@GetMapping("/CountReclamationByTypeWaiting")
 	@ResponseBody
 	@ApiOperation(value="Count Reclamations : Waiting")
 	int nbrReclamationTypeWaiting(){
-		return reclamationService.nbrReclamationTypeWaiting();
+		return service.nbrReclamationTypeWaiting();
 	}
 	
 	@GetMapping("/CountReclamationByTypeProcessed")
 	@ResponseBody
 	@ApiOperation(value="Count Reclamations : Processed")
 	int nbrReclamationTypeProcessed(){
-		return reclamationService.nbrReclamationTypeProcessed();
+		return service.nbrReclamationTypeProcessed();
 	}
 	
 	@GetMapping("/CountReclamationByTypeInProgress")
 	@ResponseBody
 	@ApiOperation(value="Count Reclamations : Inprogress")
 	int nbrReclamationTypeInprogress(){
-		return reclamationService.nbrReclamationTypeInprogress();
+		return service.nbrReclamationTypeInprogress();
 	}
+	
+	/* Offer */
+	
+
+	@GetMapping("/NbrOfferByUser")
+	@ResponseBody
+	int nbrOfferByUser(@PathVariable Long idUser){
+		return service.nbrOfferByUser(idUser);
+	}
+	
+	@GetMapping("/NbrOfferCategoryServices")
+	@ResponseBody
+	int nbrOfferCategoryServices(){
+		return service.nbrOfferCategoryServices();
+	}
+	
+	@GetMapping("/NbrOfferCategoryShopping")
+	@ResponseBody
+	int nbrOfferCategoryShopping(){
+		return service.nbrOfferCategoryShopping();
+	}
+	
+	@GetMapping("/NbrOfferCategoryHobbies")
+	@ResponseBody
+	int nbrOfferCategoryHobbies(){
+		return service.nbrOfferCategoryHobbies();
+	}
+	
+	@GetMapping("/NbrOfferCategoryTraining")
+	@ResponseBody
+	int nbrOfferCategoryTraining(){
+		return service.nbrOfferCategoryTraining();
+	}
+	
+	@GetMapping("/NbrOfferCategoryFood")
+	@ResponseBody
+	int nbrOfferCategoryFood(){
+		return service.nbrOfferCategoryFood();
+	}
+	
+	@GetMapping("/NbrOfferCategoryHome")
+	@ResponseBody
+	int nbrOfferCategoryHome(){
+		return service.nbrOfferCategoryHome();
+	}
+	
+	@GetMapping("/NbrOfferCategoryOther")
+	@ResponseBody
+	int nbrOfferCategoryOther(){
+		return service.nbrOfferCategoryOther();
+	}
+	
+
 
 }

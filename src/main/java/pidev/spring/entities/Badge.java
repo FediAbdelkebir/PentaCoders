@@ -30,7 +30,7 @@ public class Badge implements Serializable{
 	private String Title;
 	@Column
 	private String Description;
-	@Column 
-	private int point;
+	/*@Column 
+	private int point;*/
 	
 }

@@ -33,13 +33,4 @@ public interface IServiceOffer {
 	List<Offer> retrieveOfferAndHisSimilar(int id, Long idUser);
 	List<Offer> retrieveOffersByUser(Long idUser);
 	
-	int nbrOfferByUser(Long idUser);
-	int nbrOfferCategoryServices();
-	int nbrOfferCategoryShopping();
-	int nbrOfferCategoryHobbies();
-	int nbrOfferCategoryTraining();
-	int nbrOfferCategoryFood();
-	int nbrOfferCategoryHome();
-	int nbrOfferCategoryOther();
-	
 }
