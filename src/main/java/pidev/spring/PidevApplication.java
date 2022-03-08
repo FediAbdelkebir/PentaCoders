@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationEn
 public class PidevApplication {
 
 	public static void main(String[] args) {
-		String url = "jdbc:mysql://localhost:3306/WorkMood?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+		String url = "jdbc:mysql://localhost:3306/work-mood?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 		String username = "root";
 		String password = "";
 
