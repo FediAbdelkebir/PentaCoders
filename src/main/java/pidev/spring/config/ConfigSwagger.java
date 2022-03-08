@@ -9,8 +9,10 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
+@EnableSwagger2
 public class ConfigSwagger {
 	@Bean
 	public Docket api() {
@@ -20,7 +22,7 @@ public class ConfigSwagger {
 				.paths(PathSelectors.any())
 				.build().apiInfo(apiInfo());
 		//  http://localhost:8089/SpringMVC/v2/api-docs
-		//  http://localhost:8089/WorkMood/swagger-ui/index.html
+		  //http:localhost:8089/WorkMood/swagger-ui/index.html
 	}
 	
 	private ApiInfo apiInfo () {

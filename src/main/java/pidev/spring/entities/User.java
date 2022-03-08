@@ -1,17 +1,21 @@
 package pidev.spring.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
+
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -35,13 +39,11 @@ public class User implements Serializable{
 	@Column
 	private String firstname;
 	@Column
-	private String lastname;
+	private String name;
 	@Column
 	private String emailAddress;
 	@Column
-	private String password;
-	@Column
-	private Date birthDate;
+	private String username;
 	@Column
 	private float salary;
 	@Column
@@ -52,10 +54,14 @@ public class User implements Serializable{
 	private int Points;
 	@Column
 	private int Trouphies;
-	
+	@Temporal(TemporalType.DATE)
+	private Date subDate;
+	private String passwd;
+	private String confirmPasswd;
+	private boolean enabled;
 
-	@ManyToMany(mappedBy = "users" , cascade=CascadeType.ALL)
-    @JsonIgnore
+	@ManyToMany(mappedBy="users",cascade = CascadeType.ALL , fetch= FetchType.EAGER)
+	@JsonIgnore
 	private Set<Role> roles;
 	
 
