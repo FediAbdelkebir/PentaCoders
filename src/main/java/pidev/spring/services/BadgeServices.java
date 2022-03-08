@@ -179,7 +179,7 @@ public class BadgeServices {
         font2.setSize(20);
         font2.setColor(Color.BLACK);
        
-        Paragraph p1 = new Paragraph(user.getFirstname() + " " + user.getLastname(), font2);
+        Paragraph p1 = new Paragraph(user.getFirstname() + " " + user.getUsername(), font2);
         Paragraph p2 = new Paragraph(String.valueOf(Badge.getTitle()), font2);
         Paragraph p3 = new Paragraph(Badge.getDescription(), font2);
         Paragraph p4 = new Paragraph("Expiration Date : "+s, font2);

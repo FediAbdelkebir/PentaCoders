@@ -6,6 +6,8 @@ import java.sql.SQLException;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class PidevApplication {
@@ -24,6 +26,10 @@ public class PidevApplication {
 		    throw new IllegalStateException("Cannot connect the database!", e);
 		}
 		SpringApplication.run(PidevApplication.class, args);
+	}
+	@Bean
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 
 }

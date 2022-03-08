@@ -1,11 +1,13 @@
 package pidev.spring.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,8 +19,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-
 @Entity
 @Getter
 @Setter
@@ -26,15 +26,14 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Role implements Serializable {
 	
-	@Id
+	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column
-    private Name name;
+	@Enumerated(EnumType.STRING)
+	private Name name;
 	
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JsonIgnore
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<User> users;
-   
- 
+
 }

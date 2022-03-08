@@ -184,7 +184,7 @@ public class ServiceOffer implements IServiceOffer {
 		font2.setSize(20);
 		font2.setColor(Color.BLACK);
 
-		Paragraph p1 = new Paragraph(user.getFirstname() + " " + user.getLastname(), font2);
+		Paragraph p1 = new Paragraph(user.getFirstname() + " " + user.getUsername(), font2);
 		Paragraph p2 = new Paragraph("Address : " + offer.getAddress(), font2);
 		Paragraph p3 = new Paragraph("Category : " + offer.getCategory().toString(), font2);
 		Paragraph p4 = new Paragraph("Expiration Date : " + s, font2);
