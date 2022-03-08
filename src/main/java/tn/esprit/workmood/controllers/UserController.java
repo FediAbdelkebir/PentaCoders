@@ -57,6 +57,33 @@ public class UserController {
 		us.deleteUser(id);
 		System.out.println("user removed");
 	}
+	@DeleteMapping("/remove-all-users")
+	@ResponseBody
+	public String deleteAllusers(){
+		return us.deleteAllUsers();
+	}
+	@PutMapping("/disable-account/{user-id}")
+	@ResponseBody
+	public void DisableUser(@PathVariable("user-id") Long id) {
+		us.disableAccount(id);
+		System.out.println("Account Disabled");
+	}
+	@GetMapping(value="/get-Admins")
+	@ResponseBody
+	int findByUserRoleAdmin(){
+		return us.findByUserRoleAdmin();
+	}
+	@GetMapping(value="/get-Employees")
+	@ResponseBody
+	int findByUserRoleEmployee(){
+		return us.findByUserRoleEmployee();
+		}
+	@GetMapping(value="/get-Managers")
+	@ResponseBody
+	int findByUserRoleManager()
+	{
+		return us.findByUserRoleManager();
+	}
     
 	
 	

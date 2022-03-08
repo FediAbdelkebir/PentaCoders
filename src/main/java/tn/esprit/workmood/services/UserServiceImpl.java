@@ -166,5 +166,23 @@ public class UserServiceImpl implements UserServiceInt {
 		
 	}
 
+	@Override
+	public User disableAccount(Long id) {
+		User u = userRepository.findById(id).orElse(null);
+		u.setEnabled(false);
+		userRepository.save(u);
+		return u;
+	}
+	
+	public String deleteAllUsers(){
+		List <User> users = retrieveUsers();
+		for(User u : users){
+			
+			deleteUser(u.getId());
+			
+		}
+		return "Uesers removed";
+	}
+
 
 }

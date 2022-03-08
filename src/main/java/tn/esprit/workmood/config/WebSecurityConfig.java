@@ -39,18 +39,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     authenticationFilter.setFilterProcessesUrl("/login");
     
     
-   
-    
 	http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-	
+	//POSET Methods
 	http.authorizeRequests().antMatchers(HttpMethod.POST ,"/login/**").permitAll();
 	http.authorizeRequests().antMatchers(HttpMethod.POST ,"/mail/**").permitAll();
 	http.authorizeRequests().antMatchers(HttpMethod.POST ,"/add-user/{idRole}/**").permitAll();
+	http.authorizeRequests().antMatchers(HttpMethod.POST ,"/disable-account/{user-id}/**").hasAuthority("ADMIN");
 	
+	
+	//GET Methods
 	http.authorizeRequests().antMatchers(HttpMethod.GET,"/get-user-by-email/**").hasAnyAuthority("ADMIN","EMPLOYEE");
 	http.authorizeRequests().antMatchers(HttpMethod.GET,"/get-all-users/**").hasAnyAuthority("ADMIN","EMPLOYEE");
+	http.authorizeRequests().antMatchers(HttpMethod.GET,"/get-Admins/**").hasAuthority("ADMIN");
+	http.authorizeRequests().antMatchers(HttpMethod.GET,"/get-Employees/**").hasAuthority("ADMIN");
+	http.authorizeRequests().antMatchers(HttpMethod.GET,"/get-Managers/**").hasAuthority("ADMIN");
 	
 	
+	//DELETE Methods
 	http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/remove-user/**").hasAnyAuthority("MANAGER","ADMIN");
 	
 	

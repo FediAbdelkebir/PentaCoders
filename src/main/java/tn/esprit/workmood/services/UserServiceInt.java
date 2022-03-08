@@ -26,6 +26,8 @@ public interface UserServiceInt {
 	int findByUserRoleAdmin();
 	int findByUserRoleEmployee();
 	int findByUserRoleManager();
+	String deleteAllUsers();
+	User disableAccount(Long id);
 	
 
 }

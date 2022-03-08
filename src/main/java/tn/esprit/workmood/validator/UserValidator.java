@@ -41,6 +41,10 @@ public class UserValidator implements Validator {
             errors.rejectValue("passwd", "Size.user.password");
         }
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailAddress", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "enabled", "NotEmpty");
+        if (user.isEnabled()!= true) {
+            errors.rejectValue("enabled", "enable account!");
+        }
         
         if (matcher.find()==false) {
             errors.rejectValue("emailAddress", "EmailAddress.not.valid");
