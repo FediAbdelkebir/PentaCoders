@@ -178,7 +178,7 @@ public class UserServiceImpl implements UserServiceInt {
 		List <User> users = retrieveUsers();
 		for(User u : users){
 			
-			deleteUser(u.getId());
+			deleteUser(u.getIdUser());
 			
 		}
 		return "Uesers removed";

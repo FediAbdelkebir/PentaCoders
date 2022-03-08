@@ -33,9 +33,9 @@ public class User implements Serializable {
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long idUser;
 	private String username;
-	
+	private float salary;
 	private String emailAddress;
 	private String name;
 	private String firstName;
@@ -44,6 +44,8 @@ public class User implements Serializable {
 	private String passwd;
 	private String confirmPasswd;
 	private boolean enabled;
+	private String address;
+	
 	
 	@ManyToMany(mappedBy="users",cascade = CascadeType.ALL , fetch= FetchType.EAGER)
 	@JsonIgnore
