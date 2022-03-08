@@ -39,14 +39,22 @@ public class Post  {
 	@Temporal(TemporalType.DATE)
 	private Date timeCreation; 
 	private String Images; 
+	private int nbLike;
 	
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="post")  
 	@JsonIgnore
     private Set<Comment> Comments; 
 	
+	
 	@ManyToOne(cascade = CascadeType.ALL)  
 	@JsonIgnore
-     User user;
+     User user; 
+	
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="post") 
+    @JsonIgnore
+    private Set<ReactionPost> ReactionPosts; 
+	
 	
 }

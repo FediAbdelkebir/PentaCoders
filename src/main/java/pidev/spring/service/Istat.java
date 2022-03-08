@@ -8,6 +8,8 @@ public interface Istat {
 		int nbreArticleByCategorySel(); 
 		int nbreArticleByCategoryHealth(); 
 		int nbreArticleByCategoryEnt();
-		int nbreLikeByUser(Long idUser);
+		int nbreLikeByUser(Long idUser);  
+	
+		//int nbreLikeByUserbycat(Long idUser,Long idArticle);
 		
 }

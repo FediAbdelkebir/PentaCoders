@@ -73,14 +73,18 @@ public class BadWordFilter {
 	    String inputToReturn = input;
 	    for (String swearWord : badWordsFound) { 
 	    	System.out.println(swearWord + " qualified as a bad word in Your comment");
-	      //char[] charsStars = new char[swearWord.length()];
-	      //Arrays.fill(charsStars, '*');
-	      //final String stars = new String(charsStars);
+	       char[] charsStars = new char[swearWord.length()];
+	        Arrays.fill(charsStars, '*');
+	       final String stars = new String(charsStars);
+	      // System.out.println("stars : "+ stars);
 
 	      // The "(?i)" is to make the replacement case insensitive.
-	      //inputToReturn = inputToReturn.replaceAll("(?i)" + swearWord, stars);
+	       inputToReturn = inputToReturn.replaceAll("(?i)" + swearWord, stars);
+	       //inputToReturn = stars;
+	      // System.out.println("inputToReturn : " + inputToReturn);
 	    }
-
+	   // System.out.println("inputToReturn final  : " + inputToReturn);
+	    //return stars;
 	    return inputToReturn;
 	  } // end getCensoredTextCensoredText 
 	  

@@ -75,7 +75,7 @@ public class StatController {
 	@ResponseBody
 	@ApiOperation(value="Count like user")
 	int nbrLikeuser(@PathVariable Long idUser) {
-	return statserv.nbreLikeByUser(idUser);
+	return statserv.nbreLikeByUser(idUser); }
 	
 	
 } 
@@ -84,4 +84,4 @@ public class StatController {
 	
 	
 
-}
+

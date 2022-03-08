@@ -69,5 +69,13 @@ public class Stat implements Istat {
 	}
 
 
+
+	
+	//public int nbreLikeByUserbycat(Long idUser) {
+		// TODO Auto-generated method stub
+		//return likeRepo.findByUserIdUserAndArticleCategory(idUser);
+	//} 
+
+
 	
 }

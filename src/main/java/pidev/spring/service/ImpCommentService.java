@@ -42,13 +42,16 @@ public class ImpCommentService implements IcommentService {
 		c.setUser(u); 
 		c.setPost(p); 
 		BadWordFilter.getCensoredText(c.getDescription()); 
-		 char[] charsStars = new char[c.getDescription().length()];
-	      Arrays.fill(charsStars, '*');
-	      final String stars = new String(charsStars);
-		 System.out.println(c.getDescription());  
-	      String test=c.getDescription().replaceAll("(?i)" +c.getDescription(), stars); 
-	      c.setDescription(test);
-	      System.out.println(test); 
+		String newDescription = BadWordFilter.getCensoredText(c.getDescription()); 
+		//System.out.println(BadWordFilter.getCensoredText(c.getDescription()));
+		  //char[] charsStars = new char[c.getDescription().length()];
+	      //Arrays.fill(charsStars, '*');
+	      //final String stars = new String(charsStars);
+		 //System.out.println(c.getDescription());  
+	      //String test=c.getDescription().replaceAll("(?i)" +c.getDescription(), stars); 
+	      //c.setDescription(test);
+	     // System.out.println(test); 
+		c.setDescription(newDescription);
 		return commentrepo.save(c);  
 	} 
 	
@@ -59,7 +62,10 @@ public class ImpCommentService implements IcommentService {
 		User u =userRepo.findById(idUser).orElse(null); 
 		Article a =articlerepo.findById(idArticle).orElse(null); 
 		c.setUser(u);
-		c.setArticle(a);
+		c.setArticle(a); 
+		BadWordFilter.getCensoredText(c.getDescription()); 
+		String newDescription = BadWordFilter.getCensoredText(c.getDescription()); 
+		c.setDescription(newDescription);
 		return commentrepo.save(c);
 	} 
 
