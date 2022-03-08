@@ -1,12 +1,13 @@
 package pidev.spring.entities;
-
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,28 +25,43 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@Entity 
+@Getter 
+@Setter 
+@AllArgsConstructor 
+@NoArgsConstructor 
+@ToString 
 @EqualsAndHashCode
-public class Article implements Serializable{
+public class Article  {
+
 	@Id 
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id; 
-	@Column
-    private String Title; 
-	@Column
-    private String Description; 
-	@Column
-    @Temporal(TemporalType.DATE)
-    private Date date_creation; 
-	@Column
-    private String Image;  
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	private Long idArticle; 
+	private String title; 
+	private String Description; 
+	@Temporal(TemporalType.DATE)
+	private Date dateCreation;  
+	private String Image;  
+	@Enumerated(EnumType.STRING) 
+	private ArticleCategory category; 
+	private int nbLike;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	private User user;
-	
+       @OneToMany(cascade = CascadeType.ALL, mappedBy="article") 
+       @JsonIgnore
+       private Set<Comment> Comments; 
+       
+       @ManyToOne(cascade = CascadeType.ALL) 
+       @JsonIgnore
+       User user; 
+       
+       @OneToMany(cascade = CascadeType.ALL, mappedBy="article") 
+       @JsonIgnore
+       private Set<LikeArticle> LikeArticles;
+       
+       //@OneToMany(cascade = CascadeType.ALL, mappedBy="article") 
+   	  // @JsonIgnore
+   	  // private List<LikeArticle> likeArticles; 
+       
+      
+
 }

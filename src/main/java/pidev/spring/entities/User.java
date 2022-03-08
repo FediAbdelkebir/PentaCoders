@@ -88,6 +88,13 @@ public class User implements Serializable{
 	
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JsonIgnore  
-	private Set<Badge> AcquiredBadges;
+	private Set<Badge> AcquiredBadges; 
+	@OneToMany(mappedBy="user",cascade = CascadeType.ALL) 
+	@JsonIgnore
+	private Set<Comment> Comments; 
+	
+	@OneToMany(mappedBy="user",cascade = CascadeType.ALL) 
+	@JsonIgnore
+	private Set<LikeArticle> likeArticle; 
 	
 }

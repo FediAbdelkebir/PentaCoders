@@ -26,6 +26,15 @@ public interface IStat {
 		
 		//Survey
 		int nbreSurveyByUser(Long idUser);
-		int nbreQuestionBySurveyAnswer(int surveyAnswer);
+		int nbreQuestionBySurveyAnswer(int surveyAnswer); 
+		
+		//article 
+		int nbreArticleByUser(Long idUser);
+        int nbreArticleByCategoryeduc(); 
+        int nbreArticleByCategoryTech(); 
+        int nbreArticleByCategorySel(); 
+        int nbreArticleByCategoryHealth(); 
+        int nbreArticleByCategoryEnt();
+        int nbreLikeByUser(Long idUser);
 	
 }

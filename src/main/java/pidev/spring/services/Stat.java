@@ -3,11 +3,14 @@ package pidev.spring.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import pidev.spring.entities.ArticleCategory;
 import pidev.spring.entities.CategoryOffer;
 import pidev.spring.entities.CategoryReview;
 import pidev.spring.entities.StatusReclamation;
 import pidev.spring.entities.TypeReview;
 import pidev.spring.entities.User;
+import pidev.spring.repositories.Articlerepo;
+import pidev.spring.repositories.LikeArtRepo;
 import pidev.spring.repositories.OfferRepo;
 import pidev.spring.repositories.ReclamationRepo;
 import pidev.spring.repositories.ReviewRepository;
@@ -27,7 +30,12 @@ public class Stat implements IStat{
 	@Autowired 
 	ReviewRepository ReviewRepo;
 	@Autowired 
-	SurveyRepository SurveyRepo;
+	SurveyRepository SurveyRepo; 
+	@Autowired 
+    Articlerepo articlerepo;
+   
+    @Autowired 
+    LikeArtRepo likeRepo;
 
 	/*	Reclamation */
 	
@@ -133,7 +141,59 @@ public class Stat implements IStat{
 	public int nbreQuestionBySurveyAnswer(int SurveyAnswer) {
 	
 		return SurveyRepo.findBySurveyAnswerId(SurveyAnswer).size();
-	}
+	} 
+	 @Override
+	    public int nbreArticleByUser(Long idUser) {
+	        // TODO Auto-generated method stub
+	        return articlerepo.findByUserIdUser(idUser).size();
+	    }
+
+	    @Override
+	    public int nbreLikeByUser(Long idUser) {
+	        // TODO Auto-generated method stub
+	        return likeRepo.findByUserIdUser(idUser).size();
+	    } 
+
+
+
+
+	    @Override
+	    public int nbreArticleByCategoryeduc() {
+	        // TODO Auto-generated method stub
+	        return articlerepo.findByCategory(ArticleCategory.Education).size();
+	    }
+
+
+
+	    @Override
+	    public int nbreArticleByCategoryTech() {
+	        // TODO Auto-generated method stub
+	        return articlerepo.findByCategory(ArticleCategory.Technology).size();
+	    }
+
+
+
+
+	    @Override
+	    public int nbreArticleByCategoryHealth() {
+	        // TODO Auto-generated method stub
+	        return articlerepo.findByCategory(ArticleCategory.Health).size();
+	    }
+
+	    @Override
+	    public int nbreArticleByCategoryEnt() {
+	        // TODO Auto-generated method stub
+	        return articlerepo.findByCategory(ArticleCategory.Entertainment).size();
+	    }
+
+	    @Override
+	    public int nbreArticleByCategorySel() {
+	        // TODO Auto-generated method stub
+	        return articlerepo.findByCategory(ArticleCategory.Selfdeveolpment).size();
+	    }
+
+
+
 	
 	
 }

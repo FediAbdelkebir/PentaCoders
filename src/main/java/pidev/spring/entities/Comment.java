@@ -1,20 +1,17 @@
 package pidev.spring.entities;
-
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
-import javax.persistence.CascadeType;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -22,39 +19,33 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
 @Entity 
 @Getter 
 @Setter 
 @AllArgsConstructor 
 @NoArgsConstructor 
 @ToString 
-@EqualsAndHashCode 
-public class Post  { 
-	
-	@Id
+@EqualsAndHashCode
+public class Comment   {
+
+	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idPost;      
-	private String contenu; 
+	private Long id;       
+	private String description ;  
+	private String likes ;   
 	@Temporal(TemporalType.DATE)
-	private Date timeCreation; 
-	private String Images; 
-	private int nbLike;
-	
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="post")  
+	private Date DateComment ;
+    
+	@ManyToOne 
 	@JsonIgnore
-    private Set<Comment> Comments; 
-	
-	
-	@ManyToOne(cascade = CascadeType.ALL)  
+	Article article; 
+	@ManyToOne 
 	@JsonIgnore
-     User user; 
+	Post post; 
+	@ManyToOne
+	@JsonIgnore
+	User user;
 	
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="post") 
-    @JsonIgnore
-    private Set<ReactionPost> ReactionPosts; 
 	
 	
 }
