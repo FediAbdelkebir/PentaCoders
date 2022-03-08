@@ -28,10 +28,6 @@ import tn.esprit.workmood.validator.UserValidator;
 public class UserController {
 	@Autowired
     private UserServiceInt us;
-	
-	
-	
-
     @Autowired
     private UserValidator userValidator;
     
@@ -95,9 +91,7 @@ public class UserController {
 	public ResponseEntity<?> sendMail(@RequestParam String email ) {
 		
 		try{
-			
-			
-			
+	
 			User u = us.resetPasswd(email);
 			if (u == null){
 			return ResponseEntity.ok("user not found");

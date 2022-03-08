@@ -2,6 +2,7 @@ package tn.esprit.workmood.services;
 
 import java.util.List;
 
+import tn.esprit.workmood.entities.Name;
 import tn.esprit.workmood.entities.Role;
 import tn.esprit.workmood.entities.User;
 
@@ -22,5 +23,9 @@ public interface UserServiceInt {
 	User retriveUser(Long idUser);
 	
 	User resetPasswd(String email);
+	int findByUserRoleAdmin();
+	int findByUserRoleEmployee();
+	int findByUserRoleManager();
+	
 
 }

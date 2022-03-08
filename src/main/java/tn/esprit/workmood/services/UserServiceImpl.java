@@ -18,6 +18,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 
 import lombok.AllArgsConstructor;
+import tn.esprit.workmood.entities.Name;
 import tn.esprit.workmood.entities.Role;
 import tn.esprit.workmood.entities.User;
 import tn.esprit.workmood.repositories.RoleRepository;
@@ -144,5 +145,26 @@ public class UserServiceImpl implements UserServiceInt {
 		
     
 	}
+
+	@Override
+	public int findByUserRoleAdmin() {
+		
+		return userRepository.findByRolesName(Name.ADMIN).size();
+		
+	}
+	@Override
+	public int findByUserRoleEmployee() {
+		
+		return userRepository.findByRolesName(Name.EMPLOYEE).size();
+		
+	}
+
+	@Override
+	public int findByUserRoleManager() {
+		
+		return userRepository.findByRolesName(Name.MANAGER).size();
+		
+	}
+
 
 }
