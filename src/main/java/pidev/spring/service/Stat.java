@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.ArticleCategory;
 import pidev.spring.repositories.Articlerepo;
+import pidev.spring.repositories.LikeArtRepo;
 import pidev.spring.repositories.UserRepo;
 
 @Service
@@ -13,13 +14,24 @@ public class Stat implements Istat {
 	@Autowired 
 	Articlerepo articlerepo;
 	@Autowired 
-	UserRepo userRepo;
+	UserRepo userRepo; 
+	@Autowired 
+	LikeArtRepo likeRepo;
 	
 	@Override
 	public int nbreArticleByUser(Long idUser) {
 		// TODO Auto-generated method stub
 		return articlerepo.findByUserIdUser(idUser).size();
-	}
+	}  
+	
+	@Override
+	public int nbreLikeByUser(Long idUser) {
+		// TODO Auto-generated method stub
+		return likeRepo.findByUserIdUser(idUser).size();
+	} 
+	
+	
+
 
 	@Override
 	public int nbreArticleByCategoryeduc() {

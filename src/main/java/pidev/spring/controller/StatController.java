@@ -70,6 +70,14 @@ public class StatController {
 	@ApiOperation(value="Count entert article")
 	int nbrArticleenterta() {
 	return statserv.nbreArticleByCategoryEnt();
+	}
+	@GetMapping("/CountLikeUser/{idUser}")
+	@ResponseBody
+	@ApiOperation(value="Count like user")
+	int nbrLikeuser(@PathVariable Long idUser) {
+	return statserv.nbreLikeByUser(idUser);
+	
+	
 } 
 	
 	
