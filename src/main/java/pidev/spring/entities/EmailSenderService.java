@@ -5,7 +5,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 public class EmailSenderService {
 
 	@Autowired
@@ -13,7 +13,7 @@ public class EmailSenderService {
 
 	public void sendEmail(String toEmail, String subject, String body) {
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom("asmabss1998@gmail.com");
+		message.setFrom("hazemammani@gmail.com");
 		message.setTo(toEmail);
 		message.setText(body);
 		message.setSubject(subject);

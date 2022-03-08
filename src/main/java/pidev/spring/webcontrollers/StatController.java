@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import pidev.spring.services.IReviewServices;
+import pidev.spring.services.ISurveyServices;
 import pidev.spring.services.Stat;
 
 @RestController
@@ -18,6 +20,10 @@ public class StatController {
 	
 	@Autowired
 	Stat service;
+	@Autowired
+	IReviewServices reveiwServ;
+	@Autowired
+	ISurveyServices SurveyServ;
 	
 	@GetMapping("/CountReclamationByUser/{idUser}")
 	@ResponseBody
@@ -98,6 +104,56 @@ public class StatController {
 		return service.nbrOfferCategoryOther();
 	}
 	
+	@GetMapping("/CountReviewByuser/{idUser}")
+	@ResponseBody
+	@ApiOperation(value="Count Review")
+	int nbrRecviewByUser(@PathVariable Long idUser) {
+	return service.nbreReviewByUser(idUser);
+}
+	
+	@GetMapping("/CountReviewBycategorieCompany")
+	@ResponseBody
+	@ApiOperation(value="Count Review: Company")
+	int nbrReviewBycategorieCompany() {
+	return service.nbreReviewTypeCompany();
+}
+	
+	@GetMapping("/CountReviewBycategorieEmployee")
+	@ResponseBody
+	@ApiOperation(value="Count Review: Employee")
+	int nbrReviewBycategorieEmployee() {
+	return service.nbreReviewTypeEmplyee();
+}
+	
+	@GetMapping("/CountReviewByReviewPublic")
+	@ResponseBody
+	@ApiOperation(value="Count Review: Public")
+	int nbrReviewByTypeReviewPublic() {
+	return service.nbreReviewTypePublic();
+}
+	
+	@GetMapping("/CountReviewByReviewAnnonyme")
+	@ResponseBody
+	@ApiOperation(value="Count Review: Annonyme")
+	int nbrReviewByTypeReviewAnnonyme() {
+	return service.nbreReviewTypeAnnonyme();
+}
+	
+	//Survey
+	
+	@GetMapping("/CountSurveyByuser/{idUser}")
+	@ResponseBody
+	@ApiOperation(value="Count Survey")
+	int nbrSurveyByUser(@PathVariable Long idUser) {
+	return service.nbreSurveyByUser(idUser);
+}
+	
+	@GetMapping("/CountSurveyByAnswer/{SurveyAnswer}")
+	@ResponseBody
+	@ApiOperation(value="Count SurveyByAnswer")
+	int nbrSurveyByAnswer(@PathVariable Integer SurveyAnswer) {
+	return service.nbreQuestionBySurveyAnswer(SurveyAnswer);
+}
 
 
 }

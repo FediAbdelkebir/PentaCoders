@@ -5,19 +5,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 
 @Entity
 @Data
-public class Message {
+@AllArgsConstructor
+public class OutputMessage {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private String from;
-    private String text;
-
+	private String from;
+	private String text;
+	private String time;
 }
-
-
-

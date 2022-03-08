@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -47,7 +49,12 @@ public class Review implements Serializable{
 	@Enumerated(EnumType.STRING)
 	@Column
 	private TypeReview review;
+	@Enumerated(EnumType.STRING)
+	@Column
+	private Classification classf;
+	
 	
 	@ManyToOne
+	@JsonIgnore
 	private User user;
 }
