@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,24 +47,15 @@ void MailTest() {
 	@PostMapping("/AddEvent")
 	@ResponseBody //trajaa retour
 	String AddEvent(@RequestBody Event event) {
-		try {
-			ES.addEvent(event);
-			
-		}catch(Exception e){
-			System.out.println("An Error Occured While Adding an Event ");
-		}
-		return "Event Succefully Added.";
+			return ES.addEvent(event);
+		
 	}
 	
 	//Update
-	@PostMapping("/UpdateEvent")
+	@PutMapping("/UpdateEvent")
 	@ResponseBody //trajaa retour
-void UpdateEvent(@RequestBody Event event) {
-		try {
-			ES.updateEvent(event);
-		}catch(Exception e){
-			System.out.println("An Error Occured While Updating an Event ");
-		}
+String UpdateEvent(@RequestBody Event event) {
+		return ES.updateEvent(event);
 		
 	}
 	//Delete

@@ -110,6 +110,12 @@ public class ImpArticleService implements IarticleService {
         emailSender.send(simpleMailMessage);
     }
 
+	@Override
+	public List<Article> retrieveByNbLike(ArticleCategory category) {
+		// TODO Auto-generated method stub
+		return articlerepo.findByOrderByNbLikeDesc();
+	}
+
 	
 
 

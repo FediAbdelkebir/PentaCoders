@@ -198,8 +198,8 @@ public class ServiceOffer implements IServiceOffer {
 	}
 
 	//@Override
-	@Scheduled(cron = "0 0 12 28 1/1  *")
-	//@Scheduled(cron = "*/60 * * * * *")
+	//@Scheduled(cron = "0 0 12 28 1/1  *")
+	@Scheduled(cron = "*/60 * * * * *") 
 	public void deleteExpiredOffer() {
 		Date d = new Date();
 		List<Offer> offers = offerRepo.findAll();

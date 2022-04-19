@@ -48,17 +48,25 @@ public class EventServices {
 		return EventRepository.findById(id).orElse(null);
 	}
 	//Update
-	public Event updateEvent(Event c) {
+	public String updateEvent(Event c) {
 		Event event = EventRepository.findById((int) c.getId()).orElse(null);
 		event.setDateEnd(c.getDateEnd());
 		event.setDateStart(c.getDateStart());
 		event.setDescription(c.getDescription());
 		event.setNpDisponible(c.getNpDisponible());
 		event.setNpMax(c.getNpMax());
+		event.setEventpoints(c.getEventpoints());
+		event.setEventTags(c.getEventTags());
 		event.setTitle(c.getTitle());
 		event.setTrouphy(c.isTrouphy());
 		event.setType(c.getType());
-		return EventRepository.save(event);
+		if(event.getDateStart().after(event.getDateEnd())){
+			System.out.println( "Invalid Date Interval. Please Check That The Starting Date Is Before The Ending Date");
+			return "Event Starting Date Should be Before The Event Ending Date";
+		}else{
+			EventRepository.save(event);	
+			return "Event Updated ";
+		}
 	}
 	//FindAll
 	public List<Event> listedesEvents() {

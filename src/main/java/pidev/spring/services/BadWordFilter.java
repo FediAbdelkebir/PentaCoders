@@ -94,7 +94,7 @@ public class BadWordFilter {
 		      // The following spreadsheet is from: https://gist.github.com/PimDeWitte/c04cc17bc5fa9d7e3aee6670d4105941
 		      // (If the spreadsheet ever ceases to exist, then this application will still function normally otherwise - it just won't censor any swear words.)
 		      
-		    	     FileReader fr = new FileReader("C:\\Users\\fedia\\Desktop\\bad-words.csv");
+		    	     FileReader fr = new FileReader("C:\\Users\\Hazem\\Desktop\\WoorkMood\\bad-words.csv");
 		    	     BufferedReader reader = new BufferedReader(fr);
 		    	      
 //		    	BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(

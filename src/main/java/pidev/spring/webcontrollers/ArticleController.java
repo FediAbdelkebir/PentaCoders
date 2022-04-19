@@ -39,7 +39,6 @@ public class ArticleController {
 	@GetMapping("/retrieve-article/{article-id}")		
 	@ResponseBody
 	public Article retrieveArticles(@PathVariable("article-id") Long id) {
-		System.out.println(articleservice.retrieveArticles(id));
 		return articleservice.retrieveArticles(id);
 		}
 
@@ -99,7 +98,14 @@ public class ArticleController {
 	@ResponseBody
 	public List<Article> getTitlesearch(@PathVariable("title") String title) {
 	return articleservice.searchTitle(title);
-			}
+			} 
+	
+	@GetMapping("/retrieve-like-cat")
+    @ResponseBody
+ 	public List<Article> retrieveByLikeCat(@RequestParam ArticleCategory category) {
+	List<Article> listarticle = articleservice.retrieveByNbLike(category);
+		 return listarticle;
+    }
 	
 	
 

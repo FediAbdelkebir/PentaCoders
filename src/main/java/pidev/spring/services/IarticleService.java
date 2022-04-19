@@ -19,5 +19,6 @@ public interface IarticleService {
 	  Page<Article> findarticlewithPagination(int offset,int pagesize); 
 	  List<Article> searchTitle(String title);
 	  Article retrieveArticles(Long id); 
-	  void deleteArticle(Long id); 
+	  void deleteArticle(Long id);  
+	  List<Article> retrieveByNbLike(ArticleCategory category);
 }

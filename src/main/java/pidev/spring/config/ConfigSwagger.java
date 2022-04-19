@@ -22,7 +22,7 @@ public class ConfigSwagger {
 				.paths(PathSelectors.any())
 				.build().apiInfo(apiInfo());
 		//  http://localhost:8089/SpringMVC/v2/api-docs
-		  //http:localhost:8089/WorkMood/swagger-ui/index.html
+		  //http://localhost:8089/work-mood/swagger-ui/index.html
 	}
 	
 	private ApiInfo apiInfo () {

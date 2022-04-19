@@ -22,6 +22,7 @@ public interface Articlerepo extends JpaRepository<Article, Long>{
 	     public List<Article> findByOrderByDateCreationDesc();
 	     @Query("SELECT a FROM Article a WHERE a.title LIKE CONCAT('%',:string,'%')")
 	 	 public List<Article> searchTitle(@Param("string") String title); 
+	     public List<Article> findByOrderByNbLikeDesc();
 	     List<Article> findByUserIdUser(Long idUser);
 		//public Optional<Article> findByIdArticle(Long idArticle); 
 	     //public Article findByIdArticle(Long id);

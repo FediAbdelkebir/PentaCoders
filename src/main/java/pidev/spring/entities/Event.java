@@ -37,7 +37,7 @@ import lombok.ToString;
 @ToString
 
 public class Event implements Serializable{
-	@ApiModelProperty(hidden = true)
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;

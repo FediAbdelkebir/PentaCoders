@@ -101,11 +101,7 @@ public class ImpLikeArt implements ILikeArticle {
 		return likees;
 	}
 
-	@Override
-	public String updateLike(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public int nbLike(Long id) {
@@ -113,17 +109,25 @@ public class ImpLikeArt implements ILikeArticle {
 		return 0;
 	}
 
-	@Override
-	public void deletePubLike(Long id) {
-		// TODO Auto-generated method stub
-		likeartrepo.deleteById(id);
-	}
+	
+
+	
 
 	@Override
-	public String deleteLike(Long iduser, Long idArticle) {
+	public LikeArticle UpdateLike(LikeArticle l, Long idUser) {
 		// TODO Auto-generated method stub
-		return null;
-	}  
+		User u =userRepo.findById(idUser).orElse(null); 
+		l.setUser(u);
+		return  likeartrepo.save(l);
+	}
+
+
+	@Override
+	public void deleteLike(Long id) {
+		// TODO Auto-generated method stub 
+		likeartrepo.deleteById(id);
+		
+	}
 	
 		
 }
