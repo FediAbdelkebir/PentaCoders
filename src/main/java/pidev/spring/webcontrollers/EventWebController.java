@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,8 +24,8 @@ import pidev.spring.entities.Event;
 import pidev.spring.entities.User;
 import pidev.spring.services.EventServices;
 import pidev.spring.services.MailSenderFactory;
-
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/Evenements")
 public class EventWebController {
 	@Autowired

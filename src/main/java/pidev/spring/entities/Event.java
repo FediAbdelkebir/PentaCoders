@@ -47,11 +47,9 @@ public class Event implements Serializable{
 	private String description;
 	@Column 
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateStart;
 	@Column 
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateEnd;
 	@Column 
 	@ApiModelProperty(hidden = true)

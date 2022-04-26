@@ -28,6 +28,7 @@ public class EventServices {
 	UserRepository UserRepository;
 
 	//Ajout
+	/*
 	public String addEvent(Event c) {
 		if(c.getDateStart().after(c.getDateEnd())) {
 			System.out.println( "Invalid Date Interval. Please Check That The Starting Date Is Before The Ending Date");
@@ -38,6 +39,10 @@ public class EventServices {
 			return "Event Succefully Added.";
 		}
 		
+	}*/
+	public String addEvent(Event c) {
+		EventRepository.save(c);
+		return "test";
 	}
 	//Delete
 	public void deleteEvent(int id) {
