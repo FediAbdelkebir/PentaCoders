@@ -65,6 +65,7 @@ public class EventServices {
 		event.setTitle(c.getTitle());
 		event.setTrouphy(c.isTrouphy());
 		event.setType(c.getType());
+		event.setCoverimage(c.getCoverimage());
 		if(event.getDateStart().after(event.getDateEnd())){
 			System.out.println( "Invalid Date Interval. Please Check That The Starting Date Is Before The Ending Date");
 			return "Event Starting Date Should be Before The Event Ending Date";

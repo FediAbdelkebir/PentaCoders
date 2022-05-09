@@ -102,9 +102,9 @@ public class UserController {
 		
 		return us.retrieveUsers();
 	}
-	@PutMapping(value="/get-user/{idUser}")
+	@GetMapping(value="/get-user/{idUser}")
 	@ResponseBody
-	User retrieveUser(@PathParam("idUser") Long idUser ){
+	User retrieveUser(@PathVariable("idUser") Long idUser ){
 		
 		return us.retriveUser(idUser);
 	}

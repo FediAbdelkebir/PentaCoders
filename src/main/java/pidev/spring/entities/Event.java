@@ -34,8 +34,6 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-
 public class Event implements Serializable{
 	
 	@Id
@@ -45,6 +43,8 @@ public class Event implements Serializable{
 	private String title;
 	@Column
 	private String description;
+	@Column 
+	private String coverimage;
 	@Column 
 	@Temporal(TemporalType.DATE)
 	private Date dateStart;
@@ -68,13 +68,14 @@ public class Event implements Serializable{
 	@Column 
 	private int eventpoints;
 	
+	
+
 	@ManyToMany(cascade=CascadeType.ALL)
-	@JsonIgnore
 	@ApiModelProperty(hidden = true)
 	private Set<User> users;
 	
 	@ManyToMany(cascade=CascadeType.ALL)
-	@JsonIgnore 
 	@ApiModelProperty(hidden = true)
 	private Set<User> UsersLiked;
+	
 }

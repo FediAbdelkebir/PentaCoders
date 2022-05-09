@@ -31,7 +31,6 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class User implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -93,7 +92,6 @@ public class User implements Serializable{
 	private Set<Event> LikedEvent;
 	
 	@ManyToMany(cascade=CascadeType.ALL)
-	@JsonIgnore  
 	private Set<Badge> AcquiredBadges; 
 	@OneToMany(mappedBy="user",cascade = CascadeType.ALL) 
 	@JsonIgnore

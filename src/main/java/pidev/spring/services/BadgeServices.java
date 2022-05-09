@@ -55,6 +55,7 @@ public class BadgeServices {
 		Badge badge = BadgeRepository.findById((int) c.getId()).orElse(null);
 		badge.setTitle(c.getTitle());
 		badge.setDescription(c.getDescription());
+		badge.setCost(c.getCost());
 		return BadgeRepository.save(badge);
 	}
 	//FindAll

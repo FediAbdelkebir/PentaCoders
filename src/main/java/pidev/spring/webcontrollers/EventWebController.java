@@ -1,12 +1,14 @@
 package pidev.spring.webcontrollers;
 
 import java.util.Date;
+
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 import pidev.spring.entities.Event;
 import pidev.spring.entities.EventTags;
 import pidev.spring.entities.EventType;
@@ -60,7 +62,7 @@ String UpdateEvent(@RequestBody Event event) {
 		
 	}
 	//Delete
-		@GetMapping("/DeleteEvent/{idEvent}")
+	@DeleteMapping("/DeleteEvent/{idEvent}")
 		@ResponseBody
 void DeleteEvent(@PathVariable("idEvent") int idEvent){
 			try{
@@ -181,16 +183,17 @@ List<Event> Events(){
 	//AffecterEventToUser
 			@PostMapping("/AffecterEventToUser/{Event}/{userid}")
 			@ResponseBody
-			String FindEventById(@PathVariable("Event") int Event,@PathVariable("userid") Long userid){
+			String AffecterEventToUser(@PathVariable("Event") int Event,@PathVariable("userid") Long userid){
+				System.out.print("TESTSTTS");
 				return ES.AffecterEventToUser(Event, userid);
 			}
 	//RemoveUserFromEvent
-			@GetMapping("/RemoveUserFromEvent/{idEvent}/{idUser}")
+			@DeleteMapping("/RemoveUserFromEvent/{idEvent}/{idUser}")
 			@ResponseBody
 			String RemoveUserFromEvent(@PathVariable("idEvent") int idEvent,@PathVariable("idUser") Long idUser){
 				return ES.RemoveUserFromEvent(idEvent, idUser);
 			}
-	//RemoveUserFromEvent
+	//UserJoinedEvents
 			@GetMapping("/UserJoinedEvents/{idUser}")
 			@ResponseBody
 			Set<Event> UserJoinedEvents(@PathVariable("idUser") Long idUser){
@@ -199,17 +202,17 @@ List<Event> Events(){
 	//Recommendations 
 			@GetMapping("/RecomendedEvents/{Tags}")
 			@ResponseBody
-			List<Event> UserJoinedEvents(@PathVariable("Tags") EventTags Tags){
+			List<Event> RecomendedEvents(@PathVariable("Tags") EventTags Tags){
 				return ES.RecommendedEvents(Tags);
 			}
 	//LikeEvent 
 			@PostMapping("/LikeEvent/{idEvent}/{idUser}")
 			@ResponseBody
-			String  UserJoinedEvents(@PathVariable("idEvent") int idEvent,@PathVariable("idUser") Long idUser){
+			String  LikeEvent(@PathVariable("idEvent") int idEvent,@PathVariable("idUser") Long idUser){
 				return ES.LikeEvent(idEvent,idUser);
 			}
 	//DisLikeEvent 
-			@PostMapping("/DisLikeEvent/{idEvent}/{idUser}")
+			@DeleteMapping("/DisLikeEvent/{idEvent}/{idUser}")
 			@ResponseBody
 			String  DislikeEvent(@PathVariable("idEvent") int idEvent,@PathVariable("idUser") Long idUser){
 				return ES.DisLikeEvent(idEvent,idUser);
