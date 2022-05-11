@@ -91,7 +91,7 @@ public class User implements Serializable{
 	@JsonIgnore  
 	private Set<Event> LikedEvent;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.ALL) 
 	private Set<Badge> AcquiredBadges; 
 	@OneToMany(mappedBy="user",cascade = CascadeType.ALL) 
 	@JsonIgnore

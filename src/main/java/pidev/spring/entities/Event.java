@@ -68,8 +68,6 @@ public class Event implements Serializable{
 	@Column 
 	private int eventpoints;
 	
-	
-
 	@ManyToMany(cascade=CascadeType.ALL)
 	@ApiModelProperty(hidden = true)
 	private Set<User> users;
