@@ -3,14 +3,14 @@ pipeline {
    stages {
       stage("Cloning Project"){
          steps {
-                git clone 'https://github.com/FediAbdelkebir/PentaCoders.git'
+                git 'https://github.com/FediAbdelkebir/PentaCoders.git'
          }
       }
       stage("Build Project"){
           steps {
-                sh "mvn compile"
+                sh 'mvn compile'
          }
-      }
+      
    }
 }
 
