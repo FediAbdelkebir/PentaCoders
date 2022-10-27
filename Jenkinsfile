@@ -11,11 +11,11 @@ pipeline {
                 sh 'mvn compile'
             }
         }
-        stage("Unit Test"){
-            steps {
-                sh 'mvn test'
-            }
-        }
+       // stage("Unit Test"){
+         //   steps {
+           //     sh 'mvn test'
+          //  }
+        //}
         stage("Packaging Project"){
             steps {
                 sh 'mvn package'
