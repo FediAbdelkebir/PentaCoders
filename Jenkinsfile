@@ -16,10 +16,10 @@ pipeline {
            //     sh 'mvn test'
           //  }
         //}
-        stage("Packaging Project"){
-            steps {
-                sh 'mvn package'
-            }
-        }
+        //stage("Packaging Project"){
+          //  steps {
+            //    sh 'mvn package'
+            //}
+        //}
     }
 }
